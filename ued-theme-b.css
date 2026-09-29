@@ -1016,3 +1016,11 @@ a.nav-de-btn, .nav-de-btn {
    重映射又把字色压成中灰 → 直接给深藏蓝字（对比 ≈6.2） */
 .de-panel .de-tagline .de-slogan { color:#22314e !important; }
 .de-panel .de-tagline .de-lead { color:#3d4c70 !important; }
+/* 「N 项应用」计数：.cap-count b 是**渐变裁切文字**（fill:transparent + 渐变当字色），
+   B 的重映射把渐变整体提亮成中浅蓝紫、最浅一条近白 #EBE7FC → 浅底上几乎不可见
+   → 全站最显眼的计数位，直接改实心深藏蓝（并恢复被 clip 吃掉的 fill） */
+.cap-count b { background:none !important; background-image:none !important;
+  -webkit-text-fill-color:#1e3fa8 !important; color:#1e3fa8 !important; }
+.cap-count span { color:#5a6784 !important; }
+.cap-count.plan b { background-image:none !important;
+  -webkit-text-fill-color:#7d879c !important; color:#7d879c !important; }

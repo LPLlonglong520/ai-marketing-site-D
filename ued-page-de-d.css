@@ -1476,6 +1476,13 @@ footer .ft-tag { background:rgba(10,128,100,.10) !important; border-color:rgba(1
   box-shadow:0 8px 22px rgba(0,0,0,.08) !important;
 }
 .de-back .de-lb-btn:hover { background:#f0f0f0 !important; }
+/* 「N 项应用」计数：D 的重映射把渐变字色推到近白 #FB FCFD → 白底上完全不可见
+   （用户最初报障的就是这里） → 实心近黑 */
+.cap-count b { background:none !important; background-image:none !important;
+  -webkit-text-fill-color:#0a0a0a !important; color:#0a0a0a !important; }
+.cap-count span { color:#4d4f54 !important; }
+.cap-count.plan b { background-image:none !important;
+  -webkit-text-fill-color:#8a8a8a !important; color:#8a8a8a !important; }
 
 /* ---- 内联样式外置 ---- */
 [data-u="1"]{background:linear-gradient(135deg,rgb(250,250,250),rgb(250,250,250)) !important;}
