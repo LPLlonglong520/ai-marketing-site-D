@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>营销AI小秘 · 超级数字员工 — 安恒信息 AI赋能营销</title>
+<link rel="stylesheet" href="ued-theme-a.css" data-ued-th="a" media="all">
+<link rel="stylesheet" href="ued-theme-b.css" data-ued-th="b" media="not all">
+<link rel="stylesheet" href="ued-theme-c.css" data-ued-th="c" media="not all">
+<link rel="stylesheet" href="ued-theme-d.css" data-ued-th="d" media="not all">
+<link rel="stylesheet" href="ued-page-de-a.css" data-ued-th="a" media="all">
+<link rel="stylesheet" href="ued-page-de-b.css" data-ued-th="b" media="not all">
+<link rel="stylesheet" href="ued-page-de-c.css" data-ued-th="c" media="not all">
+<link rel="stylesheet" href="ued-page-de-d.css" data-ued-th="d" media="not all">
+<link rel="stylesheet" href="ued-switch.css">
+<link rel="preload" as="image" type="image/avif" href="media/de_board_front_1x.avif" imagesrcset="media/de_board_front_m.avif 640w, media/de_board_front_1x.avif 560w, media/de_board_front.avif 1120w" imagesizes="(max-width:768px) 320px, 560px" fetchpriority="high">
+<link rel="preload" as="image" href="media/de_char_body.webp">
+<script id="ued-switch-boot">
+(function () {
+  var H = document.documentElement;
+  var IDS = ['a', 'b', 'c', 'd'];
+  function siteOf() {
+    /* /ai-marketing-site(-B|-C|-D)/ → a|b|c|d；本地文件/其它路径 → a */
+    var m = /(?:^|\/)ai-marketing-site(?:-([BbCcDd]))?\//.exec(location.pathname || '');
+    return (m && m[1]) ? m[1].toLowerCase() : 'a';
+  }
+  var site = siteOf(), pick = null, forced = false;
+  try {
+    var q = new URLSearchParams(location.search).get('ued');
+    if (q && IDS.indexOf(q.toLowerCase()) >= 0) { pick = q.toLowerCase(); forced = true; }
+  } catch (e) {}
+  if (!pick) {
+    try {
+      var s = localStorage.getItem('ued-theme@' + site);
+      if (s && IDS.indexOf(s) >= 0) pick = s;
+    } catch (e) {}
+  }
+  if (!pick) pick = site;
+  window.__ued = { site: site, theme: pick, forced: forced };
+  H.setAttribute('data-ued-site', site);
+  H.setAttribute('data-ued-theme', pick);
+  var ls = document.querySelectorAll('link[data-ued-th]');
+  for (var i = 0; i < ls.length; i++) {
+    ls[i].media = (ls[i].getAttribute('data-ued-th') === pick) ? 'all' : 'not all';
+  }
+  window.__uedApply = function (t) {
+    if (IDS.indexOf(t) < 0) return;
+    H.setAttribute('data-ued-theme', t);
+    var n = document.querySelectorAll('link[data-ued-th]');
+    for (var i = 0; i < n.length; i++) {
+      n[i].media = (n[i].getAttribute('data-ued-th') === t) ? 'all' : 'not all';
+    }
+    var bs = document.querySelectorAll('.uedsw-b');
+    for (var j = 0; j < bs.length; j++) {
+      bs[j].setAttribute('aria-pressed', bs[j].getAttribute('data-ued') === t ? 'true' : 'false');
+    }
+    window.__ued.theme = t;
+    try { localStorage.setItem('ued-theme@' + window.__ued.site, t); } catch (e) {}
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    window.__uedApply(window.__ued.theme);
+    var box = document.querySelector('.uedsw');
+    if (!box) return;
+    box.addEventListener('click', function (ev) {
+      var b = ev.target.closest ? ev.target.closest('.uedsw-b') : null;
+      if (!b) return;
+      ev.preventDefault();
+      var t = b.getAttribute('data-ued');
+      if (t === window.__ued.theme) return;
+      document.documentElement.classList.add('uedsw-anim');
+      window.__uedApply(t);
+      setTimeout(function () {
+        document.documentElement.classList.remove('uedsw-anim');
+      }, 340);
+    });
+  });
+})();
+</script>
+</head>
+<body class="de-body">
+<div id="prog"></div>
+
+<nav>
+  <a class="nav-brand" href="index.html"><img src="media/image2.png" alt="安恒信息" fetchpriority="high" decoding="async" width="445" height="273"><span>AI赋能营销</span></a>
+  <div class="nav-actions">
+    <div class="uedsw" role="group" aria-label="界面风格切换" title="UED 界面风格切换 · 四个风格内容一致，仅视觉不同"><span class="uedsw-lab"><svg class="uedsw-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.1a6.9 6.9 0 0 0 0 13.8c.95 0 1.6-.72 1.6-1.5 0-.4-.16-.73-.42-1-.24-.25-.38-.56-.38-.92 0-.76.63-1.37 1.42-1.37h1.05A4.68 4.68 0 0 0 15.9 5.5C15.9 2.98 12.32 1.1 8 1.1Z"/><circle cx="4.85" cy="6.5" r="1.05"/><circle cx="7.6" cy="4.3" r="1.05"/><circle cx="10.85" cy="5.15" r="1.05"/><circle cx="10.95" cy="8.35" r="1.05"/></svg><span class="uedsw-lab-t">界面风格</span></span><span class="uedsw-opts"><button type="button" class="uedsw-b" data-ued="a" title="深色科技风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>深色科技</span></button><button type="button" class="uedsw-b" data-ued="b" title="企业AI风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>企业AI</span></button><button type="button" class="uedsw-b" data-ued="c" title="政企权威风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>政企权威</span></button><button type="button" class="uedsw-b" data-ued="d" title="极简商务风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>极简商务</span></button></span></div>
+  <a class="nav-back-btn" href="index.html">← 返回 AI赋能营销</a>
+    <div class="nav-right"><img src="media/image2.png" alt="" fetchpriority="high" decoding="async" width="445" height="273"><span class="nav-right-dept">安恒信息· 营销中心 · 综合管理部</span></div>
+  </div>
+</nav>
+
+<div class="de-board-sec" id="de-board">
+  <div class="de-wrap">
+    <div class="de-bs-grid">
+      <div class="de-stage">
+        <div class="de-floor"></div>
+        <div class="de-persp">
+          <div class="de-board" id="deBoard">
+            <div class="de-edge l"></div>
+            <div class="de-edge r"></div>
+            <div class="de-face de-back">
+              <img class="de-lqip" src="data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAACwBwCdASoWABwAPrFIn0snJCKhsBgIAOAWCWMArDLshZUf+qk9nz/93SUiWRAjwAuUXJi8zq1gJUDHfocbHf2PCq2pCPYAAM4zN8UamejQ2t05wMbMH7gwi9ra75LXZEgh/absUGWJW9UyPTRA8/Ai9E4lfsR2pNGdDtYlhxLgnDLdOpImVWC/+QFgw3m99bJPGW4skfC2MjAhUTqmosohkZz+CHBtdI5lEO39kBTXehfYYSgECAxLzMGUkl8ew75YXOUQ3OdD/LfmTKiHXWRoQ0Y0YuRP23QGlrVWvhTwBLS08M2qQaXzBBCPz4MyBWQbUhTjqIjbML3yEUUT4p/cMxIRFa0eYAA=" alt="" aria-hidden="true">
+              <picture><source type="image/avif" srcset="media/de_board_back_m.avif 640w, media/de_board_back_1x.avif 560w, media/de_board_back.avif 1120w" sizes="(max-width:768px) 320px, 560px"><img class="de-img" src="media/de_board_back_1x.webp" srcset="media/de_board_back_m.webp 640w, media/de_board_back_1x.webp 560w, media/de_board_back.webp 1120w" sizes="(max-width:768px) 320px, 560px" width="560" height="715" alt="营销AI小秘 场景能力立牌 背面" decoding="async" fetchpriority="low"></picture>
+              <div class="de-char" id="deCharBack" title="点我切换动作"><img class="de-l de-l-body" src="media/de_char_b_body.webp?v=1790562927" alt="" decoding="async"><img class="de-l de-l-tab" src="media/de_char_b_tab.webp?v=1790562931" alt="" decoding="async"><img class="de-l de-l-arm" src="media/de_char_b_arm.webp?v=1790562934" alt="" decoding="async"><img class="de-l de-l-head" src="media/de_char_b_head.webp?v=1790562929" alt="" decoding="async"></div>
+              <div class="de-sheen"></div>
+              <div class="de-back-tools"><button class="de-lb-btn" type="button" data-de-front><span class="ic">↩</span>查看正面能力全景 →</button><button class="de-lb-btn" type="button" data-lb-open="deLbBack"><span class="ic">🔍</span>放大查看</button></div>
+            </div>
+            <div class="de-strut">
+              <div class="hinge"></div>
+              <div class="rail l"></div>
+              <div class="rail r"></div>
+              <div class="cross"></div>
+              <div class="foot l"></div>
+              <div class="foot r"></div>
+              <div class="tagline">铝合金背撑 · 稳固落地</div>
+            </div>
+            <div class="de-face de-front">
+              <img class="de-lqip" src="data:image/webp;base64,UklGRjQBAABXRUJQVlA4ICgBAABwBgCdASoWABwAPrFMokunJCMhqAqo4BYJYgCdMoM6LKTz7YtlQ4yHvAj5Yme928ARQAeDFuVrk3r6XgAAzjNktoN59Oz43+e1wxbIqOZfmsHznv2JcAOs+npGZzIBuEgj4Woilv4xtL7KCXuNYrL/gZbwtQyqppXXJC3pP/YOn1HoiH/6wMZ8PuTb7T9oQD9QW7JjH44nu+ePhaj8Zi1pzrmDrgDBGfI2Il9SM/A3xXT060sNnNoghviIrvUbRH19iY/l8cAG1kwYJKf0cKehKY0knYwvSiFvGFEzXfuSw7H+2Bcoek6r6CBs5NF6N51nAtU/sy57LLy90w1Yq/ypPwaiNv6w6sjzB8l9zqAR+XP9kbzLXDscUnhabGLqfcqp+qtHVAygAA==" alt="" aria-hidden="true">
+              <picture><source type="image/avif" srcset="media/de_board_front_m.avif 640w, media/de_board_front_1x.avif 560w, media/de_board_front.avif 1120w" sizes="(max-width:768px) 320px, 560px"><img class="de-img" src="media/de_board_front_1x.webp" srcset="media/de_board_front_m.webp 640w, media/de_board_front_1x.webp 560w, media/de_board_front.webp 1120w" sizes="(max-width:768px) 320px, 560px" width="560" height="715" alt="营销AI小秘 场景能力立牌" decoding="async" fetchpriority="high"></picture>
+              <div class="de-char" id="deChar" title="点我切换动作"><img class="de-l de-l-body" src="media/de_char_body.webp?v=1790562914" alt="" decoding="async"><img class="de-l de-l-tab" src="media/de_char_tab.webp?v=1790562919" alt="" decoding="async"><img class="de-l de-l-arm" src="media/de_char_arm.webp?v=1790562921" alt="" decoding="async"><img class="de-l de-l-head" src="media/de_char_head.webp?v=1790562916" alt="" decoding="async"></div>
+              <div class="de-sheen"></div>
+            </div>
+          </div>
+          <div class="de-board-tools"><button class="de-lb-btn" type="button" data-lb-open="deLb"><span class="ic">🔍</span>放大查看</button></div>
+        </div>
+        <div class="de-bhint"><span class="k">⇄</span> 按住立牌左右拖动，可 180° 转动查看</div>
+      </div>
+
+      <div class="de-panel">
+        <h2 class="de-h2"><a class="de-h2-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击进入「营销AI小秘」体验"><span class="de-h2-t">营销AI小秘</span><span class="de-h2-go">进入体验<i>↗</i></span></a><br><em>营销的超级数字员工</em></h2>
+        <div class="de-tagline">
+          <span class="de-slogan">让每一次营销动作，都有 AI 陪跑</span>
+          <span class="de-tagsep"></span>
+          <span class="de-lead">从市场洞察到成单交付，一个会查、会写、会算、会讲的超级数字员工</span>
+        </div>
+        <div class="de-kpis"><div class="de-kpi" tabindex="0" data-kpi="KPI1"><div class="de-kpi-pop"><div class="kp-t">8 场景</div><div class="kp-l"><span class="kp-i">机会点</span><span class="kp-i">客户</span><span class="kp-i">商机</span><span class="kp-i">招投标</span><span class="kp-i">合同</span><span class="kp-i">交付</span><span class="kp-i">收入/经营</span><span class="kp-i">日常工作</span></div></div><b>8</b><span>场景</span><i class="kp-dot"></i></div><div class="de-kpi" tabindex="0" data-kpi="KPI2"><div class="de-kpi-pop"><div class="kp-t">34 AI能力</div><div class="kp-l"><span class="kp-i">机会点·公开标讯</span><span class="kp-i">机会点·行业机会</span><span class="kp-i">机会点·维保机会</span><span class="kp-i">机会点·智能推送</span><span class="kp-i">客户·客户公开信息</span><span class="kp-i">客户·驻场绿灯条件</span><span class="kp-i">客户·客户内部信息</span><span class="kp-i">客户·新建客户</span><span class="kp-i">客户·客户拜访</span><span class="kp-i">客户·客户画像</span><span class="kp-i">客户·AI客户对练</span><span class="kp-i">商机·机会点分析</span><span class="kp-i">商机·报价单</span><span class="kp-i">商机·新建商机</span><span class="kp-i">商机·商机跟进记录</span><span class="kp-i">商机·创建项目</span><span class="kp-i">商机·项目进展更新</span><span class="kp-i">招投标·写方案</span><span class="kp-i">招投标·找人员</span><span class="kp-i">招投标·找案例</span><span class="kp-i">招投标·找资质</span><span class="kp-i">招投标·查价格</span><span class="kp-i">招投标·招投标全场景</span><span class="kp-i">交付·排产/发货查询</span><span class="kp-i">交付·驻场查询</span><span class="kp-i">收入/经营·业绩查询及预测</span><span class="kp-i">收入/经营·经营指标全景推送</span><span class="kp-i">收入/经营·回款/逾期</span><span class="kp-i">日常工作·资料下载</span><span class="kp-i">日常工作·查制度</span><span class="kp-i">日常工作·查接口人</span><span class="kp-i">日常工作·产品能力</span><span class="kp-i">日常工作·行业打法</span><span class="kp-i">日常工作·公司标准</span></div></div><b>34</b><span>AI能力</span><i class="kp-dot"></i></div><div class="de-kpi" tabindex="0" data-kpi="KPI3"><div class="de-kpi-pop"><div class="kp-t">30 已上线</div><div class="kp-l"><span class="kp-i">机会点·公开标讯</span><span class="kp-i">机会点·行业机会</span><span class="kp-i">机会点·维保机会</span><span class="kp-i">机会点·智能推送</span><span class="kp-i">客户·客户公开信息</span><span class="kp-i">客户·驻场绿灯条件</span><span class="kp-i">客户·客户内部信息</span><span class="kp-i">客户·客户拜访</span><span class="kp-i">客户·客户画像</span><span class="kp-i">客户·AI客户对练</span><span class="kp-i">商机·机会点分析</span><span class="kp-i">商机·商机跟进记录</span><span class="kp-i">商机·创建项目</span><span class="kp-i">商机·项目进展更新</span><span class="kp-i">招投标·写方案</span><span class="kp-i">招投标·找人员</span><span class="kp-i">招投标·找案例</span><span class="kp-i">招投标·找资质</span><span class="kp-i">招投标·查价格</span><span class="kp-i">招投标·招投标全场景</span><span class="kp-i">交付·排产/发货查询</span><span class="kp-i">交付·驻场查询</span><span class="kp-i">收入/经营·业绩查询及预测</span><span class="kp-i">收入/经营·经营指标全景推送</span><span class="kp-i">日常工作·资料下载</span><span class="kp-i">日常工作·查制度</span><span class="kp-i">日常工作·查接口人</span><span class="kp-i">日常工作·产品能力</span><span class="kp-i">日常工作·行业打法</span><span class="kp-i">日常工作·公司标准</span></div></div><b>30</b><span>已上线</span><i class="kp-dot"></i></div><div class="de-kpi" tabindex="0" data-kpi="KPI4"><div class="de-kpi-pop"><div class="kp-t">4 建设中</div><div class="kp-l"><span class="kp-i plan">新建客户（2026Q4）</span><span class="kp-i plan">报价单（试用中）</span><span class="kp-i plan">新建商机（2026Q4）</span><span class="kp-i plan">回款/逾期（2026Q4）</span></div></div><b>4</b><span>建设中</span><i class="kp-dot"></i></div></div>
+        <div class="de-bubble"><span class="bb-ic">💬</span><span class="bb-tx" id="deSay">你好，我是营销AI小秘，写方案、查资质、找案例，都交给我</span></div>
+        <div class="de-acts"><button class="de-act" data-act="hello" data-say="你好，我是营销AI小秘，写方案、查资质、找案例，都交给我"><span class="ic">☺</span>打招呼</button><button class="de-act" data-act="turn" data-say="换个角度，看看我的侧身和背后的支撑结构"><span class="ic">↻</span>转身</button><button class="de-act" data-act="back" data-say="翻到背面，看看这块立牌每天在做的事"><span class="ic">⇄</span>转到背面</button><button class="de-act" data-act="reset" data-say="视角已复位，随时可以再聊"><span class="ic">↺</span>复位</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="de-lb" id="deLb" data-lb data-base="media/de_board_front_lb_1x.webp" data-avif="media/de_board_front_lb_zoom.avif" data-webp="media/de_board_front_lb_zoom.webp">
+  <span class="cl" title="关闭">✕</span>
+  <div class="de-lb-stage">
+    <img class="de-lb-base" alt="" aria-hidden="true">
+    <img class="de-lb-hi" alt="营销AI小秘 场景能力立牌 放大图" decoding="async">
+  </div>
+  <div class="de-lb-tip"><span class="ic">🔍</span> 点图片 1× / 2× 切换 · 点空白处或按 Esc 关闭</div>
+</div>
+  <div class="de-lb" id="deLbBack" data-lb data-base="media/de_board_back_lb_1x.webp" data-avif="media/de_board_back_lb_zoom.avif" data-webp="media/de_board_back_lb_zoom.webp">
+  <span class="cl" title="关闭">✕</span>
+  <div class="de-lb-stage">
+    <img class="de-lb-base" alt="" aria-hidden="true">
+    <img class="de-lb-hi" alt="营销AI小秘 场景能力立牌 背面 放大图" decoding="async">
+  </div>
+  <div class="de-lb-tip"><span class="ic">🔍</span> 点图片 1× / 2× 切换 · 点空白处或按 Esc 关闭</div>
+</div>
+</div>
+
+<section class="de-flow-sec" id="de-flow">
+  <div class="de-flow-inner">
+    <div class="de-flow-head">
+      <h2>营销全场景业务流</h2>
+      <div class="de-flow-stat"><span class="seg"><b>7</b>大业务阶段</span><span class="dot">·</span><span class="seg"><b>28</b>项关键动作</span><span class="dot">·</span><span class="seg"><b>1</b>条日常工作跨场景带</span></div>
+    </div>
+
+    <div class="de-daily jumpable" data-jump="日常工作" role="link" tabindex="0">
+      <span class="lb">8. 日常</span>
+      <span class="it">资料下载</span><span class="it">查制度</span><span class="it">查接口人</span><span class="it">产品咨询</span><span class="it">行业打法</span><span class="it">公司标准</span>
+      <span class="ln"></span>
+      <span class="ds">贯穿全流程</span>
+    </div>
+
+    <div class="flow-grid" style="--flow-cols:7"><div class="flow-col jumpable" data-jump="机会点场景" role="link" tabindex="0">
+  <div class="flow-head"><span class="n">1</span><span class="t">机会点</span></div>
+  <div class="flow-body"><div class="flow-item"><i>1.1</i><span>市场机会</span></div><div class="flow-item"><i>1.2</i><span>公开标讯</span></div><div class="flow-item"><i>1.3</i><span>行业机会</span></div><div class="flow-item"><i>1.4</i><span>维保机会</span></div></div>
+</div><div class="flow-col jumpable" data-jump="客户场景" role="link" tabindex="0">
+  <div class="flow-head"><span class="n">2</span><span class="t">客户</span></div>
+  <div class="flow-body"><div class="flow-item"><i>2.1</i><span>需求调研</span></div><div class="flow-item"><i>2.2</i><span>交流答疑</span></div><div class="flow-item"><i>2.3</i><span>客户管理</span></div></div>
+</div><div class="flow-col jumpable" data-jump="商机场景" role="link" tabindex="0">
+  <div class="flow-head"><span class="n">3</span><span class="t">商机</span></div>
+  <div class="flow-body"><div class="flow-item"><i>3.1</i><span>商机管理</span></div><div class="flow-item"><i>3.2</i><span>项目管理</span></div><div class="flow-item"><i>3.3</i><span>测试机管理</span></div><div class="flow-item"><i>3.4</i><span>申请/实施</span></div></div>
+</div><div class="flow-col jumpable" data-jump="招投标场景" role="link" tabindex="0">
+  <div class="flow-head"><span class="n">4</span><span class="t">招投标</span></div>
+  <div class="flow-body"><div class="flow-item"><i>4.1</i><span>招投标管理</span></div><div class="flow-item"><i>4.2</i><span>招标/投标/讲标</span></div><div class="flow-item"><i>4.3</i><span>报价/行权</span></div><div class="flow-item"><i>4.4</i><span>成本管理</span></div><div class="flow-item"><i>4.5</i><span>POC</span></div></div>
+</div><div class="flow-col plan jumpable" data-jump="合同场景" role="link" tabindex="0">
+  <div class="flow-head"><span class="n">5</span><span class="t">合同</span></div>
+  <div class="flow-body"><div class="flow-item"><i>5.1</i><span>合同管理</span></div><div class="flow-item"><i>5.2</i><span>合同模板</span></div><div class="flow-item"><i>5.3</i><span>框架/特殊合同</span></div><div class="flow-item"><i>5.4</i><span>报POS</span></div><span class="plan-foot">建设中</span></div>
+</div><div class="flow-col jumpable" data-jump="交付场景" role="link" tabindex="0">
+  <div class="flow-head"><span class="n">6</span><span class="t">交付</span></div>
+  <div class="flow-body"><div class="flow-item"><i>6.1</i><span>交付项目</span></div><div class="flow-item"><i>6.2</i><span>外包</span></div><div class="flow-item"><i>6.3</i><span>驻场</span></div><div class="flow-item"><i>6.4</i><span>排产/发货</span></div></div>
+</div><div class="flow-col jumpable" data-jump="收入/经营场景" role="link" tabindex="0">
+  <div class="flow-head"><span class="n">7</span><span class="t">收入</span></div>
+  <div class="flow-body"><div class="flow-item"><i>7.1</i><span>应收/确认</span></div><div class="flow-item"><i>7.2</i><span>回款/逾期</span></div><div class="flow-item"><i>7.3</i><span>开票</span></div><div class="flow-item"><i>7.4</i><span>业绩预测</span></div></div>
+</div></div>
+
+    <div class="flow-foot">
+      <span class="ff-l">L1 业务阶段 × L2 业务动作</span>
+      <span class="ff-sep"></span>
+      <span class="ff-r"><b>7</b> 大阶段 · <b>28</b> 项关键动作 · <b>1</b> 条日常工作跨场景带</span>
+    </div>
+  </div>
+</section>
+
+<section class="de-cap-sec" id="de-cap">
+  <div class="de-wrap">
+    <div class="de-sec-head">
+      
+      <h2 class="de-h2">超级数字员工 · 场景能力集合</h2>
+      
+      
+    </div>
+    <div class="cap-grid"><div class="cap-card" data-u="11" style="--cc:#1e6fd9" data-scene="机会点场景">
+  <div class="cap-top">
+    <div class="cap-ico">🎯</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅰ</div>
+      <div class="cap-name">机会点场景</div>
+    </div>
+    <div class="cap-count"><b>4</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">把散落在多个渠道的市场机会、公开标讯、行业机会、维保机会，收拢成一线够得着的线索</div>
+  <div class="cap-loop"><span class="cap-loop-t">机会点场景闭环</span><div class="cap-loop-chain"><span class="cp">市场洞察</span><i>→</i><span class="cp">标讯捕捉</span><i>→</i><span class="cp">行业机会</span><i>→</i><span class="cp">维保提醒</span><i>→</i><span class="cp">线索分发</span></div></div>
+  
+  <div class="cap-tbl-wrap"><table class="cap-tbl"><thead><tr><th>skill / 功能</th><th>介绍 / 输入示例</th><th>数据来源</th><th>入口 / 链接</th></tr></thead><tbody><tr><td class="sk">公开标讯</td><td class="dm">①多维度的安全市场空间分析<br>②当日最新的公开招标标讯查询<br><span class="dm-x">点击平台直接搜索/下载使用</span></td><td class="dt" data-l="数据来源">平台集成</td><td class="ent" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/page/link?target=panel&amp;targetDesktop=slide&amp;url=https%3A%2F%2Finternal3.dbappsecurity.com.cn%3A65525%2Freport%2Ffr%3FbizId%3D27" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘-挖商机（PC）</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">行业机会</td><td class="dm">行业、客户等热门机会点查询<br><span class="dm-x">示例：帮我找下浙江区域教育2026年机会点</span></td><td class="dt" data-l="数据来源">行业机会点</td><td class="ent ent-span" rowspan="3" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">维保机会</td><td class="dm">合同号、序列号等维保时间查询<br><span class="dm-x">示例：帮我查一下AH22-P08-0502的维保信息</span></td><td class="dt" data-l="数据来源">维保信息库</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">智能推送</td><td class="dm">标杆案例、市场活动等武器弹药精准推送一线<br><span class="dm-x">频次：不定期推送行业、市场等标杆案例</span></td><td class="dt" data-l="数据来源">业务负责人梳理</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr></tbody></table></div>
+  
+</div><div class="cap-card" data-u="12" style="--cc:#7c4dff" data-scene="客户场景">
+  <div class="cap-top">
+    <div class="cap-ico">🤝</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅱ</div>
+      <div class="cap-name">客户场景</div>
+    </div>
+    <div class="cap-count"><b>7</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">从公开信息到内部信息，从拜访录入到 AI 对练，拜访前把功课做足，拜访后把记录补齐</div>
+  <div class="cap-loop"><span class="cap-loop-t">客户场景闭环</span><div class="cap-loop-chain"><span class="cp">公开信息</span><i>→</i><span class="cp">内部档案</span><i>→</i><span class="cp">拜访记录</span><i>→</i><span class="cp">360°画像</span><i>→</i><span class="cp">AI对练</span></div></div>
+  
+  <div class="cap-tbl-wrap"><table class="cap-tbl"><thead><tr><th>skill / 功能</th><th>介绍 / 输入示例</th><th>数据来源</th><th>入口 / 链接</th></tr></thead><tbody><tr><td class="sk">客户公开信息</td><td class="dm">客户风险、关联关系、法人等公开信息查询<br><span class="dm-x">示例：帮我查一下安恒股份与安恒严选的关联关系</span></td><td class="dt" data-l="数据来源">企查查等</td><td class="ent ent-span" rowspan="6" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">驻场绿灯条件</td><td class="dm">客户是否满足内部驻场条件查询<br><span class="dm-x">示例：中国电信股份有限公司吉安分公司符合驻场绿灯条件吗？</span></td><td class="dt" data-l="数据来源">驻场信息</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">客户内部信息</td><td class="dm">内部客户等级、类型、负责人等查询<br><span class="dm-x">示例：帮我查一下中国电信股份有限公司的客户负责人</span></td><td class="dt dt-span" rowspan="3" data-l="数据来源">客户管理系统</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">新建客户<i class="plan-tag">2026Q4上线</i></td><td class="dm">文字/语音快速输入创建客户<br><span class="dm-x">示例：帮我创建（名称、类型...）客户</span></td><td class="dt-m" data-l="数据来源">客户管理系统</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">客户拜访</td><td class="dm">文字/语音快速录入客户拜访信息<br><span class="dm-x">示例：今天拜访了XXX客户，主要是XXX内容，达成XX合作</span></td><td class="dt-m" data-l="数据来源">客户管理系统</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">客户画像</td><td class="dm">1分钟生成全方位的客户画像信息<br><span class="dm-x">示例：浙商银行的客户画像</span></td><td class="dt" data-l="数据来源">内外部数据集成</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">AI客户对练</td><td class="dm">客户拜访前和AI客户实战模拟沟通，提前打磨沟通话术<br><span class="dm-x">点击平台直接选择客户场景使用</span></td><td class="dt" data-l="数据来源">平台集成</td><td class="ent" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/page/link?target=panel&amp;targetDesktop=slide&amp;url=https%3A%2F%2Finternal28.dbappsecurity.com.cn%3A65525%2FmobileCenter%2Ftransfer%3FappName%3D1621506992555413505%26path%3Dhttps%253A%252F%252Fshort-phx-ali.yunxuetang.cn%252F4let0l8q6" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘-练话术</span><i class="ent-arw">↗</i></a></td></tr></tbody></table></div>
+  
+</div><div class="cap-card" data-u="13" style="--cc:#0ea5a4" data-scene="商机场景">
+  <div class="cap-top">
+    <div class="cap-ico">📈</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅲ</div>
+      <div class="cap-name">商机场景</div>
+    </div>
+    <div class="cap-count"><b>6</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">机会点转商机、报价单生成、跟进记录、项目创建与进展更新，全部从「手录」变成「说一句」</div>
+  <div class="cap-loop"><span class="cap-loop-t">商机场景闭环</span><div class="cap-loop-chain"><span class="cp">线索转商机</span><i>→</i><span class="cp">报价生成</span><i>→</i><span class="cp">跟进记录</span><i>→</i><span class="cp">项目创建</span><i>→</i><span class="cp">进展更新</span></div></div>
+  
+  <div class="cap-tbl-wrap"><table class="cap-tbl"><thead><tr><th>skill / 功能</th><th>介绍 / 输入示例</th><th>数据来源</th><th>入口 / 链接</th></tr></thead><tbody><tr><td class="sk">机会点分析</td><td class="dm">公开招标标讯给到销售进行线索分析/转商机<br>每日最新标讯自动流转到销售</td><td class="dt" data-l="数据来源">市场情报分析平台</td><td class="ent" data-l="入口"><a class="ent ent-chip ent-a" href="https://ltc.dbappsecurity.com.cn/#/paas/list?subBusinessType=404&amp;appId=27&amp;menuId=153&amp;saasMark=2&amp;distributorMark=0&amp;timestamp=1789890595373" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">LTC-机会点</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">报价单<i class="plan-tag">试用中</i></td><td class="dm">依据招标参数要求生成报价单初版<br><span class="dm-x">示例：我要依据XXX招标文件参数要求进行选型报价</span></td><td class="dt" data-l="数据来源">报价器</td><td class="ent ent-span" rowspan="5" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">新建商机<i class="plan-tag">2026Q4上线</i></td><td class="dm">文字/语音快速输入创建商机<br><span class="dm-x">示例：创建XX名称商机，XX客户...商机</span></td><td class="dt dt-span" rowspan="2" data-l="数据来源">商机管理系统</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">商机跟进记录<i class="plan-tag">仅限销售使用</i></td><td class="dm">文字/语音完成商机跟进记录创建<br><span class="dm-x">示例：今日拜访了XX商机，和负责人XX沟通具体的方案</span></td><td class="dt-m" data-l="数据来源">商机管理系统</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">创建项目<i class="plan-tag">仅限行销使用</i></td><td class="dm">售前直接快速创建项目<br><span class="dm-x">示例：客户XXX，XX背景...帮我在IPM创建对应的项目</span></td><td class="dt dt-span" rowspan="2" data-l="数据来源">LTC-IPM</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">项目进展更新<i class="plan-tag">仅限行销使用</i></td><td class="dm">直接输入更新项目的进展信息<br><span class="dm-x">示例：XXX重点项目，主要进展XXXX，帮我更新项目进展</span></td><td class="dt-m" data-l="数据来源">LTC-IPM</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr></tbody></table></div>
+  
+</div><div class="cap-card" data-u="14" style="--cc:#dc2626" data-scene="招投标场景">
+  <div class="cap-top">
+    <div class="cap-ico">📝</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅳ</div>
+      <div class="cap-name">招投标场景</div>
+    </div>
+    <div class="cap-count"><b>6</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">写方案、查人员、找案例、查资质、解析标书、查价格，投标资料不再靠翻库，说出条件就能下载</div>
+  <div class="cap-loop"><span class="cap-loop-t">招投标场景闭环</span><div class="cap-loop-chain"><span class="cp">标书解析</span><i>→</i><span class="cp">方案初版</span><i>→</i><span class="cp">人员/案例/资质检索</span><i>→</i><span class="cp">标前检查</span><i>→</i><span class="cp">价格核对</span></div></div>
+  
+  <div class="cap-tbl-wrap"><table class="cap-tbl"><thead><tr><th>skill / 功能</th><th>介绍 / 输入示例</th><th>数据来源</th><th>入口 / 链接</th></tr></thead><tbody><tr><td class="sk">写方案</td><td class="dm">输入用户行业场景，输出 WORD/PPT 方案（可直接下载方案初版）<br><span class="dm-x">示例：请解读下公安176号文的政策，帮我写一份汇报PPT初版方案</span></td><td class="dt" data-l="数据来源">知识中心</td><td class="ent ent-span" rowspan="5" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">找人员</td><td class="dm">人员符合XXXXX条件（学历、资质等）<br>XXXX学历证明、XXX人员的社保等（输入我要下载，可直接下载）<br><span class="dm-x">示例：查询具有CISP-CISO、PMP、CISAW的人员</span></td><td class="dt" data-l="数据来源">人员信息库</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">找案例</td><td class="dm">行业/区域/金额/产品/客户等符合条件案例合同、回单、中标通知书等扫描件（输入我要下载，可直接下载）<br><span class="dm-x">示例：我需要杭州近三年金融行业的案例</span></td><td class="dt" data-l="数据来源">OA案例库</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">找资质</td><td class="dm">XX产品/XX名称/XX漏洞证明等（输入我要下载，可直接下载）<br><span class="dm-x">示例：查询明御WEB应用防火墙相关的产品资质</span></td><td class="dt" data-l="数据来源">OA资质库</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">查价格</td><td class="dm">查询XXXXX型号的价格、查询某渠道的XX型号的价格<br><span class="dm-x">示例：查询DAS-WAF-880AG的价格</span></td><td class="dt" data-l="数据来源">报价器</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">招投标全场景</td><td class="dm">招标文件智能解析-智写商务标初版-标前智能检查-文件智能查重四大AI功能（下载初版标书）<br><span class="dm-x">点击平台直接使用</span></td><td class="dt" data-l="数据来源">已集成</td><td class="ent" data-l="入口"><a class="ent ent-chip ent-a" href="http://bid.xxzx.dbappsecurity.com.cn/project" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘-写标书</span><i class="ent-arw">↗</i></a></td></tr></tbody></table></div>
+  
+</div><div class="cap-card" data-u="15" style="--cc:#64748b" data-scene="合同场景">
+  <div class="cap-top">
+    <div class="cap-ico">📄</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅴ</div>
+      <div class="cap-name">合同场景</div>
+    </div>
+    <div class="cap-count plan"><b>0</b><span>本期未建设</span></div>
+  </div>
+  <div class="cap-desc">合同管理、合同模板、框架/特殊合同、报POS —— 本期暂未建设，能力清单持续补充中</div>
+  <div class="cap-loop"><span class="cap-loop-t">合同场景闭环</span><div class="cap-loop-chain"><span class="cp">合同管理</span><i>→</i><span class="cp">合同模板</span><i>→</i><span class="cp">框架/特殊合同</span><i>→</i><span class="cp">报POS（本期建设中）</span></div></div>
+  
+  <div class="cap-empty"><b>本期暂未建设</b><span>该阶段能力正在规划中，上线后将持续补充到本清单</span></div>
+  
+</div><div class="cap-card" data-u="16" style="--cc:#0d9488" data-scene="交付场景">
+  <div class="cap-top">
+    <div class="cap-ico">🚚</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅵ</div>
+      <div class="cap-name">交付场景</div>
+    </div>
+    <div class="cap-count"><b>2</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">报个合同号就能查排产发货，按客户/商机/项目/销售多维度查驻场，进度自己心里有数</div>
+  <div class="cap-loop"><span class="cap-loop-t">交付场景闭环</span><div class="cap-loop-chain"><span class="cp">合同归档</span><i>→</i><span class="cp">排产发货</span><i>→</i><span class="cp">驻场跟踪</span></div></div>
+  
+  <div class="cap-tbl-wrap"><table class="cap-tbl"><thead><tr><th>skill / 功能</th><th>介绍 / 输入示例</th><th>数据来源</th><th>入口 / 链接</th></tr></thead><tbody><tr><td class="sk">排产/发货查询</td><td class="dm">合同号、公司名称等即可查询对应合同下排产、发货进度<br><span class="dm-x">示例：帮我查一下AH26-P07-0241的排产和发货情况</span></td><td class="dt" data-l="数据来源">排产/发货库</td><td class="ent ent-span" rowspan="2" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">驻场查询</td><td class="dm">客户名称、商机编号、项目名称、销售、驻场人员维度查询驻场信息<br><span class="dm-x">示例：查一下商机编号XSSJ-XBB-202506170033的驻场信息</span></td><td class="dt" data-l="数据来源">驻场项目管理表</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr></tbody></table></div>
+  
+</div><div class="cap-card" data-u="17" style="--cc:#b45309" data-scene="收入/经营场景">
+  <div class="cap-top">
+    <div class="cap-ico">💰</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅶ</div>
+      <div class="cap-name">收入/经营场景</div>
+    </div>
+    <div class="cap-count"><b>3</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">业绩完成情况按个人/区域/战区多视角呈现并智能预测，经营指标定期推送，回款逾期主动提醒</div>
+  <div class="cap-loop"><span class="cap-loop-t">收入/经营场景闭环</span><div class="cap-loop-chain"><span class="cp">业绩查询</span><i>→</i><span class="cp">智能预测</span><i>→</i><span class="cp">指标推送</span><i>→</i><span class="cp">回款提醒</span></div></div>
+  
+  <div class="cap-tbl-wrap"><table class="cap-tbl"><thead><tr><th>skill / 功能</th><th>介绍 / 输入示例</th><th>数据来源</th><th>入口 / 链接</th></tr></thead><tbody><tr><td class="sk">业绩查询及预测</td><td class="dm">个人、区域、战区等视角的业绩完成情况，智能预测本年完成情况<br><span class="dm-x">示例：帮我查一下高超的业绩情况，还有多少毛利未核算</span></td><td class="dt dt-span" rowspan="2" data-l="数据来源">经营数据</td><td class="ent ent-span" rowspan="3" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">经营指标全景推送</td><td class="dm">依据业务考核系列指标定期推送经营情况<br>工作日（销售）早和每周五（主任）收到经营情况</td><td class="dt-m" data-l="数据来源">经营数据</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">回款/逾期<i class="plan-tag">2026Q4上线</i></td><td class="dm">回款及逾期查询及精准推送/提醒<br>及时提醒关于回款和逾期的信息</td><td class="dt" data-l="数据来源">回款/逾期数据</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr></tbody></table></div>
+  
+</div><div class="cap-card" data-u="18" style="--cc:#2563eb" data-scene="日常工作">
+  <div class="cap-top">
+    <div class="cap-ico">🧰</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅷ</div>
+      <div class="cap-name">日常工作</div>
+    </div>
+    <div class="cap-count"><b>6</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">不属于任何主流程阶段，在任意环节都能随时调用：找资料、查制度、找人、问产品、问行业、查标准</div>
+  <div class="cap-loop"><span class="cap-loop-t">日常工作闭环</span><div class="cap-loop-chain"><span class="cp">找资料</span><i>→</i><span class="cp">查制度</span><i>→</i><span class="cp">找人</span><i>→</i><span class="cp">问产品</span><i>→</i><span class="cp">问行业</span><i>→</i><span class="cp">查标准</span></div></div>
+  
+  <div class="cap-tbl-wrap"><table class="cap-tbl"><thead><tr><th>skill / 功能</th><th>介绍 / 输入示例</th><th>数据来源</th><th>入口 / 链接</th></tr></thead><tbody><tr><td class="sk">资料下载</td><td class="dm">产品/资料名称等直接输出需求进行下载<br><span class="dm-x">示例：下载明御WEB应用防火墙产品解决方案</span></td><td class="dt" data-l="数据来源">知识中心</td><td class="ent ent-span" rowspan="6" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">查制度</td><td class="dm">查询渠道/销售最新的政策内容<br><span class="dm-x">示例：我需要打猎业绩的制度介绍</span></td><td class="dt" data-l="数据来源">销售/渠道政策</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">查接口人</td><td class="dm">查询产线、行业、渠道、营销各领域/部门对接人<br><span class="dm-x">示例：明御安全网关产品经理是谁</span></td><td class="dt" data-l="数据来源">接口人信息表</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">产品能力</td><td class="dm">查询各产线、安服、恒脑等产品的能力<br><span class="dm-x">示例：日志审计的日志有完整性保护机制吗？</span></td><td class="dt" data-l="数据来源">产品资料库</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">行业打法</td><td class="dm">找行业解决方案、机会点、政策、案例等资料<br><span class="dm-x">示例：四川区域金融行业的案例资料有哪些？</span></td><td class="dt" data-l="数据来源">行业资料库</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr><tr><td class="sk">公司标准</td><td class="dm">查询公司参与的国家、行业、地方、团队标准<br><span class="dm-x">示例：我司参与编制的国家标准有哪些？</span></td><td class="dt" data-l="数据来源">公司参与标准库</td><td class="ent-m" data-l="入口"><a class="ent ent-chip ent-a" href="https://applink.dingtalk.com/action/jumprobot?dingtalkid=%24%3aLWCP_v1%3a%24jNpCmgi%2fFOAC4IeQJVQM%2bm3Lp3xG0gCb" target="_blank" rel="noopener noreferrer" title="点击跳转前往体验"><span class="ent-n">营销AI小秘</span><i class="ent-arw">↗</i></a></td></tr></tbody></table></div>
+  
+</div></div>
+    <div class="de-sub-head"><span>跨阶段 · 通用能力</span></div><div class="cap-sub-grid" style="--sub-cols:2"><div class="cap-card compact" data-u="19" style="--cc:#7c3aed" data-scene="知识助手">
+  <div class="cap-top">
+    <div class="cap-ico">🧠</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅹ</div>
+      <div class="cap-name">知识助手</div>
+    </div>
+    <div class="cap-count"><b>1</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">把零散文档、制度、案例沉淀成可检索的知识底座，问一句就能定位到出处</div>
+  <div class="cap-loop"><span class="cap-loop-t">知识助手闭环</span><div class="cap-loop-chain"><span class="cp">知识问答</span><i>→</i><span class="cp">文档溯源</span><i>→</i><span class="cp">出处定位</span></div></div>
+  
+  <div class="cap-rows"><div class="cap-row"><div class="cap-row-bd"><div class="cap-row-h"><b>知识AI问答</b></div><div class="cap-row-d">基于营销知识库的问答检索，支持文档溯源</div><div class="cap-row-m">数据来源 · 营销知识库</div></div><div class="cap-row-side"><div class="cap-row-path"><span class="crp-c"><span class="pth">知识中心</span><i class="pth-sep">→</i><span class="pth">知识助手</span><i class="pth-sep">→</i><span class="pth">输入问题</span></span></div></div></div></div>
+  <a class="cap-jump" href="scene-7.html?from=de&amp;to=%E7%9F%A5%E8%AF%86%E5%8A%A9%E6%89%8B">查看知识助手完整介绍 →</a>
+</div><div class="cap-card compact" data-u="20" style="--cc:#db2777" data-scene="Skill共享平台">
+  <div class="cap-top">
+    <div class="cap-ico">🛠️</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅺ</div>
+      <div class="cap-name">Skill共享平台</div>
+    </div>
+    <div class="cap-count"><b>1</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc"></div>
+  <div class="cap-loop"><span class="cap-loop-t">Skill共享平台闭环</span><div class="cap-loop-chain"><span class="cp">经验沉淀</span><i>→</i><span class="cp">Skill共享</span><i>→</i><span class="cp">激励闭环</span></div></div>
+  
+  <div class="cap-rows"><div class="cap-row"><div class="cap-row-bd"><div class="cap-row-h"><b>Skill上传与共享</b></div><div class="cap-row-d">一线员工上传实战经验与优秀 Skill，获奖项激励</div><div class="cap-row-m">数据来源 · 公司统一 Skill 平台</div></div><div class="cap-row-side"><div class="cap-row-path"><span class="crp-c"><span class="pth">DASLink</span><i class="pth-sep">→</i><span class="pth">行销门户2.0</span><i class="pth-sep">→</i><span class="pth">Skill共享平台</span></span></div></div></div></div>
+  <a class="cap-jump" href="scene-6.html?from=de&amp;to=Skill%E5%85%B1%E4%BA%AB%E5%B9%B3%E5%8F%B0">查看 Skill共享平台完整介绍 →</a>
+</div></div>
+  </div>
+</section>
+
+<section class="de-eco-sec" id="de-eco">
+  <div class="de-wrap">
+    <div class="de-sub-head"><span>生态 · 渠道赋能</span></div>
+    
+    <div class="de-eco-grid">
+      <div class="de-eco-stage">
+        <div class="de-floor"></div>
+        <div class="de-eco-persp">
+          <div class="de-eco-board" id="ecoBoard" style="aspect-ratio:520/664" role="img" aria-label="渠道数字员工能力立牌，可按住左右拖动翻转">
+            <div class="de-edge l"></div>
+            <div class="de-edge r"></div>
+            <div class="de-face de-eco-back"><div class="de-bi">
+  <div class="de-bi-top"><i></i>安恒信息 · 渠道生态<span class="de-bi-back-btn" data-eco-front>查看正面能力全景 →</span></div>
+  <div class="de-bi-mid">
+    <div class="n">渠道数字员工</div>
+    <div class="s">安小渠 · 渠道生态 AI 伙伴</div>
+    <div class="de-bi-sep"></div>
+    <div class="t">让每一个渠道伙伴，都成为增长力量</div>
+    <div class="d">2 大能力方向 · 10 项 AI 能力 · 7×24 小时在线响应。正面是能力全景，背面是它每天在做的事。</div>
+    <div class="de-bi-spec">
+      <span><b>面板</b> 5mm 复合板</span><span><b>支架</b> 铝合金背撑</span>
+      <span><b>工艺</b> 高清微喷</span><span><b>尺寸</b> 420 × 536 mm</span>
+    </div>
+  </div>
+  <div class="de-bi-foot">
+    <span class="code">DAS-SECURITY · CHANNEL AI · 2026</span>
+    <span class="mat">铝合金背撑 · 稳固落地</span>
+  </div>
+</div></div>
+            <div class="de-face de-eco-front">
+              <img class="de-lqip" src="data:image/webp;base64,UklGRjYBAABXRUJQVlA4ICoBAAAwBwCdASoWABwAPrFOnkwnJCKiKAqo4BYJYwCdMt3P/s1qgc/ZY/9bNkQHK0IPmp6sKPr/zBIsAuDegEmfDh+FtbAA4nGH2kw1LIWgS/Bb22ASoA1lc+p4DDh1I7TM8/Zt05U1Q2W3EuuCx+MhI3cggFEb52hKq7NJio1m6n0Kwbj1Op4epMOgVofPO1sTNg2xhcRjzAkMVukBeqhKE13ATdx9r1pe6MSId/x0EIY9ftqSTMajKh3IigAqESal/1NoOiHeO2he5ffvxNs1kxtwLMXgOHZHetJFA+ikFf/6sNFCYvAa/+iZ/5JToK41+Q8OtZmFxzJB3chW21Pr58IKNtO2Kb85r7nl3uDJaHsrrEb481mTgnkX36WVjsFnLimyEh6X5qhpFQAA" alt="" aria-hidden="true">
+              <picture><source type="image/avif" srcset="media/eco_board_m.avif 720w, media/eco_board_1x.avif 520w, media/eco_board.avif 1040w" sizes="(max-width:980px) 92vw, 520px"><img class="de-img" src="media/eco_board_1x.webp" srcset="media/eco_board_m.webp 720w, media/eco_board_1x.webp 520w, media/eco_board.webp 1040w" sizes="(max-width:980px) 92vw, 520px" width="520" height="664" alt="渠道数字员工 能力立牌" decoding="async" loading="lazy"></picture>
+            </div>
+            <div class="de-sheen"></div>
+          </div>
+        </div>
+        <div class="de-bhint"><span class="k">↔</span> 按住立牌左右拖动，可 180° 转动查看</div>
+        <div class="de-board-tools"><button class="de-lb-btn" type="button" data-lb-open="ecoLb"><span class="ic">🔍</span>放大查看</button></div>
+      </div>
+      <div class="de-eco-side"><div class="cap-card compact" data-u="21" style="--cc:#059669" data-scene="渠道赋能">
+  <div class="cap-top">
+    <div class="cap-ico">🏭</div>
+    <div class="cap-hd">
+      <div class="cap-num">Ⅸ</div>
+      <div class="cap-name">渠道赋能</div>
+    </div>
+    <div class="cap-count"><b>2</b><span>项应用</span></div>
+  </div>
+  <div class="cap-desc">渠道 AI 数字员工 + 渠道市场分析空间，7×24 小时值守，减少重复答疑，赋能渠道伙伴提质增效</div>
+  <div class="cap-loop"><span class="cap-loop-t">渠道赋能闭环</span><div class="cap-loop-chain"><span class="cp">渠道答疑</span><i>→</i><span class="cp">商机挖掘</span><i>→</i><span class="cp">市场研判</span></div></div>
+  
+  <div class="cap-rows"><div class="cap-row"><div class="cap-row-bd"><div class="cap-row-h"><b>安小渠</b></div><div class="cap-row-d">专为渠道打造，解答产品知识、行业打法、挖掘商机、渠道政策以及下载资料，7×24小时值守</div><div class="cap-row-m">数据来源 · 渠道专属知识库</div></div><div class="cap-row-side"><span class="ent ent-chip"><span class="ent-n">钉钉 → 安小渠（安恒信息组织）</span></span></div></div><div class="cap-row"><div class="cap-row-bd"><div class="cap-row-h"><b>渠道市场分析空间</b></div><div class="cap-row-d">渠道地图、渠道运营、渠道市场研判、行业市场研判</div><div class="cap-row-m">数据来源 · 渠道市场数据</div></div><div class="cap-row-side"><span class="ent ent-chip"><span class="ent-n">DASLink → 帆软 → 渠道市场空间分析</span></span></div></div></div>
+  <a class="cap-jump" href="scene-5.html?from=de&amp;to=%E6%B8%A0%E9%81%93%E8%B5%8B%E8%83%BD">查看渠道赋能完整介绍 →</a>
+</div></div>
+    </div>
+  </div>
+  <div class="de-lb" id="ecoLb" data-lb data-base="media/eco_board_1x.webp" data-avif="media/eco_board_zoom.avif" data-webp="media/eco_board_zoom.webp">
+  <span class="cl" title="关闭">✕</span>
+  <div class="de-lb-stage">
+    <img class="de-lb-base" alt="" aria-hidden="true">
+    <img class="de-lb-hi" alt="渠道数字员工 能力立牌 放大图" decoding="async">
+  </div>
+  <div class="de-lb-tip"><span class="ic">🔍</span> 点图片 1× / 2× 切换 · 点空白处或按 Esc 关闭</div>
+</div>
+</section>
+
+<section class="inc-section">
+  <div class="inc-inner">
+    <div class="inc-header">
+      <div class="inc-title">积极使用 AI，更有 丰厚激励 等你拿</div>
+      <div class="inc-sub"><span class="text-highlight-gold">积极使用</span>AI工具，<span class="text-highlight-gold">主动反馈</span>优化建议，甚至自建提效Skill——优秀实践可获<span class="text-highlight-gold">月度激励、专项大奖及年度荣誉</span>！</div>
+    </div>
+    <div class="inc-grid">
+<a href="https://365.kdocs.cn/l/cqQpJWaDnycr" target="_blank" class="inc-card" data-glow="gold">
+  <div class="inc-card-icon">🏆</div>
+  <div class="inc-card-title">10W专项激励</div>
+  <div class="inc-card-en">SPECIAL AWARD</div>
+  <div class="inc-card-desc">针对AI应用有突出贡献的个人/团队，提供10万元专项激励基金，授予年度AI应用先锋荣誉。</div>
+  <div class="inc-card-stats"><div><div class="inc-stat-num">10W</div><div class="inc-stat-label">专项基金</div></div><div><div class="inc-stat-num">营销全员</div><div class="inc-stat-label">参与范围</div></div></div>
+  <div class="inc-card-tags"><span class="inc-card-tag">突出贡献</span><span class="inc-card-tag">先锋团队</span><span class="inc-card-tag">专项基金</span></div>
+  <div class="inc-card-cta">查看激励详情</div>
+</a>
+<a href="https://ah-marketing-2026.github.io/honor/" target="_blank" class="inc-card" data-glow="blue">
+  <div class="inc-card-icon">📅</div>
+  <div class="inc-card-title">常态化月度激励</div>
+  <div class="inc-card-en">MONTHLY AWARD</div>
+  <div class="inc-card-desc">每月评选AI应用之星，月度公示、月度激励，让AI使用习惯持续渗透到每一个一线团队。</div>
+  <div class="inc-card-stats"><div><div class="inc-stat-num">月度</div><div class="inc-stat-label">评选节奏</div></div><div><div class="inc-stat-num">全国助理</div><div class="inc-stat-label">综合管理部激励</div></div><div><div class="inc-stat-num">行销部全员</div><div class="inc-stat-label">行销激励</div></div></div>
+  <div class="inc-card-tags"><span class="inc-card-tag">月度之星</span><span class="inc-card-tag">持续激励</span><span class="inc-card-tag">全员覆盖</span></div>
+  <div class="inc-card-cta">查看荣誉榜单</div>
+</a>
+<div class="inc-card" data-glow="purple">
+  <div class="inc-card-icon">🎯</div>
+  <div class="inc-card-title">年底综合激励</div>
+  <div class="inc-card-en">YEAR-END AWARD</div>
+  <div class="inc-card-desc">年底综合评定，AI应用标杆团队/个人额外奖励，颁发年度AI赋能营销奖项，纳入绩效考核。</div>
+  <div class="inc-card-stats"><div><div class="inc-stat-num">年度</div><div class="inc-stat-label">综合评优</div></div><div><div class="inc-stat-num">标杆</div><div class="inc-stat-label">示范效应</div></div></div>
+  <div class="inc-card-tags"><span class="inc-card-tag">年度评优</span><span class="inc-card-tag">绩效加分</span><span class="inc-card-tag">示范标杆</span></div>
+  <div class="inc-card-cta no-arrow">敬请期待</div>
+</div>
+    </div>
+    <div class="inc-action">营销中台已进行 8 个区域（广东、深圳、江苏、安徽、北京、天津、浙江、四川）的 AI 应用赋能及交流，持续更新中</div>
+  </div>
+</section>
+
+<section class="future-home-section" id="future-home">
+  <div class="future-home-inner">
+    <div class="future-home-header">
+      <div class="future-home-pill">FUTURE PLAN</div>
+      <div class="future-home-title">未来规划</div>
+      <div class="future-home-subtitle">统一入口 · 整合资源 · 建设营销AI综合能力平台</div>
+    </div>
+    <a href="future.html?from=de&amp;to=future-home" class="future-home-card">
+      <div class="future-home-icon">🚀</div>
+      <div class="future-home-card-body">
+        <div class="future-home-card-title">建设营销AI综合能力平台</div>
+        <div class="future-home-card-desc">各类AI应用分散在不同平台，一线员工在外部AI工具上积累了大量实战经验，亟需统一整合、沉淀推广。</div>
+        <div class="future-home-tags">
+          <span class="future-home-tag">统一入口</span>
+          <span class="future-home-tag">整合资源</span>
+          <span class="future-home-tag">持续迭代</span>
+        </div>
+        <div class="future-home-cta">查看未来规划</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="de-cta">
+  <div class="de-cta-in de-wrap">
+    <h3>让每一次营销动作，都有 AI 陪跑</h3>
+    <p>营销AI小秘 · 超级数字员工 —— 从市场洞察，到成单交付</p>
+    <div class="de-cta-btns">
+      <a class="de-cta-a pri" href="index.html">← 返回 AI赋能营销完整版</a>
+      <a class="de-cta-a sec" href="#de-board">回到顶部 ↑</a>
+    </div>
+  </div>
+</section>
+
+<footer data-u="8" style="background:linear-gradient(180deg,#0a1638,#070e2a);border-top:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.4);">
+  <div class="ft-logo" data-u="9" style="color:rgba(255,255,255,.8);"><img src="media/image2.png" alt="安恒信息" style="height:32px;vertical-align:middle;margin-right:6px;filter:brightness(1.2);" fetchpriority="high" decoding="async" width="445" height="273">AI赋能营销</div>
+  <p>安恒信息 · 营销中心 · 综合管理部 | 2026</p>
+</footer>
+
+<script>
+(function(){
+  /* ---------- 滚动进度条 ---------- */
+  var prog = document.getElementById('prog');
+  window.addEventListener('scroll', function(){
+    if(!prog) return;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (h > 0 ? window.scrollY / h * 100 : 0) + '%';
+  }, {passive:true});
+
+  /* ---------- 生态板块立牌（第二块立牌，独立变量，与页头立牌互不影响） ---------- */
+  (function(){
+    var eco = document.getElementById('ecoBoard');
+    if(!eco) return;
+    var F = -15, B = 195;
+    var rot = F, dragging = false, sx = 0, srot = 0;
+    var stage = eco.closest('.de-eco-stage');
+    function apply(){ eco.style.setProperty('--eco-rot', rot + 'deg'); }
+    function settle(){ eco.classList.add('settling');
+      setTimeout(function(){ eco.classList.remove('settling'); }, 720); }
+    apply();
+    eco.addEventListener('pointerdown', function(e){
+      dragging = true; sx = e.clientX; srot = rot;
+      eco.classList.add('dragging'); eco.classList.remove('settling');
+      if(stage) stage.classList.add('dragging');
+      try { eco.setPointerCapture(e.pointerId); } catch(err){}
+    });
+    eco.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      rot = Math.max(-30, Math.min(210, srot + (e.clientX - sx) * 0.45));
+      apply();
+    });
+    function end(){
+      if(!dragging) return;
+      dragging = false;
+      eco.classList.remove('dragging');
+      if(stage) stage.classList.remove('dragging');
+      rot = (rot < 90) ? F : B;
+      apply(); settle();
+    }
+    eco.addEventListener('pointerup', end);
+    eco.addEventListener('pointercancel', end);
+    eco.addEventListener('pointerleave', end);
+    /* 背面上的「转回正面」 */
+    var fb = eco.querySelector('[data-eco-front]');
+    if(fb){
+      fb.addEventListener('click', function(e){
+        e.stopPropagation();
+        rot = F; apply(); settle();
+      });
+    }
+  })();
+
+  /* ---------- 3D 立牌 ---------- */
+  var board = document.getElementById('deBoard');
+  if(!board) return;
+  var FRONT = -15, BACK = 195;
+  var rot = FRONT, tilt = 0, dragging = false, sx = 0, srot = 0, moved = 0;
+
+  function apply(){
+    board.style.setProperty('--de-rot', rot + 'deg');
+    board.style.setProperty('--de-tilt', tilt + 'deg');
+    board.classList.toggle('is-back', rot > 90);
+  }
+  apply();
+
+  function snap(){
+    board.classList.add('settling');
+    rot = (rot < 90) ? FRONT : BACK;
+    apply();
+    setTimeout(function(){ board.classList.remove('settling'); }, 720);
+  }
+
+  board.addEventListener('pointerdown', function(e){
+    dragging = true; moved = 0; sx = e.clientX; srot = rot;
+    board.classList.add('dragging');
+    board.classList.remove('settling');
+    try { board.setPointerCapture(e.pointerId); } catch(err){}
+  });
+  board.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    var dx = e.clientX - sx;
+    moved = Math.max(moved, Math.abs(dx));
+    rot = Math.max(-30, Math.min(210, srot + dx * 0.45));
+    apply();
+  });
+  function endDrag(){
+    if(!dragging) return;
+    dragging = false;
+    board.classList.remove('dragging');
+    snap();
+  }
+  board.addEventListener('pointerup', endDrag);
+  board.addEventListener('pointercancel', endDrag);
+  board.addEventListener('pointerleave', endDrag);
+
+  /* 非拖拽时：鼠标纵向位置带来轻微俯仰，强化立体感 */
+  var stage = board.closest('.de-stage');
+  if(stage && window.matchMedia('(hover:hover)').matches){
+    stage.addEventListener('pointermove', function(e){
+      if(dragging) return;
+      var r = stage.getBoundingClientRect();
+      tilt = ((e.clientY - r.top) / r.height - 0.5) * -12;
+      apply();
+    });
+    stage.addEventListener('pointerleave', function(){ tilt = 0; apply(); });
+  }
+
+  /* 转到背面 / 复位 */
+  function flipBoard(toBack){
+    board.classList.add('settling');
+    rot = toBack ? BACK : FRONT;
+    if(!toBack) tilt = 0;
+    apply();
+    setTimeout(function(){ board.classList.remove('settling'); }, 720);
+  }
+  /* 背面上的"转回正面" */
+  var frontBtn = document.querySelector('[data-de-front]');
+  if(frontBtn){
+    frontBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      flipBoard(false);
+    });
+  }
+
+  /* ---------- 放大查看（页头立牌 + 生态板块立牌共用一套） ----------
+     两段式：先用页面上已缓存的小图瞬间铺满（点开零等待），
+     放大图（AVIF，约 150KB）到达后淡入替换；鼠标悬停 / 手指按下就预热。
+     放大图不点不下载，不占首屏体积。 */
+  (function(){
+    var AVIF_OK = (function(){
+      try { return document.createElement('canvas').toDataURL('image/avif').indexOf('data:image/avif') === 0; }
+      catch(e){ return false; }
+    })();
+    var boxes = document.querySelectorAll('[data-lb]');
+    Array.prototype.forEach.call(boxes, function(lb){
+      var btn  = document.querySelector('[data-lb-open="' + lb.id + '"]');
+      var base = lb.querySelector('.de-lb-base');
+      var hi   = lb.querySelector('.de-lb-hi');
+      var url  = (AVIF_OK && lb.getAttribute('data-avif')) || lb.getAttribute('data-webp') || '';
+      var warm = 0;
+      function warmup(){
+        if(warm || !url) return;
+        warm = 1;
+        var im = new Image();
+        im.onload = function(){ hi.src = url; lb.classList.add('hi-ready'); };
+        im.src = url;
+      }
+      function open(){
+        if(base && !base.getAttribute('src')) base.setAttribute('src', lb.getAttribute('data-base') || '');
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        warmup();
+      }
+      function close(){
+        lb.classList.remove('open', 'z2');
+        document.body.style.overflow = '';
+      }
+      if(btn){
+        btn.addEventListener('click', function(e){ e.stopPropagation(); open(); });
+        btn.addEventListener('pointerenter', warmup);                       // 桌面：悬停即预热
+        btn.addEventListener('touchstart', warmup, {passive:true});         // 触屏：按下即预热
+      }
+      lb.addEventListener('click', function(e){
+        if(e.target === base || e.target === hi){ lb.classList.toggle('z2'); return; }  // 点图 1×↔2×
+        close();
+      });
+      lb.lbClose = close;
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key !== 'Escape') return;
+      Array.prototype.forEach.call(boxes, function(lb){ if(lb.lbClose) lb.lbClose(); });
+    });
+  })();
+
+  /* ---------- KPI 悬浮明细（触屏点击展开） ---------- */
+  var kpiCards = Array.prototype.slice.call(document.querySelectorAll('.de-kpi'));
+  kpiCards.forEach(function(k){
+    k.addEventListener('click', function(e){
+      e.stopPropagation();
+      var on = k.classList.contains('open');
+      kpiCards.forEach(function(o){ o.classList.remove('open'); });
+      if(!on) k.classList.add('open');
+    });
+  });
+  document.addEventListener('click', function(){
+    kpiCards.forEach(function(o){ o.classList.remove('open'); });
+  });
+
+  /* ---------- 人物动作：打招呼 / 转身 / 转到背面 / 复位 ----------
+     正反两面各有一块立牌、各有一个 .de-char（#deChar / #deCharBack）。
+     两面的人物都是同一套 4 层素材切出来的，所以动作类直接同时加到两块上，
+     转到哪一面看到的人都在动 —— 「两面的打招呼 / 转身表现一致」。 */
+  var charEls = Array.prototype.slice.call(document.querySelectorAll('.de-char'));
+  var charEl = charEls[0] || null;
+  /* 每块立牌的分层图全部就绪后各自整体淡入，避免逐块弹出；
+     2.5s 兜底强制显示，防止图片异常时人物消失 */
+  charEls.forEach(function(el){
+    var imgs = Array.prototype.slice.call(el.querySelectorAll('img'));
+    var left = imgs.length, shown = false;
+    function ready(){ if(shown) return; shown = true; el.classList.add('ready'); }
+    imgs.forEach(function(im){
+      function one(){ if(--left <= 0) ready(); }
+      if(im.complete && im.naturalWidth){ one(); }
+      else { im.addEventListener('load', one); im.addEventListener('error', one); }
+    });
+    if(left <= 0) ready();
+    setTimeout(ready, 2500);
+  });
+  var sayEl = document.getElementById('deSay');  var btns = Array.prototype.slice.call(document.querySelectorAll('.de-act'));
+  var CLS = ['act-hello', 'act-turn'];
+  var CYCLE = ['hello', 'turn', 'back', 'reset'];
+  var ci = -1;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function play(a){
+    charEls.forEach(function(el){
+      CLS.forEach(function(c){ el.classList.remove(c); });
+      void el.offsetWidth;
+      if(a === 'hello' || a === 'turn') el.classList.add('act-' + a);
+    });
+    btns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-act') === a); });
+    if(a === 'back') flipBoard(true);
+    else if(a === 'reset') flipBoard(false);
+    var b = document.querySelector('.de-act[data-act="' + a + '"]');
+    if(b && sayEl){
+      sayEl.textContent = b.getAttribute('data-say');
+      sayEl.classList.remove('pop');
+      void sayEl.offsetWidth;
+      sayEl.classList.add('pop');
+    }
+    /* 动作进行中临时禁用所有按钮，避免动画被新点击打断。
+       打招呼/转身 = 1.9s 动画；转到背面/复位 = ~0.6s 3D 过渡 */
+    var busyMs = (a === 'hello' || a === 'turn') ? 1900 : 650;
+    btns.forEach(function(x){ x.classList.add('is-busy'); x.disabled = true; });
+    setTimeout(function(){
+      btns.forEach(function(x){ x.classList.remove('is-busy'); x.disabled = false; });
+    }, busyMs);
+  }
+
+  btns.forEach(function(b){
+    var a = b.getAttribute('data-act');
+    b.addEventListener('click', function(){
+      play(a);
+      ci = CYCLE.indexOf(a);
+    });
+  });
+
+  /* 点击人物：按 打招呼 → 转身 → 转到背面 → 复位 循环 */
+  charEls.forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.stopPropagation();
+      ci = (ci + 1) % CYCLE.length;
+      play(CYCLE[ci]);
+    });
+  });
+
+  /* 入场时自动打一次招呼 */
+  if(!reduce && charEls.length){
+    setTimeout(function(){ play('hello'); ci = 0; }, 2400);
+  }
+})();
+</script>
+<script>
+(function(){
+  var HEAD_OFFSET = 78;   // 顶部导航高度留白
+
+  function flash(el){
+    el.classList.remove('cap-flash');
+    void el.offsetWidth;                    // 强制重排，保证连续点同一张也能重新播动画
+    el.classList.add('cap-flash');
+    setTimeout(function(){ el.classList.remove('cap-flash'); }, 1800);
+  }
+
+  // 定位目标：优先按能力卡的 data-scene 名（如「渠道赋能」），
+  // 其次按元素 id（如未来规划模块 future-home）
+  function findTarget(name){
+    var cards = document.querySelectorAll('.cap-card[data-scene]');
+    for (var i = 0; i < cards.length; i++){
+      if (cards[i].getAttribute('data-scene') === name) return cards[i];
+    }
+    if (/^[A-Za-z][\w-]*$/.test(name)) return document.getElementById(name);
+    return null;
+  }
+
+  function goto(name){
+    var target = findTarget(name);
+    if (!target) return;
+    var y = target.getBoundingClientRect().top + window.pageYOffset - HEAD_OFFSET;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    try {
+      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    } catch (e) {
+      window.scrollTo(0, y);            // 极老浏览器不支持 options 对象时的兜底
+    }
+    setTimeout(function(){ flash(target); }, reduce ? 0 : 420);
+  }
+
+  // 从详情页点「返回」回到本页时会带 ?to=<卡名>，自动滚到那张卡并高亮一下
+  try {
+    var _to = new URLSearchParams(window.location.search).get('to');
+    if (_to){
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';  // 别让浏览器恢复旧滚动位置盖掉定位
+      setTimeout(function(){ goto(_to); }, 460);
+    }
+  } catch (e) {}
+
+  var triggers = document.querySelectorAll('[data-jump]');
+  for (var i = 0; i < triggers.length; i++){
+    (function(el){
+      el.addEventListener('click', function(){ goto(el.getAttribute('data-jump')); });
+      el.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goto(el.getAttribute('data-jump')); }
+      });
+    })(triggers[i]);
+  }
+})();
+</script>
+<script id="__perf_reg">
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  if (location.protocol === 'file:') return;
+  function warm(t) { if (t && t.postMessage) { try { t.postMessage({ type: 'warm' }); } catch (e) {} } }
+  function idle(fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 5000 }); else setTimeout(fn, 3000); }
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
+    setTimeout(function () { warm(navigator.serviceWorker.controller); }, 3500);
+  });
+  navigator.serviceWorker.register('sw.js', { scope: './' }).then(function (reg) {
+    idle(function () { warm(navigator.serviceWorker.controller || reg.active || reg.waiting); });
+  }).catch(function () {});
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type !== 'updated') return;
+    try {
+      if (sessionStorage.getItem('__ams_v') === d.v) return;
+      sessionStorage.setItem('__ams_v', d.v);
+    } catch (err) { return; }
+    location.reload();
+  });
+})();
+</script>
+</body>
+</html>

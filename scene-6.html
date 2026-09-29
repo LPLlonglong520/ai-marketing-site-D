@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Skill共享平台 — AI赋能营销</title>
+<link rel="stylesheet" href="ued-theme-a.css" data-ued-th="a" media="all">
+<link rel="stylesheet" href="ued-theme-b.css" data-ued-th="b" media="not all">
+<link rel="stylesheet" href="ued-theme-c.css" data-ued-th="c" media="not all">
+<link rel="stylesheet" href="ued-theme-d.css" data-ued-th="d" media="not all">
+<link rel="stylesheet" href="ued-switch.css">
+<script id="ued-switch-boot">
+(function () {
+  var H = document.documentElement;
+  var IDS = ['a', 'b', 'c', 'd'];
+  function siteOf() {
+    /* /ai-marketing-site(-B|-C|-D)/ → a|b|c|d；本地文件/其它路径 → a */
+    var m = /(?:^|\/)ai-marketing-site(?:-([BbCcDd]))?\//.exec(location.pathname || '');
+    return (m && m[1]) ? m[1].toLowerCase() : 'a';
+  }
+  var site = siteOf(), pick = null, forced = false;
+  try {
+    var q = new URLSearchParams(location.search).get('ued');
+    if (q && IDS.indexOf(q.toLowerCase()) >= 0) { pick = q.toLowerCase(); forced = true; }
+  } catch (e) {}
+  if (!pick) {
+    try {
+      var s = localStorage.getItem('ued-theme@' + site);
+      if (s && IDS.indexOf(s) >= 0) pick = s;
+    } catch (e) {}
+  }
+  if (!pick) pick = site;
+  window.__ued = { site: site, theme: pick, forced: forced };
+  H.setAttribute('data-ued-site', site);
+  H.setAttribute('data-ued-theme', pick);
+  var ls = document.querySelectorAll('link[data-ued-th]');
+  for (var i = 0; i < ls.length; i++) {
+    ls[i].media = (ls[i].getAttribute('data-ued-th') === pick) ? 'all' : 'not all';
+  }
+  window.__uedApply = function (t) {
+    if (IDS.indexOf(t) < 0) return;
+    H.setAttribute('data-ued-theme', t);
+    var n = document.querySelectorAll('link[data-ued-th]');
+    for (var i = 0; i < n.length; i++) {
+      n[i].media = (n[i].getAttribute('data-ued-th') === t) ? 'all' : 'not all';
+    }
+    var bs = document.querySelectorAll('.uedsw-b');
+    for (var j = 0; j < bs.length; j++) {
+      bs[j].setAttribute('aria-pressed', bs[j].getAttribute('data-ued') === t ? 'true' : 'false');
+    }
+    window.__ued.theme = t;
+    try { localStorage.setItem('ued-theme@' + window.__ued.site, t); } catch (e) {}
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    window.__uedApply(window.__ued.theme);
+    var box = document.querySelector('.uedsw');
+    if (!box) return;
+    box.addEventListener('click', function (ev) {
+      var b = ev.target.closest ? ev.target.closest('.uedsw-b') : null;
+      if (!b) return;
+      ev.preventDefault();
+      var t = b.getAttribute('data-ued');
+      if (t === window.__ued.theme) return;
+      document.documentElement.classList.add('uedsw-anim');
+      window.__uedApply(t);
+      setTimeout(function () {
+        document.documentElement.classList.remove('uedsw-anim');
+      }, 340);
+    });
+  });
+})();
+</script>
+</head>
+<body>
+<div id="prog"></div>
+
+<div class="scene-detail-nav">
+  <a href="index.html" class="back-btn">← 返回首页</a>
+  <a href="index.html#landing-scenes" class="back-btn back-to-module">返回</a>
+  <div class="nav-title">🛠️ Skill共享平台</div>
+  <div class="uedsw" role="group" aria-label="界面风格切换" title="UED 界面风格切换 · 四个风格内容一致，仅视觉不同"><span class="uedsw-lab"><svg class="uedsw-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.1a6.9 6.9 0 0 0 0 13.8c.95 0 1.6-.72 1.6-1.5 0-.4-.16-.73-.42-1-.24-.25-.38-.56-.38-.92 0-.76.63-1.37 1.42-1.37h1.05A4.68 4.68 0 0 0 15.9 5.5C15.9 2.98 12.32 1.1 8 1.1Z"/><circle cx="4.85" cy="6.5" r="1.05"/><circle cx="7.6" cy="4.3" r="1.05"/><circle cx="10.85" cy="5.15" r="1.05"/><circle cx="10.95" cy="8.35" r="1.05"/></svg><span class="uedsw-lab-t">界面风格</span></span><span class="uedsw-opts"><button type="button" class="uedsw-b" data-ued="a" title="深色科技风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>深色科技</span></button><button type="button" class="uedsw-b" data-ued="b" title="企业AI风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>企业AI</span></button><button type="button" class="uedsw-b" data-ued="c" title="政企权威风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>政企权威</span></button><button type="button" class="uedsw-b" data-ued="d" title="极简商务风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>极简商务</span></button></span></div>
+  <a class="nav-de-btn" href="digital-employee.html" title="进入 超级数字员工 专页"><span class="nde-dot"></span><span class="nde-txt">超级数字员工</span></a>
+  <div class="nav-pager"><a href="scene-5.html" class="pager-btn">← 上一场景</a><a href="scene-7.html" class="pager-btn">下一场景 →</a></div>
+</div>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var back = document.querySelector('.back-to-module');
+  if (back && params.get('from') === 'ai-arch') {
+    back.href = 'index.html#ai-arch';
+  }
+  if (params.get('from') === "de") {
+    var _to = params.get('to') || '';
+    var _x = "";
+    var _t = "digital-employee.html" + (_to ? ("?" + 'to=' + encodeURIComponent(_to)) : '');
+    var _ls = document.querySelectorAll(".back-to-module");
+    for (var _i = 0, _a; (_a = _ls[_i]); _i++) _a.setAttribute('href', _t);
+    if (_ls[0] && _x) _ls[0].textContent = _x;
+  }
+})();
+</script>
+
+<div class="detail-wrap">
+<div class="scene-timeline-item" id="scene-skill">
+<div class="bg-skill">
+<div class="scene-section">
+  <div class="scene-header">
+    <div class="scene-header-ico" data-u="43" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;">🛠️</div>
+    <div><div class="scene-title">Skill共享平台</div><div class="scene-sub">整合一线AI实战经验 · 沉淀推广优秀Skill · 共建共享营销提效工具箱</div></div>
+    <div class="scene-count">1个应用</div>
+  </div>
+  <div class="scene-body">
+
+  <div class="app-block" id="app-s6-1">
+    <div class="app-block-header">
+      <div class="app-num-badge" data-u="6" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">1</div>
+      <div><div class="app-title">Skill共享平台</div><div class="app-subtitle">基础Skill + 业务专属Skill · 上传优秀Skill赢大奖</div></div>
+      
+    </div>
+<div class="app-stats-strip"><div class="app-stats-item"><div class="app-stats-num">30+</div><div class="app-stats-label">AI实战大比武案例</div></div><div class="app-stats-item"><div class="app-stats-num">40+</div><div class="app-stats-label">AI提质增效优秀案例</div></div><div class="app-stats-item"><div class="app-stats-num">100%</div><div class="app-stats-label">共建共享</div></div><div class="app-stats-item app-stats-note-inline">整合一线AI实战经验，沉淀推广至公司平台</div></div>
+
+    <div class="app-content">
+      <div class="app-col"><div class="app-col-inner"><div class="col-label col-label-pain">😩 用户痛点</div><ul>
+          <li>一线AI实战大比武产出 <strong>30+ 应用案例</strong></li>
+          <li>AI提质增效产出近 <strong>40个优秀案例</strong></li>
+          <li>一线员工在外部AI应用上的实践技能、能力亟需整合到公司平台，<strong>沉淀推广一线宝贵经验</strong></li>
+        </ul></div><div class="col-emoji-bg">🛠️</div></div>
+      <div class="app-col"><div class="app-col-inner"><div class="col-label col-label-solve">✅ AI能帮你</div><p>建设Skill共享平台，<strong>基础Skill + 业务专属Skill</strong>，欢迎大家上传优秀Skill，更有大奖等你来拿：</p>
+        <ul>
+          <li>🏗️ 构建公司内部统一Skill共享平台</li>
+          <li>📤 一线员工上传实战经验与优秀Skill</li>
+          <li>🏆 激励机制：上传优秀Skill赢大奖</li>
+          <li>🔄 持续沉淀推广，形成营销AI工具箱</li>
+        </ul></div><div class="col-emoji-bg">✨</div></div>
+      <div class="app-col"><div class="app-col-inner"><div class="col-label col-label-how">🔧 平台入口</div><p>登录营销AI小秘平台，进入Skill共享平台，选择所需Skill即可使用。
+---</p>
+        <div class="path-tag"><span>DASLink</span> <span class="arr">→</span> <span>行销门户2.0</span> <span class="arr">→</span> <span>Skill共享平台</span></div></div><div class="col-emoji-bg">🔧</div></div>
+    </div>
+    <div class="app-video-panel">
+      <div class="app-video-label"><span class="vdot" data-u="24" style="background:#38bdf8;"></span>应用演示截图</div>
+      <div class="img-gallery col1"><figure class=""><img src="media/skill_main.webp" alt="" loading="lazy" decoding="async" width="1031" height="863"><figcaption>📌 Skill共享平台主界面</figcaption></figure></div>
+    </div>
+        <div class="report-preview">
+      <div class="report-preview-label"><span class="pdot"></span>运营报告 <span class="pbeta">REPORT</span> — 下滑查看完整报告</div>
+      <div class="report-preview-frame"><img src="media/skill_report.webp" alt="运营报告" loading="lazy" decoding="async" width="813" height="1920"></div>
+    </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<footer data-u="10" style="border-top:1px solid rgba(0,0,0,.05);">
+  <div class="ft-logo"><img src="media/image2.png" alt="安恒信息" style="height:32px;vertical-align:middle;margin-right:6px;" fetchpriority="high" decoding="async" width="445" height="273">AI赋能营销</div>
+  <p>安恒信息· 营销中心 · 综合管理部 · 2026年</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('prog').style.width=(h>0?window.scrollY/h*100:0)+'%'});
+function gotoScene(id){const el=document.getElementById(id);if(!el)return;const top=el.getBoundingClientRect().top+window.scrollY-118;window.scrollTo({top,behavior:'smooth'})}
+// 场景导航按钮 — 用 addEventListener 避免 CSP 拦截 onclick
+document.querySelectorAll('.scene-nav-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){var sid=this.getAttribute('data-scene');if(sid) gotoScene(sid);});
+});
+// 场景折叠/展开 — 点击标题旁 ▼ 按钮收起内容
+document.querySelectorAll('.scene-toggle').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var targetId=this.getAttribute('data-target');
+    var body=document.getElementById(targetId);
+    if(!body) return;
+    var isCollapsed=body.classList.toggle('collapsed');
+    this.classList.toggle('collapsed',isCollapsed);
+  });
+});
+const navLinks=document.querySelectorAll('.nav-tabs a');
+const sceneButtons=document.querySelectorAll('.scene-nav-btn');
+const scenes=[{id:'scene-opp',navIdx:0},{id:'scene-visit',navIdx:1},{id:'scene-proj',navIdx:2},{id:'scene-bid',navIdx:3},{id:'scene-channel',navIdx:4},{id:'scene-skill',navIdx:5},{id:'scene-knowledge',navIdx:6}];
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const idx=scenes.findIndex(s=>s.id===e.target.id);if(idx===-1)return;navLinks.forEach(a=>a.classList.remove('active'));sceneButtons.forEach(b=>b.classList.remove('active'));if(navLinks[idx])navLinks[idx].classList.add('active');if(sceneButtons[idx])sceneButtons[idx].classList.add('active')}})},{threshold:0.25});
+scenes.forEach(s=>{const el=document.getElementById(s.id);if(el)io.observe(el)});
+
+// 视频懒加载 + 进度指示 + 移动端友好
+function loadVideo(wrapper){
+  if(wrapper.dataset.loading==='1') return;
+  var vid=wrapper.querySelector('video'),src=wrapper.getAttribute('data-video-src');
+  if(!vid||!src) return;
+  wrapper.dataset.loading='1';
+  wrapper.classList.add('loading');
+  wrapper.classList.remove('error');
+  vid.innerHTML='<source src="'+src+'" type="video/mp4">';
+  vid.load();
+  vid.addEventListener('canplay',function(){
+    wrapper.classList.remove('loading');
+    wrapper.classList.add('playing');
+    // 不自动播放，等待用户点击
+  },{once:true});
+  vid.addEventListener('error',function(){
+    wrapper.classList.remove('loading');wrapper.classList.add('error');
+    wrapper.dataset.loading='0';
+  },{once:true});
+}
+// 进入视口附近时触发加载
+var videoObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) loadVideo(e.target); });
+},{rootMargin:'400px'});
+document.querySelectorAll('.video-wrapper').forEach(function(w){videoObs.observe(w);});
+// 点击占位区域触发加载 + 播放（pointerdown 同时覆盖 mouse + touch，无 300ms 延迟）
+document.addEventListener('pointerdown',function(e){
+  var ph=e.target.closest('.video-placeholder');
+  if(!ph) return;
+  var w=ph.closest('.video-wrapper');
+  if(!w||w.dataset.loading==='1') return;
+  if(e.target.classList.contains('vp-retry')){ loadVideo(w); return; }
+  loadVideo(w);
+  // 利用用户手势立即尝试播放（如果已缓存则直接播，否则 canplay 后再播）
+  var vid=w.querySelector('video');
+  if(vid) vid.play().catch(function(){});
+});
+const cards=document.querySelectorAll('.app-block');
+const cardIO=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:0.06});
+cards.forEach(c=>{c.style.opacity='0';c.style.transform='translateY(24px)';c.style.transition='opacity .45s ease,transform .45s ease,box-shadow .25s';cardIO.observe(c)});
+// 点赞评论模块 — MantleDB云端共享存储，所有人可见可累加
+var FB_URL='https://mantledb.sh/v2/ah-mkt-feedback/data';
+var FB_LIKE_URL='https://mantledb.sh/v2/increment/ah-mkt-feedback/data';
+var fbLikedKey='fb-liked-'+new Date().toISOString().slice(0,10);
+var fbLiked=localStorage.getItem(fbLikedKey)==='1';
+var fbLikes=0,fbComments=[];
+
+function fbGet(){
+  return fetch(FB_URL).then(function(r){return r.json();}).then(function(d){
+    // 兜底：如果MantleDB数据为空，尝试从localStorage恢复
+    if((!d.likes&&!d.comments)||(d.likes===0&&(!d.comments||d.comments.length===0))){
+      var backup=localStorage.getItem('fb-backup');
+      if(backup){try{var b=JSON.parse(backup);if(b.likes||(b.comments&&b.comments.length)){return b;}}catch(e){}}
+    }
+    return d;
+  });
+}
+function fbPut(data){
+  return fetch(FB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){return r.json();});
+}
+function fbIncrement(key,by){
+  return fetch(FB_LIKE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:key,by:by})}).then(function(r){return r.json();});
+}
+
+// 检测用户是否正在输入（避免同步时重绘DOM导致滚动/焦点丢失）
+var fbTyping=false;
+document.addEventListener('focusin',function(e){
+  if(e.target.closest('#fb-name')||e.target.closest('#fb-text')||e.target.closest('.fb-reply-area textarea')) fbTyping=true;
+});
+document.addEventListener('focusout',function(e){
+  if(e.target.closest('#fb-name')||e.target.closest('#fb-text')||e.target.closest('.fb-reply-area textarea')){
+    setTimeout(function(){ fbTyping=false; },200);
+  }
+});
+
+function syncFromCloud(){
+  fbGet().then(function(d){
+    fbLikes=d.likes||0; fbComments=d.comments||[];
+    if(!fbTyping) renderFeedback();
+    // 成功后写入localStorage备份
+    try{localStorage.setItem('fb-backup',JSON.stringify({likes:fbLikes,comments:fbComments}));}catch(e){}
+  }).catch(function(){});
+}
+
+function renderFeedback(){
+  var lc=document.getElementById('fb-like-count'); if(!lc) return;
+  lc.textContent=fbLikes+' 人觉得很赞';
+  document.getElementById('fb-cmt-count').textContent=fbComments.length;
+  var btn=document.getElementById('fb-like-btn');
+  if(btn){ if(fbLiked) btn.classList.add('liked'); else btn.classList.remove('liked'); }
+  var list=document.getElementById('fb-comment-list');
+  if(!list) return;
+  if(!fbComments.length){ list.innerHTML='<div class="fb-empty">暂无评论，来坐沙发吧 ☕</div>'; return; }
+  list.innerHTML=fbComments.slice().reverse().map(function(c){
+    var t=new Date(c.time),ts=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0')+' '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
+    var rs=(c.replies||[]).map(function(r){var rt=new Date(r.time),rts=rt.getFullYear()+'-'+String(rt.getMonth()+1).padStart(2,'0')+'-'+String(rt.getDate()).padStart(2,'0')+' '+String(rt.getHours()).padStart(2,'0')+':'+String(rt.getMinutes()).padStart(2,'0');return '<div class="fb-reply-item"><strong>'+esc(r.name)+'</strong><span>'+rts+'</span>：'+esc(r.text)+'</div>';}).join('');
+    return '<div class="fb-comment-item" data-cid="'+c.id+'"><div class="fb-comment-meta"><strong>'+esc(c.name)+'</strong><span>'+ts+'<button class="fb-reply-btn" data-cid="'+c.id+'" title="回复">💬 回复</button><button class="fb-comment-del" data-cid="'+c.id+'" title="删除">✕</button></span></div><div class="fb-comment-text">'+esc(c.text)+'</div>'+rs+'<div class="fb-reply-area" id="reply-area-'+c.id+'"><textarea id="reply-text-'+c.id+'" placeholder="写下回复…" rows="2" maxlength="200"></textarea><button data-cid="'+c.id+'" class="fb-reply-submit">回复</button></div></div>';
+  }).join('');
+}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+// 点赞按钮 — 原子递增，并发安全
+var _fbLikeBtn=document.getElementById('fb-like-btn');
+if(_fbLikeBtn) _fbLikeBtn.addEventListener('click',function(){
+  if(fbLiked) return;
+  fbLiked=true; fbLikes++;
+  localStorage.setItem(fbLikedKey,'1');
+  renderFeedback();
+  fbIncrement('likes',1).then(function(d){
+    if(d&&d.likes!==undefined) fbLikes=d.likes;
+    renderFeedback();
+    try{localStorage.setItem('fb-backup',JSON.stringify({likes:fbLikes,comments:fbComments}));}catch(e){}
+  }).catch(function(){ syncFromCloud(); });
+});
+
+// 初始加载 + 15秒定时同步（仅在反馈模块存在时）
+if(document.getElementById('fb-like-btn')){ syncFromCloud(); setInterval(syncFromCloud,15000); }
+
+function submitComment(){
+  var nameEl=document.getElementById('fb-name'),textEl=document.getElementById('fb-text');
+  var name=nameEl.value.trim(),text=textEl.value.trim();
+  if(!name||!text){alert('请填写昵称和评论内容');return}
+  if(name.length>20||text.length>500){alert('昵称或内容超出限制');return}
+  var c={id:'c_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),name:name,text:text,time:new Date().toISOString(),replies:[]};
+  // 乐观更新 + 云端同步 + localStorage备份
+  fbComments.push(c); renderFeedback();
+  nameEl.value=''; textEl.value=''; fbTyping=false;
+  var data={likes:fbLikes,comments:fbComments};
+  fbPut(data).then(function(){
+    try{localStorage.setItem('fb-backup',JSON.stringify({likes:fbLikes,comments:fbComments}));}catch(e){}
+  }).catch(function(){ syncFromCloud(); });
+}
+var _fbSubmitBtn=document.getElementById('fb-submit-btn');
+if(_fbSubmitBtn) _fbSubmitBtn.addEventListener('click',submitComment);
+
+function delComment(id){
+  if(!confirm('确定删除这条评论吗？')) return;
+  fbComments=fbComments.filter(function(c){return c.id!==id});
+  renderFeedback();
+  var data={likes:fbLikes,comments:fbComments};
+  fbPut(data).then(function(){
+    try{localStorage.setItem('fb-backup',JSON.stringify({likes:fbLikes,comments:fbComments}));}catch(e){}
+  }).catch(function(){ syncFromCloud(); });
+}
+
+// 评论列表事件代理
+var _fbCmtList=document.getElementById('fb-comment-list');
+if(_fbCmtList) _fbCmtList.addEventListener('click',function(e){
+  var delBtn=e.target.closest('.fb-comment-del');
+  if(delBtn){ var cid=delBtn.getAttribute('data-cid'); if(cid) delComment(cid); return; }
+  var replyBtn=e.target.closest('.fb-reply-btn');
+  if(replyBtn){ var cid=replyBtn.getAttribute('data-cid'); if(cid) toggleReply(cid); return; }
+  var replySubmit=e.target.closest('.fb-reply-submit');
+  if(replySubmit){ var cid=replySubmit.getAttribute('data-cid'); if(cid) submitReply(cid); return; }
+});
+
+function toggleReply(cid){
+  var area=document.getElementById('reply-area-'+cid);
+  if(!area) return;
+  area.classList.toggle('show');
+  if(area.classList.contains('show')){ var ta=document.getElementById('reply-text-'+cid); if(ta) setTimeout(function(){ta.focus()},100); }
+}
+function submitReply(cid){
+  var ta=document.getElementById('reply-text-'+cid);
+  if(!ta) return;
+  var text=ta.value.trim();
+  if(!text){alert('请输入回复内容');return}
+  if(text.length>200){alert('回复不能超过200字');return}
+  var cmt=fbComments.find(function(c){return c.id===cid});
+  if(!cmt) return;
+  if(!cmt.replies) cmt.replies=[];
+  var r={id:'r_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),name:'网友',text:text,time:new Date().toISOString()};
+  cmt.replies.push(r); renderFeedback(); fbTyping=false;
+  var data={likes:fbLikes,comments:fbComments};
+  fbPut(data).then(function(){
+    try{localStorage.setItem('fb-backup',JSON.stringify({likes:fbLikes,comments:fbComments}));}catch(e){}
+  }).catch(function(){ syncFromCloud();   });
+}
+// ---- 图片点击放大 Lightbox ----
+(function(){
+  var overlay=document.createElement('div');
+  overlay.className='lightbox-overlay';
+  overlay.innerHTML='<button class="lb-close" type="button">&times;</button><img alt=""><div class="lb-caption"></div>';
+  document.body.appendChild(overlay);
+  var lbImg=overlay.querySelector('img');
+  var lbCap=overlay.querySelector('.lb-caption');
+  var lbClose=overlay.querySelector('.lb-close');
+  function open(src,cap){
+    lbImg.src=src; lbCap.textContent=cap||'';
+    overlay.classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    overlay.classList.remove('active');
+    document.body.style.overflow='';
+    lbImg.src='';
+  }
+  overlay.addEventListener('click',function(e){ if(e.target===overlay||e.target===lbClose) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  document.addEventListener('click',function(e){
+    var fig=e.target.closest('.img-gallery figure');
+    if(!fig) return;
+    var img=fig.querySelector('img');
+    if(!img) return;
+    var cap=fig.querySelector('figcaption');
+    open(img.src, cap?cap.textContent:'');
+  });
+})();
+</script>
+<script id="__perf_reg">
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  if (location.protocol === 'file:') return;
+  function warm(t) { if (t && t.postMessage) { try { t.postMessage({ type: 'warm' }); } catch (e) {} } }
+  function idle(fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 5000 }); else setTimeout(fn, 3000); }
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
+    setTimeout(function () { warm(navigator.serviceWorker.controller); }, 3500);
+  });
+  navigator.serviceWorker.register('sw.js', { scope: './' }).then(function (reg) {
+    idle(function () { warm(navigator.serviceWorker.controller || reg.active || reg.waiting); });
+  }).catch(function () {});
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type !== 'updated') return;
+    try {
+      if (sessionStorage.getItem('__ams_v') === d.v) return;
+      sessionStorage.setItem('__ams_v', d.v);
+    } catch (err) { return; }
+    location.reload();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI赋能营销 · 营销中心-综合管理部</title>
+<link rel="stylesheet" href="ued-theme-a.css" data-ued-th="a" media="all">
+<link rel="stylesheet" href="ued-theme-b.css" data-ued-th="b" media="not all">
+<link rel="stylesheet" href="ued-theme-c.css" data-ued-th="c" media="not all">
+<link rel="stylesheet" href="ued-theme-d.css" data-ued-th="d" media="not all">
+<link rel="stylesheet" href="ued-switch.css">
+<script id="ued-switch-boot">
+(function () {
+  var H = document.documentElement;
+  var IDS = ['a', 'b', 'c', 'd'];
+  function siteOf() {
+    /* /ai-marketing-site(-B|-C|-D)/ → a|b|c|d；本地文件/其它路径 → a */
+    var m = /(?:^|\/)ai-marketing-site(?:-([BbCcDd]))?\//.exec(location.pathname || '');
+    return (m && m[1]) ? m[1].toLowerCase() : 'a';
+  }
+  var site = siteOf(), pick = null, forced = false;
+  try {
+    var q = new URLSearchParams(location.search).get('ued');
+    if (q && IDS.indexOf(q.toLowerCase()) >= 0) { pick = q.toLowerCase(); forced = true; }
+  } catch (e) {}
+  if (!pick) {
+    try {
+      var s = localStorage.getItem('ued-theme@' + site);
+      if (s && IDS.indexOf(s) >= 0) pick = s;
+    } catch (e) {}
+  }
+  if (!pick) pick = site;
+  window.__ued = { site: site, theme: pick, forced: forced };
+  H.setAttribute('data-ued-site', site);
+  H.setAttribute('data-ued-theme', pick);
+  var ls = document.querySelectorAll('link[data-ued-th]');
+  for (var i = 0; i < ls.length; i++) {
+    ls[i].media = (ls[i].getAttribute('data-ued-th') === pick) ? 'all' : 'not all';
+  }
+  window.__uedApply = function (t) {
+    if (IDS.indexOf(t) < 0) return;
+    H.setAttribute('data-ued-theme', t);
+    var n = document.querySelectorAll('link[data-ued-th]');
+    for (var i = 0; i < n.length; i++) {
+      n[i].media = (n[i].getAttribute('data-ued-th') === t) ? 'all' : 'not all';
+    }
+    var bs = document.querySelectorAll('.uedsw-b');
+    for (var j = 0; j < bs.length; j++) {
+      bs[j].setAttribute('aria-pressed', bs[j].getAttribute('data-ued') === t ? 'true' : 'false');
+    }
+    window.__ued.theme = t;
+    try { localStorage.setItem('ued-theme@' + window.__ued.site, t); } catch (e) {}
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    window.__uedApply(window.__ued.theme);
+    var box = document.querySelector('.uedsw');
+    if (!box) return;
+    box.addEventListener('click', function (ev) {
+      var b = ev.target.closest ? ev.target.closest('.uedsw-b') : null;
+      if (!b) return;
+      ev.preventDefault();
+      var t = b.getAttribute('data-ued');
+      if (t === window.__ued.theme) return;
+      document.documentElement.classList.add('uedsw-anim');
+      window.__uedApply(t);
+      setTimeout(function () {
+        document.documentElement.classList.remove('uedsw-anim');
+      }, 340);
+    });
+  });
+})();
+</script>
+</head>
+<body>
+<div id="prog"></div>
+
+<nav>
+  <a class="nav-brand" href="index.html"><img src="media/image2.png" alt="安恒信息" fetchpriority="high" decoding="async" width="445" height="273"><span>AI赋能营销</span></a>
+  <div class="nav-actions">
+    <div class="uedsw" role="group" aria-label="界面风格切换" title="UED 界面风格切换 · 四个风格内容一致，仅视觉不同"><span class="uedsw-lab"><svg class="uedsw-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.1a6.9 6.9 0 0 0 0 13.8c.95 0 1.6-.72 1.6-1.5 0-.4-.16-.73-.42-1-.24-.25-.38-.56-.38-.92 0-.76.63-1.37 1.42-1.37h1.05A4.68 4.68 0 0 0 15.9 5.5C15.9 2.98 12.32 1.1 8 1.1Z"/><circle cx="4.85" cy="6.5" r="1.05"/><circle cx="7.6" cy="4.3" r="1.05"/><circle cx="10.85" cy="5.15" r="1.05"/><circle cx="10.95" cy="8.35" r="1.05"/></svg><span class="uedsw-lab-t">界面风格</span></span><span class="uedsw-opts"><button type="button" class="uedsw-b" data-ued="a" title="深色科技风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>深色科技</span></button><button type="button" class="uedsw-b" data-ued="b" title="企业AI风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>企业AI</span></button><button type="button" class="uedsw-b" data-ued="c" title="政企权威风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>政企权威</span></button><button type="button" class="uedsw-b" data-ued="d" title="极简商务风格" aria-pressed="false"><i class="uedsw-d" aria-hidden="true"></i><span>极简商务</span></button></span></div>
+  <a class="nav-de-btn" href="digital-employee.html" title="进入 超级数字员工 专页"><span class="nde-dot"></span><span class="nde-txt">超级数字员工</span></a>
+    <div class="nav-right"><img src="media/image2.png" alt="" fetchpriority="high" decoding="async" width="445" height="273"><span class="nav-right-dept">安恒信息· 营销中心 · 综合管理部</span></div>
+  </div>
+</nav>
+
+<section class="hero" id="hero" style="min-height:auto;padding:80px 40px 24px;">
+  <div class="hero-bg-circles"><span></span><span></span><span></span></div>
+  <a class="hero-de-orb" href="digital-employee.html" title="点击查看超级数字员工" aria-label="点击查看超级数字员工">
+    <span class="orb-stage">
+      <span class="orb-halo"></span><span class="orb-halo d2"></span>
+      <span class="orb-ring"></span>
+      <span class="orb-core"><img src="media/de_orb_face.webp" alt="超级数字员工" fetchpriority="high" decoding="async" width="200" height="200"></span>
+      <span class="orb-hand"><b>👆</b></span>
+    </span>
+    <span class="orb-label">超级数字员工</span>
+  </a>
+  <div class="hero-inner">
+    <h1>AI赋能营销<br><em>AI用起来，业绩冲上来！</em></h1>
+    <p class="hero-sub">以<span class="text-highlight">业务赋能</span>为导向，以<span class="text-highlight">AI与数字化</span>为核心，以<span class="text-highlight">提质增效</span>为目标</p>
+  </div>
+</section>
+
+<section class="landing-section" id="landing-scenes">
+  <div class="landing-inner">
+    <div class="landing-title">七大场景，<em>全面覆盖</em></div>
+    <div class="landing-sub">点击<span class="text-highlight">卡片</span>深入了解每个场景的<span class="text-highlight">应用与操作</span></div>
+    <div class="cards-grid">
+    <a href="scene-1.html" class="card-item">
+      <div class="card-icon-wrap">
+        <div class="card-icon" data-u="1" style="background:linear-gradient(135deg,#0f2b5c,#1e4f8a);">📈</div>
+        <div class="card-title-group">
+          <div class="card-title">机会点增量<span class="card-count">4个AI应用</span></div>
+          <div class="card-en">Opportunity Growth</div>
+        </div>
+      </div>
+      <div class="card-desc">市场空间 · 价值线索 · 精细化运营</div>
+      <div class="card-tags"><span class="card-tag">市场分析</span><span class="card-tag">标讯运营</span><span class="card-tag">市场报告</span><span class="card-tag">标讯AI分析</span></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="scene-2.html" class="card-item">
+      <div class="card-icon-wrap">
+        <div class="card-icon" data-u="2" style="background:linear-gradient(135deg,#00a884,#00b894);">🤝</div>
+        <div class="card-title-group">
+          <div class="card-title">客户拜访<span class="card-count">2个AI应用</span></div>
+          <div class="card-en">Customer Visit</div>
+        </div>
+      </div>
+      <div class="card-desc">拜访前充分准备，现场沟通稳定发挥</div>
+      <div class="card-tags"><span class="card-tag">客户画像</span><span class="card-tag">AI对练</span><span class="card-tag">支持移动端</span></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="scene-3.html" class="card-item">
+      <div class="card-icon-wrap">
+        <div class="card-icon" data-u="3" style="background:linear-gradient(135deg,#0f2b5c,#5b3fd4);">🚀</div>
+        <div class="card-title-group">
+          <div class="card-title">项目推进<span class="card-count">2个AI应用</span></div>
+          <div class="card-en">Project Delivery</div>
+        </div>
+      </div>
+      <div class="card-desc">7×24h智能支持，适配项目推进全流程</div>
+      <div class="card-tags"><span class="card-tag">营销AI小秘</span><span class="card-tag">行销数字员工</span></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="scene-4.html" class="card-item">
+      <div class="card-icon-wrap">
+        <div class="card-icon" data-u="4" style="background:linear-gradient(135deg,#e8710a,#dc2626);">📋</div>
+        <div class="card-title-group">
+          <div class="card-title">招投标<span class="card-count">3大AI能力</span></div>
+          <div class="card-en">Bidding</div>
+        </div>
+      </div>
+      <div class="card-desc">招标文件解析→商务标生成→投标检查</div>
+      <div class="card-tags"><span class="card-tag">招标解析</span><span class="card-tag">商务标生成</span><span class="card-tag">投标检查</span></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="scene-5.html" class="card-item">
+      <div class="card-icon-wrap">
+        <div class="card-icon" data-u="5" style="background:linear-gradient(135deg,#0d9488,#14b8a6);">🏭</div>
+        <div class="card-title-group">
+          <div class="card-title">渠道赋能<span class="card-count">2个AI应用</span></div>
+          <div class="card-en">Channel Empowerment</div>
+        </div>
+      </div>
+      <div class="card-desc">渠道AI数字员工 · 渠道市场分析空间</div>
+      <div class="card-tags"><span class="card-tag">安小渠</span><span class="card-tag">渠道市场分析</span></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="scene-6.html" class="card-item">
+      <div class="card-icon-wrap">
+        <div class="card-icon" data-u="6" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">🛠️</div>
+        <div class="card-title-group">
+          <div class="card-title">Skill共享<span class="card-count">1个应用</span></div>
+          <div class="card-en">Skill Sharing</div>
+        </div>
+      </div>
+      <div class="card-desc">整合一线实战经验，共建共享工具箱</div>
+      <div class="card-tags"><span class="card-tag">30+大比武</span><span class="card-tag">40+提质增效</span><span class="card-tag">共建共享</span></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="scene-7.html" class="card-item">
+      <div class="card-icon-wrap">
+        <div class="card-icon" data-u="7" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">🧠</div>
+        <div class="card-title-group">
+          <div class="card-title">知识助手<span class="card-count">1个AI应用</span></div>
+          <div class="card-en">Knowledge AI</div>
+        </div>
+      </div>
+      <div class="card-desc">20s获答，效率提升100%</div>
+      <div class="card-tags"><span class="card-tag">5万+文档</span><span class="card-tag">20s获答</span><span class="card-tag">效率提升100%</span></div>
+      <div class="card-arrow">→</div>
+    </a>
+    </div>
+  </div>
+</section>
+
+<section class="arch-section" id="ai-arch">
+  <div class="arch-inner">
+    <div class="arch-title">
+      <span class="at-pill">AI应用矩阵</span>
+    </div>
+    <div class="arch-sub">围绕提升<strong>增量、质量、能效、管理</strong>四大目标，设计营销AI应用，<strong>赋能全链路营销业务</strong></div>
+    <div class="arch-grid">
+<a href="scene-1.html?from=ai-arch" class="arch-card arch-card-linkable" data-color="blue">
+  <div class="arch-card-top">
+    <div class="ac-icon">🚀</div>
+    <div>
+      <div class="ac-name">抓增量</div>
+      <div class="ac-en">GROWTH</div>
+    </div>
+  </div>
+  <div class="ac-desc">看清市场空间、数据驱动作战</div>
+  <div class="ac-divider"></div>
+  <div class="ac-divider-label">AI 应用</div>
+  <div class="ac-apps">
+<div class="ac-app"><span class="ac-app-dot"></span>市场空间报告</div>
+<div class="ac-app"><span class="ac-app-dot"></span>标讯推送</div>
+<div class="ac-app"><span class="ac-app-dot"></span>......</div>
+
+  </div>
+</a>
+<div class="arch-card" data-color="purple">
+  <div class="arch-card-top">
+    <div class="ac-icon">✨</div>
+    <div>
+      <div class="ac-name">抓质量</div>
+      <div class="ac-en">QUALITY</div>
+    </div>
+  </div>
+  <div class="ac-desc">提升拜访、招投标方案质量</div>
+  <div class="ac-divider"></div>
+  <div class="ac-divider-label">AI 应用</div>
+  <div class="ac-apps">
+<div class="ac-app"><span class="ac-app-dot"></span><a href="scene-2.html?from=ai-arch#app-s2-2" class="ac-app-link">AI对练</a></div>
+<div class="ac-app"><span class="ac-app-dot"></span><a href="scene-4.html?from=ai-arch" class="ac-app-link">标书制作及检查</a></div>
+<div class="ac-app"><span class="ac-app-dot"></span>......</div>
+
+  </div>
+</div>
+<div class="arch-card" data-color="orange">
+  <div class="arch-card-top">
+    <div class="ac-icon">⚡</div>
+    <div>
+      <div class="ac-name">提能效</div>
+      <div class="ac-en">EFFICIENCY</div>
+    </div>
+  </div>
+  <div class="ac-desc">整合行销能力，全面搜集客户信息</div>
+  <div class="ac-divider"></div>
+  <div class="ac-divider-label">AI 应用</div>
+  <div class="ac-apps">
+<div class="ac-app"><span class="ac-app-dot"></span><a href="scene-3.html?from=ai-arch#app-s3-2" class="ac-app-link">行销数字员工</a></div>
+<div class="ac-app"><span class="ac-app-dot"></span><a href="scene-2.html?from=ai-arch#app-s2-1" class="ac-app-link">客户画像</a></div>
+<div class="ac-app"><span class="ac-app-dot"></span>......</div>
+
+  </div>
+</div>
+<a href="scene-3.html?from=ai-arch#app-s3-1" class="arch-card arch-card-linkable" data-color="teal">
+  <div class="arch-card-top">
+    <div class="ac-icon">🛠️</div>
+    <div>
+      <div class="ac-name">助管理</div>
+      <div class="ac-en">MANAGEMENT</div>
+    </div>
+  </div>
+  <div class="ac-desc">辅助管理决策、业务关键信息查询</div>
+  <div class="ac-divider"></div>
+  <div class="ac-divider-label">AI 应用</div>
+  <div class="ac-apps">
+<div class="ac-app"><span class="ac-app-dot"></span>营销AI小秘</div>
+<div class="ac-app"><span class="ac-app-dot"></span>查企业、查价格</div>
+<div class="ac-app"><span class="ac-app-dot"></span>......</div>
+
+  </div>
+</a>
+    </div>
+  </div>
+</section>
+
+<section class="inc-section">
+  <div class="inc-inner">
+    <div class="inc-header">
+      <div class="inc-title">积极使用 AI，更有 丰厚激励 等你拿</div>
+      <div class="inc-sub"><span class="text-highlight-gold">积极使用</span>AI工具，<span class="text-highlight-gold">主动反馈</span>优化建议，甚至自建提效Skill——优秀实践可获<span class="text-highlight-gold">月度激励、专项大奖及年度荣誉</span>！</div>
+    </div>
+    <div class="inc-grid">
+<a href="https://365.kdocs.cn/l/cqQpJWaDnycr" target="_blank" class="inc-card" data-glow="gold">
+  <div class="inc-card-icon">🏆</div>
+  <div class="inc-card-title">10W专项激励</div>
+  <div class="inc-card-en">SPECIAL AWARD</div>
+  <div class="inc-card-desc">针对AI应用有突出贡献的个人/团队，提供10万元专项激励基金，授予年度AI应用先锋荣誉。</div>
+  <div class="inc-card-stats"><div><div class="inc-stat-num">10W</div><div class="inc-stat-label">专项基金</div></div><div><div class="inc-stat-num">营销全员</div><div class="inc-stat-label">参与范围</div></div></div>
+  <div class="inc-card-tags"><span class="inc-card-tag">突出贡献</span><span class="inc-card-tag">先锋团队</span><span class="inc-card-tag">专项基金</span></div>
+  <div class="inc-card-cta">查看激励详情</div>
+</a>
+<a href="https://ah-marketing-2026.github.io/honor/" target="_blank" class="inc-card" data-glow="blue">
+  <div class="inc-card-icon">📅</div>
+  <div class="inc-card-title">常态化月度激励</div>
+  <div class="inc-card-en">MONTHLY AWARD</div>
+  <div class="inc-card-desc">每月评选AI应用之星，月度公示、月度激励，让AI使用习惯持续渗透到每一个一线团队。</div>
+  <div class="inc-card-stats"><div><div class="inc-stat-num">月度</div><div class="inc-stat-label">评选节奏</div></div><div><div class="inc-stat-num">全国助理</div><div class="inc-stat-label">综合管理部激励</div></div><div><div class="inc-stat-num">行销部全员</div><div class="inc-stat-label">行销激励</div></div></div>
+  <div class="inc-card-tags"><span class="inc-card-tag">月度之星</span><span class="inc-card-tag">持续激励</span><span class="inc-card-tag">全员覆盖</span></div>
+  <div class="inc-card-cta">查看荣誉榜单</div>
+</a>
+<div class="inc-card" data-glow="purple">
+  <div class="inc-card-icon">🎯</div>
+  <div class="inc-card-title">年底综合激励</div>
+  <div class="inc-card-en">YEAR-END AWARD</div>
+  <div class="inc-card-desc">年底综合评定，AI应用标杆团队/个人额外奖励，颁发年度AI赋能营销奖项，纳入绩效考核。</div>
+  <div class="inc-card-stats"><div><div class="inc-stat-num">年度</div><div class="inc-stat-label">综合评优</div></div><div><div class="inc-stat-num">标杆</div><div class="inc-stat-label">示范效应</div></div></div>
+  <div class="inc-card-tags"><span class="inc-card-tag">年度评优</span><span class="inc-card-tag">绩效加分</span><span class="inc-card-tag">示范标杆</span></div>
+  <div class="inc-card-cta no-arrow">敬请期待</div>
+</div>
+    </div>
+    <div class="inc-action">营销中台已进行 8 个区域（广东、深圳、江苏、安徽、北京、天津、浙江、四川）的 AI 应用赋能及交流，持续更新中</div>
+  </div>
+</section>
+
+<section class="future-home-section" id="future-home">
+  <div class="future-home-inner">
+    <div class="future-home-header">
+      <div class="future-home-pill">FUTURE PLAN</div>
+      <div class="future-home-title">未来规划</div>
+      <div class="future-home-subtitle">统一入口 · 整合资源 · 建设营销AI综合能力平台</div>
+    </div>
+    <a href="future.html" class="future-home-card">
+      <div class="future-home-icon">🚀</div>
+      <div class="future-home-card-body">
+        <div class="future-home-card-title">建设营销AI综合能力平台</div>
+        <div class="future-home-card-desc">各类AI应用分散在不同平台，一线员工在外部AI工具上积累了大量实战经验，亟需统一整合、沉淀推广。</div>
+        <div class="future-home-tags">
+          <span class="future-home-tag">统一入口</span>
+          <span class="future-home-tag">整合资源</span>
+          <span class="future-home-tag">持续迭代</span>
+        </div>
+        <div class="future-home-cta">查看未来规划</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer data-u="8" style="background:linear-gradient(180deg,#0a1638,#070e2a);border-top:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.4);">
+  <div class="ft-logo" data-u="9" style="color:rgba(255,255,255,.8);"><img src="media/image2.png" alt="安恒信息" style="height:32px;vertical-align:middle;margin-right:6px;filter:brightness(1.2);" fetchpriority="high" decoding="async" width="445" height="273">AI赋能营销</div>
+  <p>安恒信息· 营销中心 · 综合管理部 · 2026年</p>
+  <section class="view-counter" style="margin-top:12px;"><span class="vc-icon">👁️</span><span>本页已浏览</span><span class="vc-num">99+</span><span>次</span></section>
+</footer>
+
+<script>window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('prog').style.width=(h>0?window.scrollY/h*100:0)+'%'});</script>
+<script id="__perf_reg">
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  if (location.protocol === 'file:') return;
+  function warm(t) { if (t && t.postMessage) { try { t.postMessage({ type: 'warm' }); } catch (e) {} } }
+  function idle(fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 5000 }); else setTimeout(fn, 3000); }
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
+    setTimeout(function () { warm(navigator.serviceWorker.controller); }, 3500);
+  });
+  navigator.serviceWorker.register('sw.js', { scope: './' }).then(function (reg) {
+    idle(function () { warm(navigator.serviceWorker.controller || reg.active || reg.waiting); });
+  }).catch(function () {});
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type !== 'updated') return;
+    try {
+      if (sessionStorage.getItem('__ams_v') === d.v) return;
+      sessionStorage.setItem('__ams_v', d.v);
+    } catch (err) { return; }
+    location.reload();
+  });
+})();
+</script>
+</body>
+</html>

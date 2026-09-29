@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天津大学 - 安全画像报告</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --primary: #1a6ef5; --primary-light: #0ea5e9; --primary-bg: #eef5ff;
+      --text-dark: #1e2a3b; --text-gray: #64748b; --text-light: #94a3b8;
+      --bg: #f1f5f9; --card: #fff; --border: #e2e8f0;
+      --green: #22c55e; --yellow: #f59e0b; --orange: #f97316;
+      --red: #ef4444; --blue: #3b82f6; --purple: #8b5cf6;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.10);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text-dark); line-height: 1.65; }
+    .confidential { background: linear-gradient(90deg, #c0182d, #e53e3e); color: #fff; text-align: center; padding: 9px 0; font-weight: 700; font-size: 13px; letter-spacing: 4px; position: sticky; top: 0; z-index: 200; box-shadow: 0 2px 6px rgba(192,24,45,.25); }
+    .container { max-width: 1380px; margin: 0 auto; padding: 24px 20px 56px; }
+    .cover { background: linear-gradient(135deg, #0f2460 0%, #1a4fc4 45%, #0ea5e9 100%); color: #fff; border-radius: 20px; padding: 52px 48px 44px; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(26,110,245,.30); margin-bottom: 28px; }
+    .cover::before { content: ''; position: absolute; top: -120px; right: -80px; width: 480px; height: 480px; background: rgba(255,255,255,.06); border-radius: 50%; pointer-events: none; }
+    .cover::after { content: ''; position: absolute; bottom: -80px; left: 30%; width: 300px; height: 300px; background: rgba(14,165,233,.15); border-radius: 50%; pointer-events: none; }
+    .cover > * { position: relative; z-index: 1; }
+    .cover h1 { font-size: 38px; font-weight: 800; margin-bottom: 6px; text-shadow: 0 2px 8px rgba(0,0,0,.2); }
+    .cover .subtitle { font-size: 15px; opacity: .9; margin-bottom: 8px; }
+    .cover-meta-block { margin-bottom: 32px; }
+    .cover-meta-line { font-size: 12px; opacity: .72; line-height: 1.6; margin-bottom: 2px; }
+    .cover-meta-block .sourcing { font-size: 12px; opacity: .58; margin-top: 6px; line-height: 1.5; font-style: italic; }
+    .score-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .score-card { background: rgba(255,255,255,.12); backdrop-filter: blur(12px); border-radius: 14px; padding: 20px 16px; text-align: center; border: 1px solid rgba(255,255,255,.22); }
+    .score-card .label { font-size: 12px; opacity: .85; margin-bottom: 10px; letter-spacing: 1px; }
+    .score-card .score-val { font-size: 22px; font-weight: 700; color: #fff; }
+    .score-card .level { font-size: 11px; margin-top: 8px; opacity: .8; }
+    .cover-score-lvl, .kpi-lvl { display: inline-block; padding: 4px 12px; border-radius: 10px; font-size: 18px; font-weight: 700; line-height: 1.2; color: #fff; }
+    .kpi-lvl { font-size: 16px; color: inherit; }
+    .status-L1 { background: #fee2e2; color: #991b1b; }
+    .status-L2 { background: #ffedd5; color: #9a3412; }
+    .status-L3 { background: #fef9c3; color: #854d0e; }
+    .status-L4 { background: #DBEAFE; color: #1E40AF; }
+    .status-L5 { background: #F0FDF4; color: #166534; }
+    .status-NA { background: #f1f5f9; color: #64748b; }
+    .cover .status-L1 { background: #dc2626; color: #fff; }
+    .cover .status-L2 { background: #ea580c; color: #fff; }
+    .cover .status-L3 { background: #d97706; color: #fff; }
+    .cover .status-L4 { background: #2563eb; color: #fff; }
+    .cover .status-L5 { background: #16a34a; color: #fff; }
+    .cover .status-NA { background: rgba(255,255,255,.25); color: rgba(255,255,255,.9); }
+    .cover-levels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 8px; margin-top: 18px; width: 100%; }
+    .cover-level-item { display: flex; align-items: flex-start; gap: 5px; background: rgba(255,255,255,.10); padding: 5px 8px; border-radius: 5px; border: 1px solid rgba(255,255,255,.15); }
+    .level-badge { flex-shrink: 0; font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 4px; margin-top: 1px; color: #fff; }
+    .level-desc { font-size: 10px; color: rgba(255,255,255,.88); line-height: 1.35; }
+    .section, .executive-summary, .action-toc { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 32px 36px; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+    .section-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .section-title .icon { width: 36px; height: 36px; background: var(--primary-bg); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    h2 { font-size: 20px; margin-bottom: 20px; color: var(--text-dark); }
+    h3 { font-size: 16px; margin: 18px 0 10px; }
+    p { margin-bottom: 10px; }
+    ul { padding-left: 20px; }
+    .exec-subtitle-text { font-size: 14px; margin-bottom: 20px; color: var(--text-dark); opacity: .9; }
+    .priority-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+    .summary-kpis, .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 16px 0 20px; }
+    .priority-box, .summary-kpi, .metric-card, .eval-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .priority-high { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.25); }
+    .priority-med { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.25); }
+    .priority-purple-tint { background: rgba(139,92,246,.15); border: 1px solid rgba(139,92,246,.25); }
+    .priority-box h4 { font-size: 14px; margin-bottom: 8px; }
+    .priority-box ul { list-style: none; padding-left: 0; font-size: 13px; }
+    .priority-box li { padding: 3px 0; }
+    .summary-kpi { text-align: center; }
+    .kpi-value { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .kpi-label { font-size: 12px; color: var(--text-gray); margin-top: 4px; }
+    .findings-card { background: var(--bg); border-radius: 12px; padding: 18px 20px; border: 1px solid var(--border); }
+    .findings-card h3 { font-size: 15px; color: var(--text-dark); margin-top: 0; }
+    .finding-item { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; font-size: 13px; }
+    .finding-icon { font-size: 16px; flex-shrink: 0; }
+    .toc-header { display: flex; align-items: baseline; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+    .toc-title { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+    .toc-subtitle { font-size: 13px; color: var(--text-gray); }
+    .toc-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .toc-link { display: inline-block; padding: 10px 22px; border-radius: 10px; color: var(--primary); background: #d0e3f4; text-decoration: none; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+    .toc-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .assessment-layout { display: flex; gap: 36px; align-items: center; margin-bottom: 24px; flex-wrap: wrap; }
+    .assess-radar { flex-shrink: 0; width: 460px; max-width: 100%; }
+    .assess-content { flex: 1; min-width: 320px; }
+    .eval-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
+    .eval-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .eval-header h3 { font-size: 15px; font-weight: 700; margin: 0; }
+    .eval-status { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+    .eval-status-text { font-size: 13px; line-height: 1.7; margin-bottom: 10px; color: var(--text-dark); }
+    .eval-problems { font-size: 13px; line-height: 1.7; margin-bottom: 10px; color: var(--text-gray); background: #fff; padding: 10px; border-radius: 8px; border: 1px solid var(--border); }
+    .eval-risk { font-size: 13px; line-height: 1.7; margin-bottom: 10px; color: #7f1d1d; background: #fff7ed; padding: 10px; border-radius: 8px; border: 1px solid #fed7aa; }
+    .eval-improvement { font-size: 13px; line-height: 1.7; color: var(--primary); background: var(--primary-bg); padding: 10px; border-radius: 8px; border-left: 3px solid var(--primary); }
+    .eval-evidence-note { font-size: 12px; line-height: 1.7; margin-top: 8px; color: var(--text-light); }
+    .gap-line { padding: 6px 0; font-size: 13px; color: var(--text-dark); }
+    .gap-line:last-child { border-bottom: none; }
+    .data-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 12px; background: #fff; }
+    .data-table th { background: var(--bg); padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; color: var(--text-gray); border-bottom: 2px solid var(--border); }
+    .data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: top; overflow-wrap: anywhere; word-break: break-word; }
+    .data-table tr:hover td { background: var(--primary-bg); }
+    .ability-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; background: var(--primary-bg); color: var(--primary); margin: 2px 4px 2px 0; }
+    .highlight-box { background: var(--primary-bg); border-left: 4px solid var(--primary); border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; }
+    .highlight-box p { font-size: 14px; color: var(--text-dark); margin-bottom: 0; }
+    .source-list { list-style: none; padding-left: 0; }
+    .source-list li { padding: 8px 0; font-size: 13px; border-bottom: 1px solid var(--border); }
+    .muted { color: var(--text-gray); font-size: 13px; }
+    .empty { color: var(--text-light); font-size: 13px; padding: 12px; background: var(--bg); border-radius: 8px; }
+    .assessment-narrative h3 { font-size: 15px; margin: 0 0 8px; color: var(--text-dark); font-weight: 800; }
+    .assessment-narrative p { font-size: 14px; line-height: 1.9; color: var(--text-gray); margin-bottom: 20px; }
+    .gap-quick-view { margin-top: 4px; }
+    .gap-quick-view h3 { font-size: 15px; margin: 0 0 8px; color: var(--text-dark); font-weight: 800; }
+    .gap-quick-view ul { list-style: none; margin: 0; padding-left: 0; border-top: 1px dashed var(--border); }
+    .gap-quick-view li { padding: 10px 0; border-bottom: 1px dashed var(--border); font-size: 14px; line-height: 1.8; color: var(--text-dark); }
+    .gap-quick-view .gap-alert { color: var(--red); font-weight: 800; margin-right: 6px; }
+    .gap-quick-view strong { color: var(--red); }
+    .collapsed-table { margin-top: 10px; overflow-x: auto; }
+    .collapsed-table summary { cursor: pointer; color: var(--primary); font-weight: 700; font-size: 13px; padding: 10px 12px; background: var(--primary-bg); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; }
+    .collapsed-table .data-table { margin-top: 0; }
+    @media (max-width: 900px) {
+      .score-cards, .priority-matrix, .summary-kpis, .metric-grid { grid-template-columns: 1fr; }
+      .eval-grid { grid-template-columns: 1fr; }
+      .toc-links { flex-direction: column; }
+      .cover { padding: 36px 24px; }
+      .cover h1 { font-size: 30px; }
+      .cover-levels { grid-template-columns: 1fr; }
+      .data-table { min-width: 760px; }
+      .section { overflow-x: auto; }
+    }
+  </style>
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</head>
+<body>
+  <div class="confidential">内部参考资料，请勿外传</div>
+  <div class="container">
+    <div class="cover">
+      <h1>天津大学</h1>
+      <p class="subtitle">网络安全全景画像分析报告 | 教育</p>
+      <div class="cover-meta-block">
+        <div class="cover-meta-line">报告生成时间：2026-06-18 · 数据截至：2026-06-18</div>
+        <div class="cover-meta-line">数据来源：标讯平台、合同系统、互联网公开搜索</div>
+        <div class="sourcing">咨询能力支撑：评估模型与规则逻辑由《AI安服数字员工-数字化安全咨询评估助手》提供</div>
+      </div>
+      <div class="score-cards"><div class="score-card"><div class="label">基础安全防护</div><div class="score-val"><span class="cover-score-lvl status-L3">L3</span></div><div class="level">主动监测级</div></div><div class="score-card"><div class="label">安全运营</div><div class="score-val"><span class="cover-score-lvl status-L3">L3</span></div><div class="level">主动监测级</div></div><div class="score-card"><div class="label">数据安全</div><div class="score-val"><span class="cover-score-lvl status-L2">L2</span></div><div class="level">被动防御级</div></div><div class="score-card"><div class="label">安全开发</div><div class="score-val"><span class="cover-score-lvl status-NA">N/A</span></div><div class="level">证据不足</div></div><div class="score-card"><div class="label">AI安全</div><div class="score-val"><span class="cover-score-lvl status-L1">L1</span></div><div class="level">基础合规级</div></div></div>
+      <div class="cover-levels">
+        <div class="cover-level-item"><span class="level-badge status-L1">L1</span><span class="level-desc">基础合规级：安全建设刚起步，尚未形成体系</span></div>
+        <div class="cover-level-item"><span class="level-badge status-L2">L2</span><span class="level-desc">被动防御级：部署若干安全能力，但协同不足</span></div>
+        <div class="cover-level-item"><span class="level-badge status-L3">L3</span><span class="level-desc">主动监测级：具备统一发现和运营能力</span></div>
+        <div class="cover-level-item"><span class="level-badge status-L4">L4</span><span class="level-desc">主动防御级：纵深防御和响应闭环较成熟</span></div>
+        <div class="cover-level-item"><span class="level-badge status-L5">L5</span><span class="level-desc">智能化运营级：AI 驱动，行业领先</span></div>
+      </div>
+    </div>
+
+    <section class="executive-summary" id="sec-summary">
+      <h2>客户画像速览</h2>
+      <p class="exec-subtitle-text">天津大学为天津教育机构，当前报告已基于 81 条标讯、24 条合同和公开资料形成。核心机会集中在安全运营、数据安全治理、基础防护扩容和安全开发/AI安全增量议题。</p>
+      <div class="priority-matrix"><div class="priority-box priority-high"><h4>高优切入（短板补齐）</h4><ul><li>先核验是否存在源代码审计、上线前安全评估、SAST/SCA 等研发安全建设记录，再判断 DevSecOps 切入路径。</li><li>先完成 AI 应用资产盘点和使用场景访谈，确认是否具备大模型安全评估或防护切入条件。</li><li>基于数据库审计系统（DAS）、数据脱敏系统、数据库安全网关推进数据分类分级、数据库审计、脱敏和 API 安全治理的落地核验。</li></ul></div><div class="priority-box priority-med"><h4>能力跃升（等级跨越）</h4><ul><li>基于Web应用防火墙（WAF）、堡垒机、网络审计系统等基础防护投入，重点推进持续加固、策略优化和资产暴露面复核。</li><li>将安全编排自动化与响应（SOAR）、网络安全监督管理平台、安全分析与管理平台（SIEM/SOC）沉淀为持续运营指标，推动告警研判、响应处置和复盘改进闭环。</li></ul></div><div class="priority-box priority-med priority-purple-tint"><h4>持续优化（成熟度精进）</h4><ul><li>持续跟踪最新标讯和合同变化，动态校正当前 4 个已有证据维度的成熟度判断。</li><li>对Web应用防火墙（WAF）、堡垒机等存量能力做续约、扩容和运营效果复盘。</li></ul></div></div>
+      <div class="summary-kpis"><div class="summary-kpi"><div class="kpi-value"><span class="kpi-lvl status-L3">L3</span></div><div class="kpi-label">整体安全成熟度</div></div><div class="summary-kpi"><div class="kpi-value">46</div><div class="kpi-label">已识别产品/服务</div></div><div class="summary-kpi"><div class="kpi-value">9</div><div class="kpi-label">建议动作数量</div></div><div class="summary-kpi"><div class="kpi-value">6</div><div class="kpi-label">公开来源数量</div></div></div>
+      <div class="findings-card">
+        <h3>关键发现</h3>
+        <div class="finding-item"><span class="finding-icon">🔑</span><span><strong>证据样本与建设节奏：</strong>已采集标讯 81 条、合同 24 条，标讯高频主题包括防火墙、等保、数据安全、上网行为，说明客户具备持续安全投入基础。</span></div><div class="finding-item"><span class="finding-icon">🔑</span><span><strong>基础防护证据判断：</strong>标讯/合同中出现Web应用防火墙（WAF）、堡垒机、网络审计系统、欺骗防御系统、用户与实体行为分析（UEBA）线索，基础安全防护当前可按 L3 研判。</span></div><div class="finding-item"><span class="finding-icon">🔑</span><span><strong>安全运营证据判断：</strong>已识别安全编排自动化与响应（SOAR）、网络安全监督管理平台、安全分析与管理平台（SIEM/SOC）、SOC/安全运营、驻场服务相关线索，后续适合围绕 SOC/SIEM、SOAR 和持续运营服务形成组合方案。</span></div><div class="finding-item"><span class="finding-icon">🔑</span><span><strong>数据安全证据判断：</strong>已有数据库审计系统（DAS）、数据脱敏系统、数据库安全网关、API安全审计系统等线索，可进一步从风险评估、DSMP、数据库审计和 API 安全治理推进。</span></div><div class="finding-item"><span class="finding-icon">🔑</span><span><strong>合同数据可用性：</strong>合同记录覆盖 2019-2025，其中可展示合同 24 条，可优先围绕维保续约、能力扩容和咨询服务升级做存量客户深挖。</span></div><div class="finding-item"><span class="finding-icon">🔑</span><span><strong>安全开发与 AI 安全适合作为增量议题：</strong>安全开发暂无明确证据；AI 安全已有大模型安全垂域系统、大模型、人工智能线索，建议作为增量议题谨慎切入。</span></div>
+      </div>
+    </section>
+
+    <nav class="action-toc">
+      <div class="toc-header"><span class="toc-title">全文导航</span><span class="toc-subtitle">点击卡片跳转</span></div>
+      <div class="toc-links"><a class="toc-link" onclick="scrollToSection('sec-overview')">客户概览</a><a class="toc-link" onclick="scrollToSection('sec-assessment')">安全成熟度评估</a><a class="toc-link" onclick="scrollToSection('sec-history')">历史项目统计</a><a class="toc-link" onclick="scrollToSection('sec-recommendations')">采购建议</a><a class="toc-link" onclick="scrollToSection('sec-sources')">数据来源</a></div>
+    </nav>
+
+    <section class="section" id="sec-overview">
+      <div class="section-title"><span class="icon">🏛</span>客户概览</div>
+      <div class="metric-grid"><div class="metric-card"><div class="muted">客户名称</div><strong>天津大学</strong></div><div class="metric-card"><div class="muted">所属行业</div><strong>教育</strong></div><div class="metric-card"><div class="muted">地域定位</div><strong>天津</strong></div><div class="metric-card"><div class="muted">客户类型</div><strong>教育机构</strong></div></div><p>天津大学属于教育机构，地域定位为天津，行业归类为教育。本报告基于内部标讯、合同和互联网公开搜索资料形成，用于售前研判、成熟度评估和行动规划。</p><h3>组织与业务线索</h3><ul><li>总部/主要经营区域：天津</li><li>机构类型：教育机构</li><li>业务与组织细节仍需结合客户访谈、官网公开资料和内部客户档案进一步校验。</li></ul>
+    </section>
+
+    <section class="section" id="sec-assessment">
+      <div class="section-title"><span class="icon">🛡</span>安全成熟度评估</div>
+      <div class="assessment-layout">
+        <div class="assess-radar"><canvas id="maturityRadar"></canvas></div>
+        <div class="assess-content"><div class="assessment-narrative"><h3>综合解读</h3><p>当前能力呈现“基础安全防护相对成熟、AI安全优先补齐”的格局。基础安全防护方面，已在标讯、合同或公开资料中识别到Web应用防火墙（WAF）、堡垒机、网络审计系统、欺骗防御系统、用户与实体行为分析（UEBA）等建设线索。；AI安全方面，已有大模型安全垂域系统、大模型、人工智能等线索，但模型风险评估、AI运行监测与合规审计仍需核验覆盖范围、联动关系和持续运营机制。。建议把成熟度等级作为方向判断，并结合客户访谈进一步确认部署范围、联动关系和运营效果。</p></div><div class="gap-quick-view"><h3>核心缺口速览</h3><ul><li><span class="gap-alert">⚠</span><strong>数据安全：</strong>已有数据库审计系统（DAS）、数据脱敏系统、数据库安全网关、API安全审计系统等线索，但DSMP统一管控仍需核验覆盖范围、联动关系和持续运营机制。 风险：敏感数据流向、接口访问和数据库操作缺少统一审计时，数据泄露、越权访问和合规整改风险会持续累积。</li><li><span class="gap-alert">⚠</span><strong>安全开发：</strong>当前未形成SAST/SCA/DAST/IAST工具链、上线前安全评估、供应链安全审查、研发流水线安全门禁的可验证建设记录，需先确认现网能力、责任边界和历史项目是否遗漏。 风险：安全测试后置到上线或运行阶段时，代码缺陷、开源组件漏洞和供应链风险会抬高修复成本。</li><li><span class="gap-alert">⚠</span><strong>AI安全：</strong>已有大模型安全垂域系统、大模型、人工智能等线索，但模型风险评估、AI运行监测与合规审计仍需核验覆盖范围、联动关系和持续运营机制。 风险：AI应用资产、模型输入输出和运行行为不可视时，提示注入、敏感数据泄露和模型合规风险难以及时治理。</li></ul></div></div>
+      </div>
+      <div class="eval-grid"><div class="eval-card"><div class="eval-header"><h3>基础安全防护</h3><span class="eval-status status-L3">L3 主动监测级</span></div><div class="eval-status-text"><strong>现状：</strong>已在标讯、合同或公开资料中识别到Web应用防火墙（WAF）、堡垒机、网络审计系统、欺骗防御系统、用户与实体行为分析（UEBA）等建设线索。</div><div class="eval-problems"><strong>能力缺口：</strong>已有Web应用防火墙（WAF）、堡垒机、网络审计系统、欺骗防御系统等线索，但EDR/终端检测响应、零信任访问、暴露面监测、常态化加固仍需核验覆盖范围、联动关系和持续运营机制。</div><div class="eval-risk"><strong>风险影响：</strong>终端、边界和暴露面风险处置不闭环时，新增资产或漏洞暴露后容易形成可利用入口。</div><div class="eval-improvement"><strong>优化建议方向（基于成熟度）：</strong>在既有边界防护和维保基础上，优先补齐 EDR、零信任访问、暴露面监测和常态化安全加固服务。</div><div class="eval-evidence-note">证据来自基础安全防护相关标讯、合同或公开资料命中项，仍需客户访谈确认部署范围、使用状态和运营效果。</div></div><div class="eval-card"><div class="eval-header"><h3>安全运营</h3><span class="eval-status status-L3">L3 主动监测级</span></div><div class="eval-status-text"><strong>现状：</strong>已在标讯、合同或公开资料中识别到安全编排自动化与响应（SOAR）、网络安全监督管理平台、安全分析与管理平台（SIEM/SOC）、SOC/安全运营、驻场服务等建设线索。</div><div class="eval-problems"><strong>能力缺口：</strong>已有安全编排自动化与响应（SOAR）、网络安全监督管理平台、安全分析与管理平台（SIEM/SOC）、SOC/安全运营等线索，但威胁情报仍需核验覆盖范围、联动关系和持续运营机制。</div><div class="eval-risk"><strong>风险影响：</strong>告警关联、响应编排和复盘指标不足时，事件发现与处置依赖人工经验，重大保障期间响应压力会明显上升。</div><div class="eval-improvement"><strong>优化建议方向（基于成熟度）：</strong>围绕安全运营平台、SOAR、日志分析、驻场运营和应急响应服务形成平台加服务闭环。</div><div class="eval-evidence-note">证据来自安全运营相关标讯、合同或公开资料命中项，仍需客户访谈确认部署范围、使用状态和运营效果。</div></div><div class="eval-card"><div class="eval-header"><h3>数据安全</h3><span class="eval-status status-L2">L2 被动防御级</span></div><div class="eval-status-text"><strong>现状：</strong>已在标讯、合同或公开资料中识别到数据库审计系统（DAS）、数据脱敏系统、数据库安全网关、API安全审计系统、网闸等建设线索。</div><div class="eval-problems"><strong>能力缺口：</strong>已有数据库审计系统（DAS）、数据脱敏系统、数据库安全网关、API安全审计系统等线索，但DSMP统一管控仍需核验覆盖范围、联动关系和持续运营机制。</div><div class="eval-risk"><strong>风险影响：</strong>敏感数据流向、接口访问和数据库操作缺少统一审计时，数据泄露、越权访问和合规整改风险会持续累积。</div><div class="eval-improvement"><strong>优化建议方向（基于成熟度）：</strong>以数据安全风险评估和分类分级成果为基础，推进 DSMP、数据库审计和 API 安全治理。</div><div class="eval-evidence-note">证据来自数据安全相关标讯、合同或公开资料命中项，仍需客户访谈确认部署范围、使用状态和运营效果。</div></div><div class="eval-card"><div class="eval-header"><h3>安全开发</h3><span class="eval-status status-NA">N/A 证据不足</span></div><div class="eval-status-text"><strong>现状：</strong>在现有标讯、合同和公开资料中暂未识别到明确安全开发产品或专项服务记录；这不代表客户没有建设，只说明当前数据尚未形成可验证线索。</div><div class="eval-problems"><strong>能力缺口：</strong>当前未形成SAST/SCA/DAST/IAST工具链、上线前安全评估、供应链安全审查、研发流水线安全门禁的可验证建设记录，需先确认现网能力、责任边界和历史项目是否遗漏。</div><div class="eval-risk"><strong>风险影响：</strong>安全测试后置到上线或运行阶段时，代码缺陷、开源组件漏洞和供应链风险会抬高修复成本。</div><div class="eval-improvement"><strong>优化建议方向（基于成熟度）：</strong>从 SAST/SCA、上线前安全评估和安全功能测试切入，逐步建立 DevSecOps 连续服务机制。</div><div class="eval-evidence-note">当前证据样本不足，建议补充客户访谈、合同明细、公开招采和内部客户档案后再细化评分。</div></div><div class="eval-card"><div class="eval-header"><h3>AI安全</h3><span class="eval-status status-L1">L1 基础合规级</span></div><div class="eval-status-text"><strong>现状：</strong>已在标讯、合同或公开资料中识别到大模型安全垂域系统、大模型、人工智能等建设线索。</div><div class="eval-problems"><strong>能力缺口：</strong>已有大模型安全垂域系统、大模型、人工智能等线索，但模型风险评估、AI运行监测与合规审计仍需核验覆盖范围、联动关系和持续运营机制。</div><div class="eval-risk"><strong>风险影响：</strong>AI应用资产、模型输入输出和运行行为不可视时，提示注入、敏感数据泄露和模型合规风险难以及时治理。</div><div class="eval-improvement"><strong>优化建议方向（基于成熟度）：</strong>将 AI 安全作为新议题切入，先开展 AI 应用资产盘点和成熟度评估，再布局大模型安全防护。</div><div class="eval-evidence-note">证据来自AI安全相关标讯、合同或公开资料命中项，仍需客户访谈确认部署范围、使用状态和运营效果。</div></div></div>
+    </section>
+
+    <section class="section" id="sec-history">
+      <div class="section-title"><span class="icon">📊</span>历史项目统计</div>
+      <p>标讯数据共 81 条，时间覆盖 2023-2026，高频主题包括防火墙、等保、数据安全、上网行为；内部合同共 24 条，其中可展示合同 24 条，合作记录覆盖 2019-2025。页面默认展示最新 5 条记录，最多内嵌最新 100 条，超出 5 条的部分折叠保留在 HTML 中，便于审计和展开查看。</p><div class="metric-grid"><div class="metric-card"><div class="kpi-value">81</div><div class="kpi-label">标讯记录</div></div><div class="metric-card"><div class="kpi-value">24</div><div class="kpi-label">合同原始记录</div></div><div class="metric-card"><div class="kpi-value">24</div><div class="kpi-label">可展示合同</div></div><div class="metric-card"><div class="kpi-value">6</div><div class="kpi-label">公开来源</div></div></div>
+      <h3>标讯明细（默认展示5条，其余折叠）</h3>
+      <table class="data-table"><colgroup><col style="width:42%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:18%"></colgroup><thead><tr><th>项目名称</th><th>状态</th><th>产品类型</th><th>日期</th><th>采购单位</th></tr></thead><tbody><tr><td>天津大学北洋园校区网络安全与人工智能大楼三通一平</td><td>招标中</td><td>采购公告</td><td>2026-06-16</td><td>天津大学</td></tr><tr><td>天津大学信息与网络中心2026年度网络安全基础设施升级改造采购项目</td><td>招标中</td><td>招标公告</td><td>2026-05-26</td><td>天津大学</td></tr><tr><td>天津大学2026年度网络安全等级保护测评与数据安全风险评估技术服务项目</td><td>招标中</td><td>招标公告</td><td>2026-05-22</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼施工</td><td>招标中</td><td>采购公告</td><td>2026-04-21</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼监理</td><td>招标中</td><td>采购公告</td><td>2026-04-21</td><td>天津大学</td></tr></tbody></table><details class="collapsed-table"><summary>展开剩余 76 条记录</summary><table class="data-table"><colgroup><col style="width:42%"><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:18%"></colgroup><thead><tr><th>项目名称</th><th>状态</th><th>产品类型</th><th>日期</th><th>采购单位</th></tr></thead><tbody><tr><td>天津大学网络安全学院RISC-V硬件仿真与原型验证平台采购</td><td>已中标</td><td>中标公告</td><td>2026-03-27</td><td>天津大学</td></tr><tr><td>天津大学网络安全学院RISC-V硬件仿真与原型验证平台采购项目</td><td>招标中</td><td>招标公告</td><td>2026-03-21</td><td>天津大学</td></tr><tr><td>天津大学网络安全基础设施升级改造项目</td><td>招标中</td><td>采购公告</td><td>2026-03-20</td><td>天津大学</td></tr><tr><td>天津大学2026年5月采购意向项目-4</td><td>招标中</td><td>采购公告</td><td>2026-03-20</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼造价咨询</td><td>招标中</td><td>采购公告</td><td>2026-03-09</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼1标段设计招标</td><td>招标中</td><td>招标公告</td><td>2026-02-24</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼1标段</td><td>招标中</td><td>招标公告</td><td>2026-02-24</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼</td><td>招标中</td><td>招标公告</td><td>2026-02-24</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼设计招标</td><td>招标中</td><td>招标公告</td><td>2026-02-24</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼审计咨询服务</td><td>招标中</td><td>采购公告</td><td>2026-01-22</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼设计</td><td>招标中</td><td>采购公告</td><td>2026-01-15</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全与人工智能大楼勘察</td><td>招标中</td><td>采购公告</td><td>2026-01-15</td><td>天津大学</td></tr><tr><td>天津大学智能与计算学部关基设备网络安全运维管理与共享服务系统采购项目</td><td>招标中</td><td>招标公告</td><td>2025-12-12</td><td>天津大学</td></tr><tr><td>天津大学智能与计算学部关基网安分析评估与态势感知系统采购项目</td><td>招标中</td><td>招标公告</td><td>2025-12-12</td><td>天津大学</td></tr><tr><td>天津大学智能与计算学部车联网C-V2X孪生仿真实训系统(网络安全学院)采购项目(第三次)</td><td>招标中</td><td>招标公告</td><td>2025-12-09</td><td>天津大学</td></tr><tr><td>国产正版办公软件采购项目</td><td>招标中</td><td>招标公告</td><td>2025-11-25</td><td>天津大学</td></tr><tr><td>天津大学信网中心财务数据中心升级项目采购项目</td><td>招标中</td><td>招标公告</td><td>2025-11-20</td><td>天津大学</td></tr><tr><td>天津大学WEB应用防火墙反拍采购</td><td>已中标</td><td>中标公告</td><td>2025-11-20</td><td>天津大学</td></tr><tr><td>防火墙和漏洞扫描</td><td>已中标</td><td>中标公告</td><td>2025-11-18</td><td>天津大学</td></tr><tr><td>天津大学智能与计算学部车联网C-V2X孪生仿真实训系统(网络安全学院)采购项目(第二次)</td><td>招标中</td><td>招标公告</td><td>2025-11-17</td><td>天津大学</td></tr><tr><td>关基网安分析评估与态势感知系统</td><td>招标中</td><td>采购公告</td><td>2025-11-06</td><td>天津大学</td></tr><tr><td>关基设备网络安全运维管理与共享服务系统</td><td>招标中</td><td>采购公告</td><td>2025-11-06</td><td>天津大学</td></tr><tr><td>天津大学2025年12月采购意向项目-2</td><td>招标中</td><td>采购公告</td><td>2025-11-06</td><td>天津大学</td></tr><tr><td>天津市泰达医院2025年等保测评项目</td><td>招标中</td><td>招标公告</td><td>2025-10-28</td><td>天津市泰达医院（天津大学泰达医院）</td></tr><tr><td>天津大学智能与计算学部关基网安攻击能力支撑引擎与能力组件采购项目</td><td>已中标</td><td>中标公告</td><td>2025-10-17</td><td>天津大学</td></tr><tr><td>天津大学浙江研究院(绍兴)-竞价公告</td><td>招标中</td><td>招标公告</td><td>2025-10-16</td><td>天津大学浙江研究院</td></tr><tr><td>零信任及网络安全虚拟化系统</td><td>招标中</td><td>招标公告</td><td>2025-10-15</td><td>天津大学</td></tr><tr><td>天津大学智能与计算学部车联网C-V2X孪生仿真实训系统(网络安全学院)采购项目</td><td>招标中</td><td>招标公告</td><td>2025-10-10</td><td>天津大学</td></tr><tr><td>天津大学智能与计算学部网络安全空间测绘及攻防子系统采购项目</td><td>招标中</td><td>招标公告</td><td>2025-09-22</td><td>天津大学</td></tr><tr><td>复杂管理系统实验室无线网络设备</td><td>招标中</td><td>招标公告</td><td>2025-09-17</td><td>天津大学</td></tr><tr><td>天津大学电气自动化与信息工程学院关键信息基础设施电网安全模拟装置采购项目</td><td>招标中</td><td>招标公告</td><td>2025-08-23</td><td>天津大学</td></tr><tr><td>天津大学电气自动化与信息工程学院关键信息基础设施电网安全防护装置采购项目</td><td>招标中</td><td>招标公告</td><td>2025-08-23</td><td>天津大学</td></tr><tr><td>天津大学电气自动化与信息工程学院关键信息基础设施电网安全隔离装置采购项目</td><td>招标中</td><td>招标公告</td><td>2025-08-23</td><td>天津大学</td></tr><tr><td>网络安全空间测绘及攻防子系统</td><td>招标中</td><td>采购公告</td><td>2025-07-07</td><td>天津大学</td></tr><tr><td>2025年度天津大学网络安全防护平台升级改造项目</td><td>招标中</td><td>招标预告</td><td>2025-06-04</td><td>天津大学</td></tr><tr><td>天津大学数据资产平台升级项目</td><td>招标中</td><td>招标公告</td><td>2025-05-27</td><td>天津大学</td></tr><tr><td>天津大学福州国际联合学院-竞价公告</td><td>招标中</td><td>招标公告</td><td>2025-04-15</td><td>天津大学福州国际联合学院</td></tr><tr><td>天津大学2025年5月采购意向项目-10</td><td>招标中</td><td>采购公告</td><td>2025-04-11</td><td>天津大学</td></tr><tr><td>财务数据中心升级项目</td><td>招标中</td><td>采购公告</td><td>2025-04-11</td><td>天津大学</td></tr><tr><td>天津大学关键信息基础设施网络安全重大科研装置项目用房改造</td><td>其他</td><td>其他</td><td>2025-04-03</td><td>天津大学</td></tr><tr><td>天津大学AI赋能网络安全防护体系升级改造项目</td><td>招标中</td><td>采购公告</td><td>2025-04-03</td><td>天津大学</td></tr><tr><td>天津大学关键信息基础设施网络隔离装置采购</td><td>其他</td><td>其他</td><td>2025-03-25</td><td>天津大学</td></tr><tr><td>web应用防火墙(WAF)</td><td>已中标</td><td>中标公告</td><td>2025-01-09</td><td>天津大学</td></tr><tr><td>用于网络安全推理的垂域大模型基座</td><td>已中标</td><td>中标公告</td><td>2025-01-07</td><td>天津大学</td></tr><tr><td>天津大学关键信息基础设施网络安全重大科研装置项目用房改造施工</td><td>招标中</td><td>招标公告</td><td>2024-12-23</td><td>天津大学</td></tr><tr><td>用于网络安全推理的垂域大模型基座-天津大学</td><td>招标中</td><td>招标公告</td><td>2024-12-12</td><td>天津大学</td></tr><tr><td>天津大学电气自动化与信息工程学院关键信息基础设施网络隔离装置采购项目</td><td>已中标</td><td>中标公告</td><td>2024-12-05</td><td>天津大学</td></tr><tr><td>天津大学电气自动化与信息工程学院关键信息基础设施横向隔离装置采购项目</td><td>已中标</td><td>中标公告</td><td>2024-12-05</td><td>天津大学</td></tr><tr><td>web应用防火墙(WAF)-天津大学</td><td>招标中</td><td>招标公告</td><td>2024-12-03</td><td>天津大学</td></tr><tr><td>天津大学关键信息基础设施网络安全重大科研装置项目用房改造设计</td><td>招标中</td><td>招标公告</td><td>2024-11-21</td><td>天津大学</td></tr><tr><td>键信息基础设施网络隔离装置采购项目</td><td>招标中</td><td>招标公告</td><td>2024-11-20</td><td>天津大学</td></tr><tr><td>天津大学电气自动化与信息工程学院关键信息基础设施纵向加密装置采购项目</td><td>招标中</td><td>招标公告</td><td>2024-11-20</td><td>天津大学</td></tr><tr><td>天津大学2024年度网络安全等保测评服务项目</td><td>招标中</td><td>招标公告</td><td>2024-10-22</td><td>天津大学</td></tr><tr><td>天津大学北洋园校区网络安全科研装置用房改造</td><td>招标中</td><td>采购公告</td><td>2024-09-30</td><td>天津大学</td></tr><tr><td>天津大学网络安全攻防实战靶场配套服务项目</td><td>招标中</td><td>招标公告</td><td>2024-09-29</td><td>天津大学</td></tr><tr><td>天津大学网站群管理平台建设项目-天津大学</td><td>招标中</td><td>招标公告</td><td>2024-09-19</td><td>天津大学</td></tr><tr><td>防火墙(万兆)-天津大学</td><td>招标中</td><td>招标公告</td><td>2024-09-14</td><td>天津大学</td></tr><tr><td>智联网化工教学全景监测系统</td><td>招标中</td><td>采购公告</td><td>2024-09-10</td><td>天津大学</td></tr><tr><td>2024年9月采购意向项目</td><td>招标中</td><td>采购公告</td><td>2024-08-15</td><td>天津大学</td></tr><tr><td>文件存储设备-天津大学</td><td>招标中</td><td>招标公告</td><td>2024-07-08</td><td>天津大学</td></tr><tr><td>天津大学信息与网络中心网络安全基础运营平台采购项目</td><td>招标中</td><td>招标公告</td><td>2024-06-07</td><td>天津大学</td></tr><tr><td>网络安全攻防实战靶场配套服务</td><td>招标中</td><td>采购公告</td><td>2024-05-31</td><td>天津大学</td></tr><tr><td>天津大学计算机网络设备电子</td><td>招标中</td><td>招标预告</td><td>2024-05-31</td><td>天津大学信息与网络中心</td></tr><tr><td>上网行为管理设备-天津大学</td><td>招标中</td><td>招标公告</td><td>2024-05-24</td><td>天津大学</td></tr><tr><td>学科交叉公共服务平台--原位电化学/辐照X射线光电子能谱</td><td>招标中</td><td>采购公告</td><td>2024-05-08</td><td>天津大学</td></tr><tr><td>天津大学网络安全基础运营平台建设项目</td><td>招标中</td><td>采购公告</td><td>2024-05-08</td><td>天津大学</td></tr><tr><td>数据中心安全设施升级改造</td><td>招标中</td><td>采购公告</td><td>2024-05-08</td><td>天津大学</td></tr><tr><td>2024年6月采购意向项目</td><td>招标中</td><td>采购公告</td><td>2024-05-08</td><td>天津大学</td></tr><tr><td>天津大学附小终端安全管理升级设备采购项目</td><td>招标中</td><td>招标公告</td><td>2024-05-06</td><td>天津大学</td></tr><tr><td>天津大学福州国际联合学院2024年信息化运维服务采购项目</td><td>招标中</td><td>招标公告</td><td>2024-01-08</td><td>天津大学福州国际联合学院</td></tr><tr><td>360DNS安全网关-天津大学</td><td>招标中</td><td>招标公告</td><td>2023-11-20</td><td>天津大学</td></tr><tr><td>图书馆资源评估与决策平台-天津大学</td><td>招标中</td><td>招标公告</td><td>2023-11-16</td><td>天津大学</td></tr><tr><td>天津大学第九届中国国际“互联网+”大学生创新创业大赛网络安全保障项目</td><td>已中标</td><td>中标公告</td><td>2023-07-27</td><td>天津大学</td></tr><tr><td>天津大学福州国际校区数字校园(一期)采购项目</td><td>已中标</td><td>中标公告</td><td>2023-07-18</td><td>天津大学福州国际联合学院</td></tr><tr><td>天津大学福州国际校区数字校园（一期）采购项目</td><td>招标中</td><td>采购公告</td><td>2023-07-17</td><td>天津大学福州国际联合学院</td></tr><tr><td>天津大学信网中心数据安全管控平台采购项目</td><td>已中标</td><td>中标公告</td><td>2023-06-21</td><td>天津大学</td></tr></tbody></table></details>
+      <h3>合同明细（默认展示5条，其余折叠）</h3>
+      <table class="data-table"><colgroup><col style="width:16%"><col style="width:28%"><col style="width:34%"><col style="width:10%"><col style="width:12%"></colgroup><thead><tr><th>合同编号</th><th>项目名称</th><th>产品/服务</th><th>金额区间</th><th>签约日期</th></tr></thead><tbody><tr><td>AH25-S11-0177</td><td>天津大学2025年度网站安全体系服务项目</td><td>安恒云-玄武盾云监测服务(基础监管版)</td><td>50万以下</td><td>2025-11-21</td></tr><tr><td>BJXAKJ25-P11-0011</td><td>关键信息基础设施电网安全隔离装置</td><td>安恒数盾安全隔离与信息交换系统</td><td>50万以下</td><td>2025-11-20</td></tr><tr><td>AH25-S10-0009</td><td>天津大学2025年度网络安全驻场服务项目</td><td>驻场服务</td><td>50万以下</td><td>2025-10-21</td></tr><tr><td>TJAHSJ25-P07-0002</td><td>天津大学AI赋能网络安全防护体系升级改造项目</td><td>【标准版软件】恒脑DeepSeek安全垂域系统; 【英伟达标准版】恒脑DeepSeek安全垂域一体机; AiGate数据库安全网关系统; AiLPHA安全分析与管理平台; API与应用系统安全审计系统; 安恒AiSort数据安全分级及风险管理平台; 安恒恒脑安全垂域大模型系统; 明御APT攻击预警平台; 明御WEB应用防火墙; 明御网络安全审计系统; 明御终端安全及防病毒系统(EDR)</td><td>100-300万</td><td>2025-08-01</td></tr><tr><td>TJAHSJ25-M03-0001</td><td>天津大学漏扫维保服务</td><td>明鉴漏洞扫描系统</td><td>50万以下</td><td>2025-03-21</td></tr></tbody></table><details class="collapsed-table"><summary>展开剩余 19 条记录</summary><table class="data-table"><colgroup><col style="width:16%"><col style="width:28%"><col style="width:34%"><col style="width:10%"><col style="width:12%"></colgroup><thead><tr><th>合同编号</th><th>项目名称</th><th>产品/服务</th><th>金额区间</th><th>签约日期</th></tr></thead><tbody><tr><td>AH24-P12-0983</td><td>天津大学电气自动化与信息工程学院关键信息基础设施横向隔离装置采购项目（招标编号：TDZC2024N0066）</td><td>安恒数盾安全隔离与信息交换系统</td><td>50万以下</td><td>2024-12-25</td></tr><tr><td>TJAHSJ24-P12-0002</td><td>天津大学WAF采购项目</td><td>明御Web应用防火墙</td><td>50万以下</td><td>2024-12-06</td></tr><tr><td>AH24-S12-0031</td><td>天津大学2024年度网站安全体系服务项目</td><td>安恒云-玄武盾云监测服务(基础监管版)</td><td>50万以下</td><td>2024-11-20</td></tr><tr><td>AH24-S09-0212</td><td>天津大学 2024 年度网络安全驻场服务项目</td><td>驻场服务</td><td>50万以下</td><td>2024-10-22</td></tr><tr><td>TJAHSJ24-P06-0015</td><td>未披露</td><td>AiLPHA安全编排与协同响应管理平台; AiLPHA安全分析与管理平台; AiLPHA一体化全链路网络安全监督管理与运营平台; 大数据外包服务</td><td>100-300万</td><td>2024-06-27</td></tr><tr><td>TJAHSJ24-M01-0003</td><td>未披露</td><td>明御运维审计与风险控制系统</td><td>50万以下</td><td>2024-01-30</td></tr><tr><td>TJAHSJ23-M12-0005</td><td>未披露</td><td>明鉴远程安全评估系统</td><td>50万以下</td><td>2023-12-20</td></tr><tr><td>AH23-S11-0144</td><td>天津大学2023年度网站安全体系服务项目</td><td>安恒云-玄武盾云监测服务(基础监管版)</td><td>50万以下</td><td>2023-11-18</td></tr><tr><td>AH23-S09-0087</td><td>天津大学第九届中国国际“互联网+”大学生创新创业大赛网络安全服务</td><td>AiLPHA安全分析与管理平台; 明鉴迷网系统; 明御APT攻击预警平台; 明御Web应用防火墙; 明御运维审计与风险控制系统; 明御综合日志审计分析平台; 专业安全服务</td><td>50万以下</td><td>2023-09-08</td></tr><tr><td>AH23-S09-0086</td><td>天津大学2023年度网络安全驻场服务项目</td><td>驻场服务</td><td>50万以下</td><td>2023-09-01</td></tr><tr><td>AH23-P06-0671</td><td>未披露</td><td>AiLPHA安全分析与管理平台; AiThink用户与实体行为分析系统(UEBA); 安恒AiLPHA数据安全管理平台; 安恒AiSort数据安全分级及风险管理平台; 明御综合日志审计分析平台</td><td>100-300万</td><td>2023-06-27</td></tr><tr><td>AH22-P12-0166</td><td>未披露</td><td>AiDLP数据防泄漏系统; AiMask数据脱敏系统; 明御数据库审计与风险控制系统</td><td>50-100万</td><td>2022-12-08</td></tr><tr><td>AH22-S11-0168</td><td>未披露</td><td>安恒云-玄武盾云监测服务(基础监管版)</td><td>50万以下</td><td>2022-11-20</td></tr><tr><td>AH22-P04-0416</td><td>未披露</td><td>安恒云(超融合)一体机; 安恒云-天池云安全管理平台; 安恒云-专享镜像产品组件通用许可; 集成项目驻场运营; 可信众测; 明御APT攻击预警平台; 明御WEB应用防火墙; 天池云安全管理平台-威胁情报模块</td><td>100-300万</td><td>2022-05-09</td></tr><tr><td>AH21-P11-0318</td><td>未披露</td><td>教学竞赛靶场</td><td>50万以下</td><td>2021-11-18</td></tr><tr><td>AH21-S09-0155</td><td>未披露</td><td>安恒云-玄武盾云监测服务(基础监管版); 实施服务</td><td>50万以下</td><td>2021-09-30</td></tr><tr><td>AH21-P06-0177</td><td>天津大学信网中心网络攻击可视化与风险数据管控系统项目</td><td>安恒云-网络空间风险监测系统; 明御APT攻击预警平台; 实施服务</td><td>50-100万</td><td>2021-06-05</td></tr><tr><td>AH19-P07-104</td><td>未披露</td><td>AILPHA大数据智能安全平台; CISP认证培训; 明御APT攻击(网络战)预警平台; 明御攻防实验室; 明御全流量深度威胁检测平台; 明御运维审计与风险控制系统; 明御综合日志审计平台</td><td>100-300万</td><td>2019-07-25</td></tr><tr><td>AH19-P01-163</td><td>未披露</td><td>明鉴网络安全事件应急处置工具箱; 明鉴信息安全等级保护检查工具箱; 明鉴远程安全评估系统</td><td>50-100万</td><td>2019-01-21</td></tr></tbody></table></details>
+    </section>
+
+    <section class="section" id="sec-recommendations">
+      <div class="section-title"><span class="icon">💡</span>产品和服务采购建议</div>
+      <div class="highlight-box"><p>建议优先围绕已有证据明确的短板能力补齐产品与服务组合，形成可落地的阶段性建设路径。</p></div><table class="data-table"><colgroup><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"></colgroup><thead><tr><th>安全域</th><th>当前等级</th><th>标准名称</th><th>内部名称</th><th>类型</th><th>推荐优先级</th><th>推荐原因</th></tr></thead><tbody><tr><td>基础安全防护</td><td>L3</td><td>终端安全管理系统（EDR）</td><td>明御终端安全及防病毒系统</td><td>产品</td><td>RP2</td><td>客户已有Web应用防火墙（WAF）、堡垒机、网络审计系统、欺骗防御系统等边界与终端侧建设基础，建议补齐 EDR 形成终端检测、响应和处置闭环。</td></tr><tr><td>基础安全防护</td><td>L3</td><td>安全加固服务</td><td>安全加固服务</td><td>基础安全服务</td><td>RP3</td><td>客户已存在Web应用防火墙（WAF）、堡垒机、网络审计系统、欺骗防御系统等基础防护投入，建议将安全加固纳入常态化服务，降低存量资产暴露风险。</td></tr><tr><td>安全运营</td><td>L3</td><td>安全分析与管理平台（SIEM/SOC）</td><td>AiLPHA安全分析与管理平台</td><td>产品</td><td>RP1</td><td>已有安全编排自动化与响应（SOAR）、网络安全监督管理平台、安全分析与管理平台（SIEM/SOC）、SOC/安全运营相关线索，适合推进统一安全运营平台，沉淀告警关联、事件研判和态势感知能力。</td></tr><tr><td>安全运营</td><td>L3</td><td>安全编排自动化与响应（SOAR）</td><td>AiLPHA安全编排与协同响应管理平台</td><td>产品</td><td>RP4</td><td>在安全编排自动化与响应（SOAR）、网络安全监督管理平台、安全分析与管理平台（SIEM/SOC）、SOC/安全运营基础上补充运营驻场服务，可保障平台落地后的持续运营和响应效率。</td></tr><tr><td>安全运营</td><td>L3</td><td>安全运营驻场服务</td><td>安全运营驻场服务</td><td>基础安全服务</td><td>RP2</td><td>在安全编排自动化与响应（SOAR）、网络安全监督管理平台、安全分析与管理平台（SIEM/SOC）、SOC/安全运营基础上补充运营驻场服务，可保障平台落地后的持续运营和响应效率。</td></tr><tr><td>数据安全</td><td>L2</td><td>数据安全管理平台（DSMP）</td><td>AiGuard数据安全管理平台</td><td>产品</td><td>RP1</td><td>已有数据库审计系统（DAS）、数据脱敏系统、数据库安全网关、API安全审计系统等数据安全建设线索，可进一步推进 DSMP 统一管控分类分级、审计和风险处置。</td></tr><tr><td>数据安全</td><td>L2</td><td>数据安全风险评估</td><td>数据安全风险评估咨询</td><td>安全咨询服务</td><td>RP2</td><td>围绕数据库审计系统（DAS）、数据脱敏系统、数据库安全网关、API安全审计系统开展风险评估，可为后续 DSMP、数据库审计和 API 安全治理提供路线图。</td></tr><tr><td>AI安全</td><td>L1</td><td>大模型安全防护系统</td><td>大模型安全防护系统</td><td>产品</td><td>RP2</td><td>已发现大模型安全垂域系统、大模型、人工智能等 AI 应用或安全线索，建议提前布局大模型安全防护，避免 AI 场景扩展后再被动补课。</td></tr><tr><td>AI安全</td><td>L1</td><td>AI 安全成熟度评估</td><td>AI 安全成熟度评估</td><td>安全咨询服务</td><td>RP3</td><td>已发现大模型安全垂域系统、大模型、人工智能等 AI 应用或安全线索，建议提前布局大模型安全防护，避免 AI 场景扩展后再被动补课。</td></tr></tbody></table>
+    </section>
+
+    <section class="section" id="sec-sources">
+      <div class="section-title"><span class="icon">📎</span>数据来源</div>
+      <ul class="source-list"><li><strong>天津大学招标信息网</strong> <a href="https://zbb.tju.edu.cn/sfw_cms/e?page=cms.index" target="_blank" rel="noopener">来源链接</a><div class="muted">Copyright 2026天津大学招投标管理办公室 版权所有</div></li><li><strong>天津大学2024年度网络安全等保测评服务项目竞争性磋商公告</strong> <a href="http://www.ccgp.gov.cn/cggg/zygg/jzxcs/202410/t20241022_23426938.htm" target="_blank" rel="noopener">来源链接</a><div class="muted">项目名称:天津大学2024年度网络安全等保测评服务项目 采购方式:竞争性磋商 预算金额:69.000000 万元(人民币) 采购需求: 项目概况:对天津大学的四个三级系统和十一个二级系统进行网络安全等级保护测评工作,具体要求详见本项目用户需求书。 项目地点:天津大学双校区(天津市南开区卫津路92号和天津市津南区雅观路135号)(特...</div></li><li><strong>天津大学2024年度网络安全等保测评服务项目成交公告</strong> <a href="http://www.ccgp.gov.cn/cggg/zygg/cjgg/202411/t20241104_23528045.htm" target="_blank" rel="noopener">来源链接</a><div class="muted">一、项目编号:TDQT202400055(招标文件编号:TDQT202400055) 二、项目名称:天津大学2024年度网络安全等保测评服务项目 三、中标(成交)信息 供应商名称:天津恒御科技有限公司 供应商地址:天津市和平区小白楼街合江路18号津湾广场9号楼-京津国际中心45层4501 中标(成交)金额:58.2000000(万元) 四、主要标的信息 序号供应商...</div></li><li><strong>等保定级和备案-天津大学信息与网络中心</strong> <a href="http://its.tju.edu.cn/xfw/qbfw/dbdjhba/dbdjhba.htm" target="_blank" rel="noopener">来源链接</a><div class="muted">等保定级和备案 根据国家《信息安全等级保护管理办法》的规定,信息安全等级保护工作包括定级、备案、安全建设和整改、信息安全等级测评、信息安全检查五个阶段。我校信息系统(网站)以自主定级、自主保护为原则,根据信息系统的重要程度,信息系统遭到破坏后的危害程度等因素将信息系统的安全保护等级分为五级,一至五级等级逐级...</div></li><li><strong>学校简介-天津大学</strong> <a href="http://www.tju.edu.cn/tdgk/xxjj.htm" target="_blank" rel="noopener">来源链接</a><div class="muted">天津大学已成为一所师资力量雄厚、学科特色鲜明、教育质量和科研水平居于国内一流、在国际上有较大影响的高水平研究型大学。 学校坚持以学生发展为中心,着力培养具有家国情怀、全球视野、创新精神、实践能力,并能引领未来的卓越人才。坚定不移用习近平新时代中国特色社会主义思想铸魂育人,深入推进“三全育人”“五育并举”人才培养综合改革。作为全国</div></li><li><strong>天津大学</strong> <a href="http://www.tju.edu.cn/" target="_blank" rel="noopener">来源链接</a><div class="muted">第一所大学—北洋大学(天津大学),开创了中国高等教育之先河,他创办了中国第一家电信企业—天津电报局,...</div></li></ul>
+    </section>
+  </div>
+  <script>
+    Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif';
+    Chart.defaults.color = '#94a3b8';
+    const radarLabels = ["基础安全防护", "安全运营", "数据安全", "安全开发", "AI安全"];
+    const radarValues = [3, 3, 2, 0, 1];
+    const radarTargetValues = [4, 4, 3, 2, 2];
+    const radar = document.getElementById('maturityRadar');
+    if (radar && window.Chart) {
+      new Chart(radar, {
+        type: 'radar',
+        data: {
+          labels: radarLabels,
+          datasets: [{
+            label: '当前等级',
+            data: radarValues,
+            backgroundColor: 'rgba(26,110,245,.18)',
+            borderColor: '#1a6ef5',
+            pointBackgroundColor: '#1a6ef5',
+            borderWidth: 2
+          }, {
+            label: '目标等级',
+            data: radarTargetValues,
+            backgroundColor: 'rgba(139,92,246,.06)',
+            borderColor: '#8b5cf6',
+            pointBackgroundColor: '#8b5cf6',
+            borderDash: [6, 6],
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            r: {
+              min: 0,
+              max: 5,
+              ticks: { stepSize: 1, callback: function(v) { return v === 0 ? '' : ['', 'L1', 'L2', 'L3', 'L4', 'L5'][v]; } },
+              grid: { color: '#f1f5f9' },
+              pointLabels: { font: { size: 13, weight: '600' } }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: { usePointStyle: true, boxWidth: 10, boxHeight: 10 }
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
