@@ -380,7 +380,7 @@ a.path-tag-link:focus-visible { outline:2px solid rgb(195,214,251); outline-offs
 .ss-num { font-size:38px; font-weight:900; line-height:1; background:linear-gradient(90deg,rgb(180,98,10),rgb(180,98,10),rgb(156,80,36)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .ss-label { font-size:13px; color:rgba(14,27,58,0.5); margin-top:6px; }
 footer { text-align:center; padding:40px 24px 72px; border-top:1px solid rgba(14,27,58,0.05); font-size:13px; color:var(--muted); }
-footer .ft-logo { font-size:18px; font-weight:900; color:var(--brand-teal); margin-bottom:8px; }
+footer .ft-logo { font-size:18px; font-weight:900; color:rgb(11,114,94); margin-bottom:8px; }
 .view-counter { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:8px 22px; background:linear-gradient(135deg,rgb(47,91,234),rgb(47,91,234)); border-radius:28px; color:rgb(14,27,58); font-size:13px; font-weight:600; letter-spacing:.3px; box-shadow:0 4px 20px rgba(13,37,80,0.25); transition:all var(--transition); }
 .view-counter:hover { transform:translateY(-1px); box-shadow:0 6px 24px rgba(13,37,80,0.3); }
 .view-counter .vc-icon { font-size:16px; }
@@ -998,3 +998,21 @@ footer .ft-tag { background:rgba(10,128,100,.10) !important; border-color:rgba(1
 [data-u="43"]{background:linear-gradient(135deg,rgb(186,227,247),rgb(197,225,241)) !important;color:rgb(14,27,58) !important;}
 [data-u="44"]{background:linear-gradient(135deg,rgb(216,219,250),rgb(111,79,212)) !important;color:rgb(14,27,58) !important;}
 [data-u="45"]{background:linear-gradient(135deg,rgb(216,219,250),rgb(111,79,212)) !important;}
+
+
+/* ==== B · 对比度终修：重映射把「白字压深渐变」错翻成「深字压深渐变」 ==== */
+/* 导航主按钮：渐变里浅紫端 rgb(201,182,245) 对白字/深字都不达标 → 收敛为深蓝→蓝紫双标 + 白字 */
+a.nav-de-btn, .nav-de-btn {
+  background:linear-gradient(118deg,#1e3fa8 0%,#5b3fd4 100%) !important;
+  color:#ffffff !important;
+}
+.nav-de-btn > span { color:#ffffff !important; }
+/* 首页 hero 右上角圆钮的标签胶囊：同上 */
+.hero-de-orb .orb-label {
+  background:linear-gradient(118deg,#1e3fa8 0%,#5b3fd4 100%) !important;
+  color:#ffffff !important;
+}
+/* 数字员工页 tagline：de-panel 在 B 里被重映射成浅紫渐变（首标 rgb(169,176,226)），
+   重映射又把字色压成中灰 → 直接给深藏蓝字（对比 ≈6.2） */
+.de-panel .de-tagline .de-slogan { color:#22314e !important; }
+.de-panel .de-tagline .de-lead { color:#3d4c70 !important; }

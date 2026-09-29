@@ -380,7 +380,7 @@ a.path-tag-link:focus-visible { outline:2px solid #7fb2ff; outline-offset:2px; }
 .ss-num { font-size:38px; font-weight:900; line-height:1; background:linear-gradient(90deg,#fbbf24,#fb923c,#f97316); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .ss-label { font-size:13px; color:rgba(255,255,255,.5); margin-top:6px; }
 footer { text-align:center; padding:40px 24px 72px; border-top:1px solid rgba(0,0,0,.05); font-size:13px; color:var(--muted); }
-footer .ft-logo { font-size:18px; font-weight:900; color:var(--brand-teal); margin-bottom:8px; }
+footer .ft-logo { font-size:18px; font-weight:900; color:#0a8064; margin-bottom:8px; }
 .view-counter { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:8px 22px; background:linear-gradient(135deg,#0d2550,#1a3d6e); border-radius:28px; color:#fff; font-size:13px; font-weight:600; letter-spacing:.3px; box-shadow:0 4px 20px rgba(13,37,80,.25); transition:all var(--transition); }
 .view-counter:hover { transform:translateY(-1px); box-shadow:0 6px 24px rgba(13,37,80,.3); }
 .view-counter .vc-icon { font-size:16px; }

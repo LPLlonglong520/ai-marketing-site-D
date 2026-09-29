@@ -380,7 +380,7 @@ a.path-tag-link:focus-visible { outline:2px solid rgb(232,232,232); outline-offs
 .ss-num { font-size:38px; font-weight:900; line-height:1; background:linear-gradient(90deg,rgb(82,76,62),rgb(87,76,66),rgb(89,72,61)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .ss-label { font-size:13px; color:rgba(10,10,10,0.5); margin-top:6px; }
 footer { text-align:center; padding:40px 24px 72px; border-top:1px solid rgba(24,27,35,0.05); font-size:13px; color:var(--muted); }
-footer .ft-logo { font-size:18px; font-weight:900; color:var(--brand-teal); margin-bottom:8px; }
+footer .ft-logo { font-size:18px; font-weight:900; color:rgb(50,70,66); margin-bottom:8px; }
 .view-counter { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:8px 22px; background:linear-gradient(135deg,rgb(26,26,26),rgb(26,26,26)); border-radius:28px; color:rgb(10,10,10); font-size:13px; font-weight:600; letter-spacing:.3px; box-shadow:0 4px 20px rgba(30,36,46,0.25); transition:all var(--transition); }
 .view-counter:hover { transform:translateY(-1px); box-shadow:0 6px 24px rgba(30,36,46,0.3); }
 .view-counter .vc-icon { font-size:16px; }
@@ -962,6 +962,26 @@ footer .ft-tag { background:rgba(10,128,100,.10) !important; border-color:rgba(1
   border:1px solid #e8e8e8 !important;
 }
 .app-content a:hover, .app-col-inner a:hover { color:#2f5bea !important; border-color:#2f5bea !important; }
+/* scene 页「路径标签」链接：LIGHT_FIX 里 `.app-col a.path-tag-link{color:#fff!important}`（特异度 0,2,1）
+   压过了上面 .app-col-inner a（0,1,1），成了白底白字 → 这里用同级特异度 + 后写者赢 消解冲突 */
+.app-col a.path-tag-link, .app-col-inner a.path-tag-link, .app-content a.path-tag-link {
+  background:#ffffff !important; background-image:none !important;
+  color:#0a0a0a !important; border:1px solid #e8e8e8 !important;
+}
+.app-col a.path-tag-link .arr, .app-col-inner a.path-tag-link .arr,
+.app-content a.path-tag-link .arr { color:rgba(10,10,10,.55) !important; }
+.app-col a.path-tag-link:hover, .app-col-inner a.path-tag-link:hover,
+.app-content a.path-tag-link:hover { color:#2f5bea !important; border-color:#2f5bea !important; }
+.app-col a.path-tag-link:hover .arr, .app-col-inner a.path-tag-link:hover .arr,
+.app-content a.path-tag-link:hover .arr { color:#2f5bea !important; }
+/* 立牌背面按钮：D 重映射把「深藏蓝底白字」翻成「近黑底近黑字」(r=1.52)
+   → D 极简风：白底发丝边 + 近黑字（与路径标签一致） */
+.de-back .de-lb-btn {
+  background:#ffffff !important; background-image:none !important;
+  border:1px solid #d9d9d9 !important; color:#0a0a0a !important;
+  box-shadow:0 8px 22px rgba(0,0,0,.08) !important;
+}
+.de-back .de-lb-btn:hover { background:#f0f0f0 !important; }
 
 /* ---- 内联样式外置 ---- */
 [data-u="1"]{background:linear-gradient(135deg,rgb(250,250,250),rgb(250,250,250)) !important;}

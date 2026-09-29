@@ -380,7 +380,7 @@ a.path-tag-link:focus-visible { outline:2px solid rgb(224,204,158); outline-offs
 .ss-num { font-size:38px; font-weight:900; line-height:1; background:linear-gradient(90deg,rgb(251,191,36),rgb(251,146,60),rgb(249,115,22)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .ss-label { font-size:13px; color:rgba(255,255,255,0.5); margin-top:6px; }
 footer { text-align:center; padding:40px 24px 72px; border-top:1px solid rgba(0,0,0,0.05); font-size:13px; color:var(--muted); }
-footer .ft-logo { font-size:18px; font-weight:900; color:var(--brand-teal); margin-bottom:8px; }
+footer .ft-logo { font-size:18px; font-weight:900; color:rgb(211,227,223); margin-bottom:8px; }
 .view-counter { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:8px 22px; background:linear-gradient(135deg,rgb(12,33,72),rgb(23,55,99)); border-radius:28px; color:rgb(255,255,255); font-size:13px; font-weight:600; letter-spacing:.3px; box-shadow:0 4px 20px rgba(13,37,80,0.25); transition:all var(--transition); }
 .view-counter:hover { transform:translateY(-1px); box-shadow:0 6px 24px rgba(13,37,80,0.3); }
 .view-counter .vc-icon { font-size:16px; }
@@ -964,7 +964,7 @@ p a, .fp-item a, .future-body a, .de-body p a, .app-col p a, .scene-body p a {
   background:linear-gradient(135deg,#d4b878,#c9a35a) !important;
   color:#0a1a3f !important;
 }
-.view-counter .vc-num { background-image:none !important; color:#ffffff !important; }
+.view-counter .vc-num { background-image:none !important; color:#ffffff !important; -webkit-text-fill-color:#ffffff !important; }
 /* 渐变裁切文字：渐变里混了青色 #5eead4（不在「蓝紫→金」映射区间），
    只改一半会出来「青→金」的脏过渡，这里显式给纯金色渐变。 */
 .hero h1 em, .text-highlight,
@@ -992,6 +992,9 @@ p a, .fp-item a, .future-body a, .de-body p a, .app-col p a, .scene-body p a {
 /* 1. path-tag 非链接版：c_map_fg 把蓝紫 → 深金，但深金压在深蓝面上看不清 → 提到亮金 */
 .path-tag { color:#d4b878 !important; }
 .path-tag .arr { color:rgba(212,184,120,.65) !important; }
+/* 立牌背面信息卡：C 里卡底被重映射成深藏蓝 rgb(31,45,74)，基础真源把 .t/.d 加深到 #5f6f8f
+   在深底上只有 r≈2.7 → C 单独给浅银灰 */
+.de-bi-mid .t, .de-bi-mid .d { color:#9fb0cd !important; }
 
 /* 2. 首页/卡牌图标块：原渐变没被 c_restyle 改色，且 emoji 文本色继承自 <a> 默认蓝 →
       强制金渐变 + 深字（[data-u] 提高特异性，确保覆盖内联 [data-u="N"]） */

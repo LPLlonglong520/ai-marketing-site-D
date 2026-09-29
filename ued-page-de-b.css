@@ -168,9 +168,9 @@
 .de-bi-mid { margin:auto 0; text-align:center; }
 .de-bi-mid .n { font-size:29px; font-weight:800; color:rgb(27,43,77); letter-spacing:-.8px; }
 .de-bi-mid .s { font-size:13px; font-weight:700; letter-spacing:2.4px; color:rgb(89,101,128); margin-top:5px; }
-.de-bi-mid .t { font-size:11.5px; color:rgb(90,101,126); margin-top:10px; }
+.de-bi-mid .t { font-size:11.5px; color:rgb(86,101,133); margin-top:10px; }
 .de-bi-sep { height:1px; background:repeating-linear-gradient(90deg,rgb(215,222,232) 0 5px,transparent 5px 10px); margin:13px 14%; }
-.de-bi-mid .d { font-size:10.5px; color:rgb(90,101,126); line-height:1.85; margin-top:4px; }
+.de-bi-mid .d { font-size:10.5px; color:rgb(86,101,133); line-height:1.85; margin-top:4px; }
 .de-bi-spec { display:grid; grid-template-columns:1fr 1fr; gap:5px 10px; margin:14px 6% 0; }
 .de-bi-spec span { font-size:9px; color:rgb(90,101,125); letter-spacing:.2px; white-space:nowrap; }
 .de-bi-spec b { color:rgb(89,101,125); font-weight:600; }
@@ -793,6 +793,10 @@ a.pth-a .ent-arw { margin-left:3px; font-size:9px; }
 .de-lb-btn { background:rgba(246,248,252,0.14); border:1px solid rgba(221,227,240,0.26); color:rgb(90,101,126);
   box-shadow:0 8px 22px rgba(14,27,58,0.34); }
 .de-lb-btn:hover { background:rgba(246,248,252,0.24); box-shadow:0 12px 28px rgba(14,27,58,0.42); }
+/* 立牌背面是白底（.de-back{background:rgb(246,248,252)}），玻璃浅字在白底上 r≈1.1 看不清
+   → 背面按钮改深藏蓝实底 + 白字 */
+.de-back .de-lb-btn { background:rgba(47,91,234,0.9); border:1px solid rgba(221,227,240,0.32); color:rgb(14,27,58); }
+.de-back .de-lb-btn:hover { background:rgba(47,91,234,0.98); box-shadow:0 12px 28px rgba(13,37,80,0.38); }
 
 /* 文案层级：白 → 浅蓝 */
 .de-h2 { color:rgb(14,27,58); }
@@ -1482,3 +1486,21 @@ footer .ft-tag { background:rgba(10,128,100,.10) !important; border-color:rgba(1
 [data-u="43"]{background:linear-gradient(135deg,rgb(186,227,247),rgb(197,225,241)) !important;color:rgb(14,27,58) !important;}
 [data-u="44"]{background:linear-gradient(135deg,rgb(216,219,250),rgb(111,79,212)) !important;color:rgb(14,27,58) !important;}
 [data-u="45"]{background:linear-gradient(135deg,rgb(216,219,250),rgb(111,79,212)) !important;}
+
+
+/* ==== B · 对比度终修：重映射把「白字压深渐变」错翻成「深字压深渐变」 ==== */
+/* 导航主按钮：渐变里浅紫端 rgb(201,182,245) 对白字/深字都不达标 → 收敛为深蓝→蓝紫双标 + 白字 */
+a.nav-de-btn, .nav-de-btn {
+  background:linear-gradient(118deg,#1e3fa8 0%,#5b3fd4 100%) !important;
+  color:#ffffff !important;
+}
+.nav-de-btn > span { color:#ffffff !important; }
+/* 首页 hero 右上角圆钮的标签胶囊：同上 */
+.hero-de-orb .orb-label {
+  background:linear-gradient(118deg,#1e3fa8 0%,#5b3fd4 100%) !important;
+  color:#ffffff !important;
+}
+/* 数字员工页 tagline：de-panel 在 B 里被重映射成浅紫渐变（首标 rgb(169,176,226)），
+   重映射又把字色压成中灰 → 直接给深藏蓝字（对比 ≈6.2） */
+.de-panel .de-tagline .de-slogan { color:#22314e !important; }
+.de-panel .de-tagline .de-lead { color:#3d4c70 !important; }

@@ -168,9 +168,9 @@
 .de-bi-mid { margin:auto 0; text-align:center; }
 .de-bi-mid .n { font-size:29px; font-weight:800; color:#1b2b4d; letter-spacing:-.8px; }
 .de-bi-mid .s { font-size:13px; font-weight:700; letter-spacing:2.4px; color:#7c88a0; margin-top:5px; }
-.de-bi-mid .t { font-size:11.5px; color:#9aa4b8; margin-top:10px; }
+.de-bi-mid .t { font-size:11.5px; color:#5f6f8f; margin-top:10px; }
 .de-bi-sep { height:1px; background:repeating-linear-gradient(90deg,#cdd5e2 0 5px,transparent 5px 10px); margin:13px 14%; }
-.de-bi-mid .d { font-size:10.5px; color:#98a3b7; line-height:1.85; margin-top:4px; }
+.de-bi-mid .d { font-size:10.5px; color:#5f6f8f; line-height:1.85; margin-top:4px; }
 .de-bi-spec { display:grid; grid-template-columns:1fr 1fr; gap:5px 10px; margin:14px 6% 0; }
 .de-bi-spec span { font-size:9px; color:#a6afc0; letter-spacing:.2px; white-space:nowrap; }
 .de-bi-spec b { color:#7f8b9f; font-weight:600; }
@@ -794,6 +794,10 @@ a.pth-a .ent-arw { margin-left:3px; font-size:9px; }
 .de-lb-btn { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.26); color:#eaf1ff;
   box-shadow:0 8px 22px rgba(0,0,0,.34); }
 .de-lb-btn:hover { background:rgba(255,255,255,.24); box-shadow:0 12px 28px rgba(0,0,0,.42); }
+/* 立牌背面是白底（.de-back{background:#fff}），玻璃浅字在白底上 r≈1.1 看不清
+   → 背面按钮改深藏蓝实底 + 白字 */
+.de-back .de-lb-btn { background:rgba(13,37,80,.90); border:1px solid rgba(255,255,255,.32); color:#ffffff; }
+.de-back .de-lb-btn:hover { background:rgba(13,37,80,.98); box-shadow:0 12px 28px rgba(13,37,80,.38); }
 
 /* 文案层级：白 → 浅蓝 */
 .de-h2 { color:#fff; }
