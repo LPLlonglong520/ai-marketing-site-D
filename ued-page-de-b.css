@@ -1429,6 +1429,12 @@ a.pth-a:hover { background:rgba(246,248,252,0.13); }
 .future-home-icon { background:linear-gradient(135deg,#2f5bea,#1e3fa8) !important; color:#fff !important; }
 .view-counter, .view-counter span { color:#ffffff !important; }
 .view-counter .vc-num { background-image:linear-gradient(90deg,#ffffff 0%,#d7e3ff 100%) !important; }
+/* ⚠️ 上面那条不够：D 的深色遗留修正里有 `.view-counter *{background:#0a0a0a !important}`，
+   shorthand 会把 vc-num 的 background-clip:text 重置成 border-box → 白渐变涂满整个数字框
+   （用户看到的就是一个白块、数字消失）。vc-num 直接给实心白字并显式恢复 clip。 */
+.view-counter .vc-num { background:none !important; background-image:none !important;
+  -webkit-background-clip:text !important; -webkit-text-fill-color:#ffffff !important;
+  color:#ffffff !important; }
 /* 深色实底「路径标签」：白字 */
 .path-tag-link, a.path-tag-link, .app-col a.path-tag-link { color:#ffffff !important; }
 .path-tag-link .arr { color:rgba(255,255,255,.75) !important; }

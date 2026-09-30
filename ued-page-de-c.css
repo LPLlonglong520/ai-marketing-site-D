@@ -1520,6 +1520,10 @@ p a, .fp-item a, .future-body a, .de-body p a, .app-col p a, .scene-body p a {
 /* 「N 项应用」计数：c_remap 后渐变里混进深墨蓝端（#153F57 压深蓝底 r≈1.6）→ 统一亮金渐变 */
 .cap-count b { background-image:linear-gradient(120deg,#e0c88f 0%,#f3e6c3 100%) !important; }
 .cap-count span { color:#b8c2d6 !important; }
+/* 规划中（0 项应用）的计数：基础真源给的是灰字实色，但上面的亮金渐变 !important 会把
+   .plan 也盖掉 → 单个「0」被渐变填成金块（用户反馈不好看）。plan 恢复灰字实色。 */
+.cap-count.plan b { background-image:none !important;
+  -webkit-text-fill-color:#98a4bc !important; color:#98a4bc !important; }
 
 /* 2. 首页/卡牌图标块：原渐变没被 c_restyle 改色，且 emoji 文本色继承自 <a> 默认蓝 →
       强制金渐变 + 深字（[data-u] 提高特异性，确保覆盖内联 [data-u="N"]） */
