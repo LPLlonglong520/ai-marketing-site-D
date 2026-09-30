@@ -9,9 +9,9 @@
  *   - 视频(mp4)：不接管 —— 交给浏览器原生 HTTP 缓存，避免 Range(206) 与 SW 缓存冲突
  *   - 跨域请求：不接管（钉钉/金山/内网链接等）
  *
- * 版本：由 build.py 注入 3fb74d01e46f。版本变化 → 新 SW 安装 → 删除同名前缀的旧缓存 → 通知页面刷新一次。
+ * 版本：由 build.py 注入 24ef287c633e。版本变化 → 新 SW 安装 → 删除同名前缀的旧缓存 → 通知页面刷新一次。
  */
-const V = '3fb74d01e46f';
+const V = '24ef287c633e';
 const PREFIX = 'ams-d-';
 const CACHE = PREFIX + V;
 
