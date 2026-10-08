@@ -19,10 +19,10 @@
  *     ③ 再往后才是其余页面与图片预热，且慢网 / 省流量模式整体跳过
  *   内容一项没少 —— 只是不再和首屏抢带宽。
  *
- * 版本：由 _cd_site_build.py 注入 e6363efbe2af（页面+CSS 内容 md5）。版本变化 → 新 SW 安装
+ * 版本：由 _cd_site_build.py 注入 33469d46228d（页面+CSS 内容 md5）。版本变化 → 新 SW 安装
  *       → 删除同名前缀的旧缓存 → 通知页面刷新一次。
  */
-const V = 'e6363efbe2af';
+const V = '33469d46228d';
 const PREFIX = 'ams-d-';
 const CACHE = PREFIX + V;
 
@@ -133,7 +133,11 @@ self.addEventListener('message', (e) => {
   const d = e.data || {};
   const t = d.type;
   if (t === 'warm-css' || t === 'warm') {
-    e.waitUntil(fill(DEFER_CSS));
+    /* 页面把自己的 <link data-ued-th> 清单换算成 4 套皮肤的文件名发过来。
+       首页只用 ued-theme-*.css，用不到数字员工页专用的 ued-page-de-*.css ——
+       按站点级 DEFER_CSS 一刀切会替首页白下 116 KB。没带 urls 才退回默认清单。 */
+    const list = (d.urls && d.urls.length) ? d.urls : DEFER_CSS;
+    e.waitUntil(fill(list));
   } else if (t === 'warm-pages') {
     if (slowNet()) return;
     e.waitUntil(fill(DEFER_PAGES));

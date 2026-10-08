@@ -393,6 +393,7 @@ function submitReply(cid){
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol === 'file:') return;
   var started = false, reg = null;
+  var THEMES = ['a', 'b', 'c', 'd'];
   function idle(fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 4000 }); else setTimeout(fn, 2000); }
   function afterLoad(fn) {
     if (document.readyState === 'complete') fn();
@@ -409,7 +410,32 @@ function submitReply(cid){
   function target() {
     return navigator.serviceWorker.controller || (reg && (reg.active || reg.waiting)) || null;
   }
-  function send(t, type) { if (t && t.postMessage) { try { t.postMessage({ type: type }); } catch (e) {} } }
+  function send(t, type, urls) {
+    if (!t || !t.postMessage) return;
+    try { t.postMessage(urls && urls.length ? { type: type, urls: urls } : { type: type }); } catch (e) {}
+  }
+  /* 本页用到的皮肤 CSS × 4 套皮肤。href 形如 ued-theme-a.css / ued-page-de-a.css，
+     展开成 a/b/c/d 四个文件名。首页本来就没有 ued-page-de-*.css 的 <link>，
+     于是不会去下那 4 个文件 —— 省 116 KB（比让 SW 按站点级清单一刀切更省）。 */
+  function cssList() {
+    var out = [], seen = {}, ls = document.querySelectorAll('link[data-ued-th]'), i, j, m, u;
+    for (i = 0; i < ls.length; i++) {
+      var href = ls[i].getAttribute('href') || '';
+      m = /^(.*-)([abcd])(\.css)$/.exec(href);
+      if (!m) {
+        if (/\.css$/.test(href) && !seen[href]) { seen[href] = 1; out.push('./' + href); }
+        continue;
+      }
+      for (j = 0; j < THEMES.length; j++) {
+        u = './' + m[1] + THEMES[j] + m[3];
+        if (!seen[u]) { seen[u] = 1; out.push(u); }
+      }
+    }
+    if (!out.length) {
+      for (i = 0; i < THEMES.length; i++) out.push('./ued-theme-' + THEMES[i] + '.css');
+    }
+    return out;
+  }
   /* 首屏（含首屏图片）全部下完之后，才开始补齐后台资源。
      慢链路上 load 会很晚才触发 —— 这个「晚」正是我们要的：首屏独占带宽。
      旧版是注册完就预热 19 个文件（286 KB）+ 8 张图（234 KB），首访直接被拖垮。 */
@@ -420,7 +446,7 @@ function submitReply(cid){
         var t = target();
         if (!t) return;                 /* 首访还没 controller，等 controllerchange 再触发 */
         started = true;
-        send(t, 'warm-css');            /* 4 套皮肤 CSS：切换风格要用，任何网络都补 */
+        send(t, 'warm-css', cssList()); /* 4 套皮肤 CSS：切换风格要用，任何网络都补 */
         if (slowNet()) return;          /* 慢网 / 省流量：其余可选内容一律不下 */
         setTimeout(function () { send(target(), 'warm-pages'); }, 8000);
         setTimeout(function () { send(target(), 'warm-img'); }, 20000);
