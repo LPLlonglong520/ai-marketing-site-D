@@ -9,15 +9,44 @@
  *   - 视频(mp4)：不接管 —— 交给浏览器原生 HTTP 缓存，避免 Range(206) 与 SW 缓存冲突
  *   - 跨域请求：不接管（钉钉/金山/内网链接等）
  *
- * 版本：由 build.py 注入 24ef287c633e。版本变化 → 新 SW 安装 → 删除同名前缀的旧缓存 → 通知页面刷新一次。
+ * ⚠️ 首访带宽纪律（2026-10-08 重写，重要）：
+ *   国际链路下大文件实测只有 ~2 KB/s。旧版把「10 个页面 + 9 个 CSS」全塞进 install
+ *   预缓存 → 首访时用户只看 1 页，却要和首屏抢着下 286 KB 的后台内容，
+ *   再叠加 ~234 KB 图片预热，首屏要多等好几分钟。
+ *   现在改成三级：
+ *     ① install 只下 CRITICAL（1.2 KB，切换器样式）
+ *     ② 首屏全部加载完（load + 空闲）后，页面发消息触发 DEFER_CSS（4 套皮肤，串行、每项一次）
+ *     ③ 再往后才是其余页面与图片预热，且慢网 / 省流量模式整体跳过
+ *   内容一项没少 —— 只是不再和首屏抢带宽。
+ *
+ * 版本：由 _cd_site_build.py 注入 e6363efbe2af（页面+CSS 内容 md5）。版本变化 → 新 SW 安装
+ *       → 删除同名前缀的旧缓存 → 通知页面刷新一次。
  */
-const V = '24ef287c633e';
+const V = 'e6363efbe2af';
 const PREFIX = 'ams-d-';
 const CACHE = PREFIX + V;
 
-/* 首访预缓存的核心页面：体积小、跳转必经。
-   刻意不预缓存视频与全部图片，避免拖慢首次访问。 */
-const PRECACHE = [
+/* ① install 阶段就要有的：只有切换器样式。
+      当前皮肤的 CSS 会被页面自身的 <link> 请求，下面的 fetch 处理器顺手写进缓存。 */
+const CRITICAL = [
+  './ued-switch.css'
+];
+
+/* ② 首屏之后的「先补这批」：4 套皮肤 CSS（由 _th_build.py 注入）。
+      切换风格时要立刻生效，所以任何网络条件下都补 —— 但必须等首屏让路。 */
+const DEFER_CSS = [
+  './ued-theme-a.css',
+  './ued-theme-b.css',
+  './ued-theme-c.css',
+  './ued-theme-d.css',
+  './ued-page-de-a.css',
+  './ued-page-de-b.css',
+  './ued-page-de-c.css',
+  './ued-page-de-d.css',
+];
+
+/* ③ 首屏之后、网络不慢时才补的：其余页面（导航会跳到）+ 图片预热。 */
+const DEFER_PAGES = [
   './index.html',
   './digital-employee.html',
   './future.html',
@@ -27,28 +56,15 @@ const PRECACHE = [
   './scene-4.html',
   './scene-5.html',
   './scene-6.html',
-  './scene-7.html',
-  './ued-theme-a.css',
-  './ued-theme-b.css',
-  './ued-theme-c.css',
-  './ued-theme-d.css',
-  './ued-switch.css',
-  './ued-page-de-a.css',
-  './ued-page-de-b.css',
-  './ued-page-de-c.css',
-  './ued-page-de-d.css'
+  './scene-7.html'
 ];
 
-/* 首页空闲时预热的高频图片（立牌 + 人物件），延后加载，不抢首屏带宽 */
+/* ④ 首页空闲时预热的高频图片（滚动到下方才会用到的那些）。
+   只留 webp（兜底格式）；avif 是同一张图的替代格式，页面 <picture> 自己会挑一个，
+   预热时两种都下等于白下一半 —— 旧版就是这么浪费的。 */
 const WARM = [
-  './media/de_board_front_1x.webp',
-  './media/de_board_front_1x.avif',
-  './media/de_board_back_1x.webp',
-  './media/de_board_back_1x.avif',
   './media/eco_board_1x.webp',
-  './media/eco_board_1x.avif',
-  './media/de_char_body.webp',
-  './media/de_char_b_body.webp'
+  './media/de_board_back_1x.webp'
 ];
 
 let opening = null;
@@ -57,11 +73,36 @@ function cache() {
   return opening;
 }
 
+/* 慢网 / 省流量：跳过「可选项」。判定失败时按「不慢」处理（宁可多补，别误跳）。 */
+function slowNet() {
+  try {
+    const c = navigator.connection || navigator.mozConnection || {};
+    if (c.saveData) return true;
+    const t = (c.effectiveType || '').toLowerCase();
+    return t === 'slow-2g' || t === '2g' || t === '3g';
+  } catch (e) { return false; }
+}
+
+/* 串行补齐：一次只发一个请求。
+   并行 18 个在慢链路上会互相抢，串行对首屏和用户后续操作的干扰最小。
+   用 cache:'default' 走浏览器 HTTP 缓存（旧版 cache:'reload' 会强制重下已经有的文件）。 */
+async function fill(list) {
+  if (!list || !list.length) return;
+  const c = await cache();
+  for (const u of list) {
+    try {
+      if (await c.match(u)) continue;
+      const r = await fetch(u, { cache: 'default' });
+      if (r && r.ok && r.type === 'basic') await c.put(u, r.clone());
+    } catch (err) { /* 单个失败可忽略 */ }
+  }
+}
+
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const c = await cache();
     /* 逐个 add：cache.addAll 是原子的，一个 404 会导致整批失败 */
-    await Promise.all(PRECACHE.map(async (u) => {
+    await Promise.all(CRITICAL.map(async (u) => {
       try { await c.add(new Request(u, { cache: 'reload' })); } catch (err) { /* 单个失败可忽略 */ }
     }));
     await self.skipWaiting();
@@ -83,14 +124,29 @@ self.addEventListener('activate', (e) => {
   })());
 });
 
-/* 页面侧可要求：warm = 预热图片 */
+/* 页面侧在首屏加载完之后按节奏发消息：
+     warm-css   → 4 套皮肤 CSS（任何网络都做）
+     warm-pages → 其余页面（慢网跳过）
+     warm-img   → 图片预热（慢网跳过）
+     裸 warm    → 兼容旧版页面：只当 warm-css 处理，不再顺带下图片 */
 self.addEventListener('message', (e) => {
   const d = e.data || {};
-  if (d.type === 'warm') {
+  const t = d.type;
+  if (t === 'warm-css' || t === 'warm') {
+    e.waitUntil(fill(DEFER_CSS));
+  } else if (t === 'warm-pages') {
+    if (slowNet()) return;
+    e.waitUntil(fill(DEFER_PAGES));
+  } else if (t === 'warm-img') {
+    if (slowNet()) return;
     e.waitUntil((async () => {
       const c = await cache();
       await Promise.all(WARM.map(async (u) => {
-        try { if (!(await c.match(u))) await c.add(new Request(u, { cache: 'reload' })); } catch (err) {}
+        try {
+          if (await c.match(u)) return;
+          const r = await fetch(u, { cache: 'default' });
+          if (r && r.ok && r.type === 'basic') await c.put(u, r.clone());
+        } catch (err) {}
       }));
     })());
   }

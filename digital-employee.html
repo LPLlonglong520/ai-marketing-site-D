@@ -821,13 +821,44 @@
 (function () {
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol === 'file:') return;
-  function warm(t) { if (t && t.postMessage) { try { t.postMessage({ type: 'warm' }); } catch (e) {} } }
-  function idle(fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 5000 }); else setTimeout(fn, 3000); }
-  navigator.serviceWorker.addEventListener('controllerchange', function () {
-    setTimeout(function () { warm(navigator.serviceWorker.controller); }, 3500);
-  });
-  navigator.serviceWorker.register('sw.js', { scope: './' }).then(function (reg) {
-    idle(function () { warm(navigator.serviceWorker.controller || reg.active || reg.waiting); });
+  var started = false, reg = null;
+  function idle(fn) { if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 4000 }); else setTimeout(fn, 2000); }
+  function afterLoad(fn) {
+    if (document.readyState === 'complete') fn();
+    else window.addEventListener('load', fn);
+  }
+  function slowNet() {
+    try {
+      var c = navigator.connection || navigator.mozConnection || {};
+      if (c.saveData) return true;
+      var t = (c.effectiveType || '').toLowerCase();
+      return t === 'slow-2g' || t === '2g' || t === '3g';
+    } catch (e) { return false; }
+  }
+  function target() {
+    return navigator.serviceWorker.controller || (reg && (reg.active || reg.waiting)) || null;
+  }
+  function send(t, type) { if (t && t.postMessage) { try { t.postMessage({ type: type }); } catch (e) {} } }
+  /* 首屏（含首屏图片）全部下完之后，才开始补齐后台资源。
+     慢链路上 load 会很晚才触发 —— 这个「晚」正是我们要的：首屏独占带宽。
+     旧版是注册完就预热 19 个文件（286 KB）+ 8 张图（234 KB），首访直接被拖垮。 */
+  function start() {
+    if (started) return;
+    afterLoad(function () {
+      idle(function () {
+        var t = target();
+        if (!t) return;                 /* 首访还没 controller，等 controllerchange 再触发 */
+        started = true;
+        send(t, 'warm-css');            /* 4 套皮肤 CSS：切换风格要用，任何网络都补 */
+        if (slowNet()) return;          /* 慢网 / 省流量：其余可选内容一律不下 */
+        setTimeout(function () { send(target(), 'warm-pages'); }, 8000);
+        setTimeout(function () { send(target(), 'warm-img'); }, 20000);
+      });
+    });
+  }
+  navigator.serviceWorker.addEventListener('controllerchange', start);
+  navigator.serviceWorker.register('sw.js', { scope: './' }).then(function (r) {
+    reg = r; start();
   }).catch(function () {});
   navigator.serviceWorker.addEventListener('message', function (e) {
     var d = e.data || {};
