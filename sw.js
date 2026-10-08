@@ -164,7 +164,17 @@ function isHtml(req) {
 /* 立即返回缓存 + 后台静默更新。无缓存时等网络。 */
 async function swr(req) {
   const c = await cache();
-  const hit = await c.match(req);
+  let hit = await c.match(req);
+  /* 目录 URL 与 index.html 是两个不同的缓存键：
+       预热清单里存的是 './index.html' → /站点/index.html，
+       而用户再次打开站点走的是 /站点/ ，两者不相等 → 会白跑一次网络。
+       回退查一次 index.html，让「再打开一次链接」真正秒开。 */
+  if (!hit && isHtml(req)) {
+    try {
+      const u = new URL(req.url);
+      if (u.pathname.slice(-1) === '/') hit = await c.match(u.pathname + 'index.html');
+    } catch (err) { /* 忽略 */ }
+  }
 
   const net = fetch(req).then((r) => {
     if (r && r.ok && r.type === 'basic') {
